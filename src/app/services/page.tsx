@@ -1,6 +1,6 @@
-import PlatformFeatures from '@/app/home/platform-features'
-import RestaurantValue from '@/app/home/restaurant-value'
-import CustomerJourney from '@/app/home/customer-journey'
+import PlatformFeatures from '@/components/landing/platform-features'
+import RestaurantValue from '@/components/landing/restaurant-value' 
+import CustomerJourney from '@/components/landing/customer-journey'
 import Header from '@/components/shared/header'
 
 export default function ServicesPage() {
