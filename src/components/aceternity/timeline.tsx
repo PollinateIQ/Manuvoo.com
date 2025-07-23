@@ -29,7 +29,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1])
 
   return (
-    <div className="w-full bg-white dark:bg-neutral-950 font-sans md:px-10" ref={containerRef}>
+    <div className="w-full font-sans md:px-10" ref={containerRef}>
       <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
         <h2 className="text-lg md:text-4xl mb-4 text-black dark:text-white max-w-4xl">
           Your journey to amazing dining
@@ -40,8 +40,27 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       </div>
 
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
-        {data.map((item, index) => (
-          <div key={index} className="flex justify-start pt-10 md:pt-40 md:gap-10">
+        {data.map((item, index) => {
+          // Static parallax: items transform based on scroll progress
+          const itemProgress = useTransform(
+            scrollYProgress,
+            [index / data.length, (index + 1) / data.length],
+            [0, 1]
+          );
+          const yOffset = useTransform(itemProgress, [0, 1], [100, 0]);
+          const opacity = useTransform(itemProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.3]);
+          const scale = useTransform(itemProgress, [0, 0.5, 1], [0.8, 1, 0.95]);
+          
+          return (
+            <motion.div 
+              key={index} 
+              className="flex justify-start pt-10 md:pt-40 md:gap-10 sticky top-20"
+              style={{
+                y: yOffset,
+                opacity: opacity,
+                scale: scale
+              }}
+            >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
               <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
                 <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:bg-neutral-700 p-2" />
@@ -57,8 +76,9 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               </h3>
               {item.content}{" "}
             </div>
-          </div>
-        ))}
+            </motion.div>
+          );
+        })}
         <div
           style={{
             height: height + "px",

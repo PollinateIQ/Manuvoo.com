@@ -100,7 +100,7 @@ export default function MissionImpact() {
             return (
               <motion.div
                 key={card.title}
-                className="group relative bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 md:p-8 transition-all duration-300 hover:bg-white/[0.05] hover:border-white/[0.15] hover:-translate-y-1"
+                className="group relative bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 md:p-8 text-center transition-all duration-300 hover:bg-white/[0.05] hover:border-white/[0.15] hover:-translate-y-1"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -108,11 +108,11 @@ export default function MissionImpact() {
               >
                 {/* Icon */}
                 <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors duration-300">
-                  <IconComponent className="w-6 h-6 text-emerald-400" strokeWidth={1.5} />
+                  <IconComponent className="w-6 h-6 text-primary" strokeWidth={1.5} />
                 </div>
 
                 {/* Number */}
-                <div className="text-3xl font-bold mb-2 text-emerald-400">
+                <div className="text-3xl font-bold mb-2 text-primary bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
                   {card.number}
                 </div>
 
@@ -150,7 +150,7 @@ export default function MissionImpact() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-4">
             <Button 
               size="lg" 
-              className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-full transition-all duration-300 hover:scale-105"
+              className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full transition-all duration-300 hover:scale-105"
             >
               Partner With Us
             </Button>

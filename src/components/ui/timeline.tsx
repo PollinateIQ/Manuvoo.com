@@ -12,97 +12,105 @@ interface TimelineEntry {
 }
 
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
-  const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect();
-      setHeight(rect.height);
-    }
-  }, [ref]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 10%", "end 50%"],
+    offset: ["start start", "end end"],
   });
 
-  const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
-  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
-
   return (
-    <div
-      className="w-full font-sans"
-      ref={containerRef}
-    >
-      <div className="max-w-7xl mx-auto py-12 px-4 md:px-8 lg:px-10">
-        <motion.h2 
-          className="text-lg md:text-4xl mb-4 text-white max-w-4xl text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Our Journey Timeline
-        </motion.h2>
-        <motion.p 
-          className="text-white/70 text-sm md:text-base max-w-2xl mx-auto text-center mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          From foundation to industry leadership - here&apos;s how we&apos;re transforming African hospitality.
-        </motion.p>
-      </div>
-
-      <div ref={ref} className="relative max-w-7xl mx-auto pb-12">
+    <div className="w-full font-sans">
+      {/* Main Container with Scroll Snap */}
+      <div 
+        ref={containerRef}
+        className="h-screen overflow-y-scroll scroll-smooth scrollbar-hide"
+        style={{
+          scrollSnapType: 'y mandatory',
+          scrollBehavior: 'smooth',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        }}
+      >
         {data.map((item, index) => {
-          const yOffset = useTransform(scrollYProgress, [0, 1], [0, -50 * index]);
+          // Parallax effect: each section transforms based on scroll progress
+          const sectionProgress = useTransform(
+            scrollYProgress,
+            [index / data.length, (index + 1) / data.length],
+            [0, 1]
+          );
+          
+          // Header parallax transforms
+          const headerY = useTransform(sectionProgress, [0, 1], [0, -20]);
+          const headerOpacity = useTransform(sectionProgress, [0, 0.3, 0.7, 1], [0.8, 1, 1, 0.8]);
+          
+          // Content parallax transforms  
+          const contentY = useTransform(sectionProgress, [0, 1], [10, -10]);
+          const contentOpacity = useTransform(sectionProgress, [0, 0.1, 0.9, 1], [0.8, 1, 1, 0.8]);
+          const contentScale = useTransform(sectionProgress, [0, 0.5, 1], [0.98, 1, 0.98]);
+          
           return (
-            <motion.div
+            <motion.div 
               key={index}
-              className="flex justify-start pt-6 md:pt-20 md:gap-10"
-              style={{ y: yOffset }}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-20%" }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              className="w-full flex flex-col relative"
+              style={{
+                scrollSnapAlign: 'start',
+                scrollSnapStop: 'always'
+              }}
             >
-              <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
-                <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-gray-900 border border-white/20 flex items-center justify-center">
-                  <div className="h-4 w-4 rounded-full bg-emerald-500 border border-emerald-400 p-2" />
+              {/* Section Header with Parallax */}
+              <motion.div 
+                className="bg-transparent backdrop-blur-sm sticky top-0 z-50"
+                style={{
+                  y: headerY,
+                  opacity: headerOpacity
+                }}
+              >
+                <div className="max-w-7xl mx-auto py-6 px-4 md:px-8 lg:px-10">
+                  <motion.h2 
+                    className="text-4xl md:text-6xl lg:text-7xl mb-3 font-bold text-center bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    {item.title}
+                  </motion.h2>
+                  <motion.div 
+                    className="w-20 h-1 bg-gradient-to-r from-primary to-blue-400 mx-auto rounded-full"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: 80 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                  />
                 </div>
-                <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-white/80">
-                  {item.title}
-                </h3>
-              </div>
+              </motion.div>
 
-              <div className="relative pl-20 pr-4 md:pl-4 w-full">
-                <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-white/80">
-                  {item.title}
-                </h3>
-                {item.content}
-              </div>
+              {/* Content with Parallax */}
+              <motion.div 
+                className="px-4 md:px-8 lg:px-16 pt-2 pb-12"
+                style={{
+                  y: contentY,
+                  opacity: contentOpacity,
+                  scale: contentScale
+                }}
+              >
+                <motion.div
+                  className="max-w-6xl mx-auto"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-20%" }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  {item.content}
+                </motion.div>
+              </motion.div>
             </motion.div>
           );
         })}
-        <div
-          style={{
-            height: height + "px",
-          }}
-          className="absolute md:left-8 left-8 top-0 overflow-hidden w-[3px] bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-60"
-        >
-          <motion.div
-            style={{
-              height: heightTransform,
-              opacity: opacityTransform,
-            }}
-            className="absolute inset-x-0 top-0 w-[3px] bg-gradient-to-b from-emerald-400 via-blue-400 to-purple-400 rounded-full shadow-lg shadow-emerald-500/20"
-          />
-        </div>
       </div>
+
+
     </div>
   );
 };

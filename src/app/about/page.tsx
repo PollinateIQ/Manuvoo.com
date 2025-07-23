@@ -1,4 +1,3 @@
-import About from '@/app/home/about'
 import Header from '@/components/shared/header'
 
 export default function AboutPage() {
@@ -20,7 +19,28 @@ export default function AboutPage() {
         </section>
 
         {/* About Content */}
-        <About />
+        <section className="py-section-mobile lg:py-section-desktop bg-background">
+          <div className="max-w-container mx-auto px-container-mobile lg:px-container-desktop">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-section-mobile lg:text-section-desktop text-foreground-primary mb-8">
+                  Our Story
+                </h2>
+                <p className="text-body-mobile lg:text-body-desktop text-foreground-secondary mb-6">
+                  Manuvoo was born from a simple vision: to bridge the gap between diners and exceptional restaurants across South Africa. We believe that every meal should be an experience worth remembering.
+                </p>
+                <p className="text-body-mobile lg:text-body-desktop text-foreground-secondary">
+                  Our platform empowers restaurants with cutting-edge technology while providing diners with seamless discovery and booking experiences.
+                </p>
+              </div>
+              <div className="relative">
+                <div className="aspect-square bg-gradient-to-br from-primary to-blue-500 rounded-2xl flex items-center justify-center">
+                  <span className="text-white text-6xl font-bold">M</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         
         {/* Mission & Vision */}
         <section className="py-section-mobile lg:py-section-desktop bg-gradient-background">
