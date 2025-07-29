@@ -13,7 +13,7 @@ interface ExitIntentPopupProps {
   onClose?: () => void
 }
 
-export default function ExitIntentPopup({ onCtaClick, isOpen, onClose }: ExitIntentPopupProps) {
+export default function ExitIntentPopup({ isOpen, onClose }: ExitIntentPopupProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -133,11 +133,11 @@ export default function ExitIntentPopup({ onCtaClick, isOpen, onClose }: ExitInt
               </h3>
               
               <p className="text-white/80 mb-2">
-                We'd love to keep you updated on how Manuvoo can transform your restaurant.
+                We&apos;d love to keep you updated on how Manuvoo can transform your restaurant.
               </p>
               
               <h4 className="text-lg font-bold text-primary mt-2">
-                Leave your contact details and we'll be in touch!
+                Leave your contact details and we&apos;ll be in touch!
               </h4>
             </div>
 
@@ -171,7 +171,7 @@ export default function ExitIntentPopup({ onCtaClick, isOpen, onClose }: ExitInt
 
             {/* Bottom Text */}
             <p className="text-center text-white/60 text-sm mt-4">
-              We'll reach out with personalized insights for your restaurant
+              We&apos;ll reach out with personalized insights for your restaurant
             </p>
           </motion.div>
         </motion.div>

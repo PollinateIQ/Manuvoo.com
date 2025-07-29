@@ -40,6 +40,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup }: LoginM
       console.log('Login successful', { email, password })
       onClose()
     } catch (error) {
+      // Removed unused error variable
       setErrors({ email: 'Invalid email or password' })
     } finally {
       setIsLoading(false)
@@ -203,7 +204,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup }: LoginM
         {/* Sign Up Link */}
         <div className="mt-6 text-center">
           <p className="text-gray-300">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <button
               onClick={onSwitchToSignup || (() => console.log('Switch to signup'))}
               className="text-primary-blue-start hover:text-primary-blue-end font-medium transition-colors duration-300"

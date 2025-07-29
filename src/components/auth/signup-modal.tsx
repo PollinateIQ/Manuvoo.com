@@ -70,6 +70,7 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }: Signup
       console.log('Signup successful', formData)
       onClose()
     } catch (error) {
+      console.error(error)
       setErrors({ email: 'An error occurred. Please try again.' })
     } finally {
       setIsLoading(false)

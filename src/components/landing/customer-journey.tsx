@@ -69,7 +69,7 @@ export default function CustomerJourney() {
             Book Your Perfect Table in 3 Simple Steps
           </h2>
           <p className="text-body-mobile lg:text-body-desktop text-foreground-secondary">
-            From discovery to dining - we've made it effortless to find and book your next great meal
+            From discovery to dining - we&apos;ve made it effortless to find and book your next great meal
           </p>
         </div>
 

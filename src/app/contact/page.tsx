@@ -240,7 +240,7 @@ export default function ContactPage() {
               className="text-5xl md:text-6xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Let's Start Your
+                Let&apos;s Start Your
               </span>
               <br />
               <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
@@ -689,7 +689,7 @@ export default function ContactPage() {
             >
               <h2 className="text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
               <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
-                Got questions? We've got answers. Here are the most common questions we receive from restaurant owners.
+                Got questions? We&apos;ve got answers. Here are the most common questions we receive from restaurant owners.
               </p>
             </motion.div>
 
@@ -760,7 +760,7 @@ export default function ContactPage() {
               </div>
               
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Let's Get Started Today
+                Let&apos;s Get Started Today
               </h2>
               
               <p className="text-xl text-white/90 leading-relaxed mb-12 max-w-3xl mx-auto">
