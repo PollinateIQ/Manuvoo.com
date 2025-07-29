@@ -9,6 +9,7 @@ import { Button as MovingBorderButton } from '@/components/ui/moving-border'
 
 
 // Fallback restaurant data with optimized images
+/*
 const fallbackRestaurants = [
   {
     id: '1',
@@ -41,6 +42,7 @@ const fallbackRestaurants = [
     price: '$$'
   }
 ]
+*/
 
 export default function Hero() {
   // Dialog state

@@ -84,9 +84,9 @@ export default function About() {
                 Why Manuvoo Exists
               </h3>
               <p className="text-foreground-secondary leading-relaxed mb-6">
-                Manuvoo was created to solve the biggest operational challenges in South Africa's hospitality industry. 
+                Manuvoo was created to solve the biggest operational challenges in South Africa&apos;s hospitality industry. 
                 We witnessed restaurants losing money to theft, struggling with manual processes, and paying for multiple 
-                expensive systems that don't talk to each other.
+                expensive systems that don&apos;t talk to each other.
               </p>
               <p className="text-foreground-secondary leading-relaxed mb-6">
                 Meanwhile, diners struggled to discover great restaurants and often faced long waits for tables. 
@@ -164,10 +164,10 @@ export default function About() {
         <div className="glass rounded-2xl p-8 lg:p-12 text-center">
           <div className="mb-8">
             <h3 className="text-subheading-mobile lg:text-subheading-desktop text-foreground-primary mb-4">
-              Today's Impact
+              Today&apos;s Impact
             </h3>
             <p className="text-foreground-secondary max-w-3xl mx-auto">
-              We're proud to support over 500 restaurants across South Africa, helping them thrive in an increasingly 
+              We&apos;re proud to support over 500 restaurants across South Africa, helping them thrive in an increasingly 
               digital world while connecting food lovers with their next favorite meal.
             </p>
           </div>

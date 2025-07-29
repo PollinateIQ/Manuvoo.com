@@ -223,7 +223,7 @@ export default function ServicesPage() {
               </span>
               <br />
               <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
-                Nothing It Doesn't
+                Nothing It Doesn&apos;t
               </span>
             </motion.h1>
             
@@ -578,7 +578,7 @@ export default function ServicesPage() {
             >
               <h2 className="text-4xl font-bold text-white mb-4">Simple, Transparent Pricing</h2>
               <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
-                Choose the plan that fits your restaurant's needs. No hidden fees, no surprises.
+                Choose the plan that fits your restaurant&apos;s needs. No hidden fees, no surprises.
               </p>
             </motion.div>
 
@@ -681,9 +681,9 @@ export default function ServicesPage() {
               className="bg-white/[0.02] border border-white/[0.08] rounded-3xl p-12 text-center max-w-4xl mx-auto"
             >
               <blockquote className="text-2xl font-light italic text-white/90 leading-relaxed mb-8">
-                "Manuvoo didn't just replace our old systems—it transformed how we think 
-                about restaurant operations. We're serving more customers with less stress 
-                and making more profit than ever before."
+                &quot;Manuvoo didn&apos;t just replace our old systems—it transformed how we think 
+                about restaurant operations. We&apos;re serving more customers with less stress 
+                and making more profit than ever before.&quot;
               </blockquote>
               
               <div className="flex items-center justify-center gap-4">

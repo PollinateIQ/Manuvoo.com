@@ -254,8 +254,7 @@ export default function ContactPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
             >
-              Whether you're ready to transform your restaurant or just exploring options, 
-              we're here to help. Reach out and let's discuss how Manuvoo can work for you.
+              We&apos;d love to hear from you! Whether you&apos;re a restaurant owner looking to transform your operations or have questions about our platform, our team is here to help. Reach out and let&apos;s discuss how Manuvoo can work for you.
             </motion.p>
           </div>
         </section>
@@ -339,7 +338,7 @@ export default function ContactPage() {
                 <div className="mb-12">
                   <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Send Us a Message</h2>
                   <p className="text-lg text-white/70 leading-relaxed">
-                    Fill out the form below and we'll get back to you within 24 hours.
+                    Fill out the form below and we&apos;ll get back to you within 24 hours.
                   </p>
                 </div>
 
@@ -479,7 +478,7 @@ export default function ContactPage() {
                   {/* Interest */}
                   <div className="relative">
                     <label className="block text-sm font-medium text-white/80 mb-2">
-                      I'm interested in:
+                      I&apos;m interested in:
                     </label>
                     <div className="relative">
                       <button
@@ -554,6 +553,7 @@ export default function ContactPage() {
                         className={`w-5 h-5 mt-0.5 accent-green-500 ${
                           formErrors.consent ? 'ring-2 ring-red-500' : ''
                         }`}
+                        required
                       />
                       <label className="text-sm text-white/70 leading-relaxed">
                         I agree to receive communications from Manuvoo about products and services.
@@ -584,14 +584,13 @@ export default function ContactPage() {
                         'Send Message'
                       )}
                     </button>
-                    
                     {/* Success/Error Messages */}
                     {submitStatus === 'success' && (
                       <div className="mt-4 p-4 bg-green-500/10 border border-green-500/20 rounded-lg flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
                         <div>
                           <p className="text-green-400 font-medium">Message sent successfully!</p>
-                          <p className="text-green-300/80 text-sm">We'll get back to you within 24 hours.</p>
+                          <p className="text-green-300/80 text-sm">We&apos;ll get back to you within 24 hours.</p>
                         </div>
                       </div>
                     )}

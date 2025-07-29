@@ -1,6 +1,6 @@
 "use client"
 
-import { useScroll, useTransform, motion } from "framer-motion"
+import { useScroll, useTransform, motion, MotionValue } from "framer-motion"
 import React, { useEffect, useRef, useState } from "react"
 
 interface TimelineEntry {
@@ -77,7 +77,7 @@ const TimelineItem = ({
 }: { 
   item: TimelineEntry
   index: number
-  scrollYProgress: any
+  scrollYProgress: MotionValue<number>
   dataLength: number
 }) => {
   const itemProgress = useTransform(
