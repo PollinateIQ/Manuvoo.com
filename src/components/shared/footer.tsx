@@ -42,8 +42,23 @@ export default function Footer() {
 
 
   return (
-    <footer className="relative overflow-hidden bg-white/5 border-t border-white/10">
-      <div className="container mx-auto max-w-7xl px-6 lg:px-8 py-16">
+    <footer className="relative overflow-hidden border-t border-white/10">
+      {/* Background with Glass Morphism - matching header */}
+      <div className="absolute inset-0 backdrop-blur-xl">
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(135deg, rgba(30, 58, 138, 0.90), rgba(15, 23, 42, 0.90), rgba(31, 41, 55, 0.90))"
+          }}
+        >
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-blue-400/10"></div>
+          {/* Additional glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-transparent to-transparent"></div>
+        </div>
+      </div>
+      {/* Content */}
+      <div className="relative z-10 container mx-auto max-w-7xl px-6 lg:px-8 py-16">
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
           {/* Brand Column */}
@@ -67,15 +82,15 @@ export default function Footer() {
             <div className="space-y-2">
               <div className="flex items-center space-x-2 text-gray-300">
                 <Mail className="w-4 h-4 text-primary" />
-                <span className="text-sm">hello@manuvoo.com</span>
+                <span className="text-sm">info@pollinateiq.co.za</span>
               </div>
               <div className="flex items-center space-x-2 text-gray-300">
                 <Phone className="w-4 h-4 text-primary" />
-                <span className="text-sm">+27 (0) 21 123 4567</span>
+                <span className="text-sm">+27 69 684 8796</span>
               </div>
               <div className="flex items-center space-x-2 text-gray-300">
                 <MapPin className="w-4 h-4 text-primary" />
-                <span className="text-sm">Cape Town, South Africa</span>
+                <span className="text-sm">67th on 7th, Edenvale, Gauteng</span>
               </div>
             </div>
 

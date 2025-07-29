@@ -134,6 +134,8 @@ export default {
         twinkle: "twinkle 3s ease-in-out infinite",
         "glass-shimmer": "glassShimmer 3s ease-in-out infinite",
         "glass-pulse": "glassPulse 2s ease-in-out infinite",
+        "spin-slow": "spin 30s linear infinite",
+        "spin-reverse": "spin-reverse 40s linear infinite",
       },
       keyframes: {
         fadeIn: {
@@ -202,6 +204,78 @@ export default {
           "50%": {
             opacity: "0.8",
             transform: "scale(1.02)",
+          },
+        },
+        "spin-reverse": {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(-360deg)",
+          },
+        },
+        shimmer: {
+          '0%': {
+            backgroundPosition: '-1000px 0',
+          },
+          '100%': {
+            backgroundPosition: '1000px 0',
+          },
+        },
+        flowUp: {
+          '0%': {
+            transform: 'translateY(100%) scaleY(0)',
+            opacity: '0',
+          },
+          '50%': {
+            transform: 'translateY(50%) scaleY(1)',
+            opacity: '1',
+          },
+          '100%': {
+            transform: 'translateY(0%) scaleY(0)',
+            opacity: '0',
+          },
+        },
+        flowDown: {
+          '0%': {
+            transform: 'translateY(-100%) scaleY(0)',
+            opacity: '0',
+          },
+          '50%': {
+            transform: 'translateY(-50%) scaleY(1)',
+            opacity: '1',
+          },
+          '100%': {
+            transform: 'translateY(0%) scaleY(0)',
+            opacity: '0',
+          },
+        },
+        flowLeft: {
+          '0%': {
+            transform: 'translateX(100%) scaleX(0)',
+            opacity: '0',
+          },
+          '50%': {
+            transform: 'translateX(50%) scaleX(1)',
+            opacity: '1',
+          },
+          '100%': {
+            transform: 'translateX(0%) scaleX(0)',
+            opacity: '0',
+          },
+        },
+        flowRight: {
+          '0%': {
+            transform: 'translateX(-100%) scaleX(0)',
+            opacity: '0',
+          },
+          '50%': {
+            transform: 'translateX(-50%) scaleX(1)',
+            opacity: '1',
+          },
+          '100%': {
+            transform: 'translateX(0%) scaleX(0)',
+            opacity: '0',
           },
         },
       },

@@ -1,180 +1,810 @@
-import PlatformFeatures from '@/components/landing/platform-features'
-import RestaurantValue from '@/components/landing/restaurant-value' 
-import CustomerJourney from '@/components/landing/customer-journey'
+'use client'
+
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import {
+  Smartphone,
+  Settings,
+  BarChart3,
+  ArrowRight,
+  CheckCircle,
+  Star,
+  CreditCard,
+  Package,
+  Mail,
+  Zap,
+  Shield,
+  Users,
+  TrendingUp,
+  Clock,
+  Eye
+} from 'lucide-react'
 import Header from '@/components/shared/header'
+import ScrollToTop from '@/components/ui/scroll-to-top'
 
 export default function ServicesPage() {
+  const [selectedPlan, setSelectedPlan] = useState('professional')
+  const [email, setEmail] = useState('')
+
+  const ecosystemModules = [
+    {
+      icon: <Smartphone className="w-4 h-4" />,
+      title: 'Customer Experience Module',
+      description: 'Transform how customers interact with your restaurant through seamless digital ordering and payment.',
+      features: [
+        'QR code instant menu access',
+        'Visual menu with rich images',
+        'Real-time order tracking',
+        'Integrated payment processing',
+        'Digital receipts & history',
+        'Multi-language support'
+      ],
+      color: '#4ADE80'
+    },
+    {
+      icon: <Settings className="w-4 h-4" />,
+      title: 'Operations Management Module',
+      description: 'Streamline every aspect of your restaurant operations with intelligent automation and real-time coordination.',
+      features: [
+        'Kitchen display system',
+        'Order queue management',
+        'Inventory tracking',
+        'Staff performance metrics',
+        'Table management',
+        'Prep time optimization'
+      ],
+      color: '#3B82F6'
+    },
+    {
+      icon: <BarChart3 className="w-4 h-4" />,
+      title: 'Business Intelligence Module',
+      description: 'Make data-driven decisions with comprehensive analytics and insights that drive profitability.',
+      features: [
+        'Real-time sales dashboard',
+        'Inventory analytics',
+        'Customer behavior insights',
+        'Profit margin analysis',
+        'Predictive forecasting',
+        'Custom reports'
+      ],
+      color: '#F59E0B'
+    }
+  ]
+
+  const detailedServices = [
+    {
+      badge: 'CUSTOMER FACING',
+      title: 'Digital Ordering That Delights',
+      description: 'Give your customers the modern dining experience they expect. No app downloads, no friction, just scan and order.',
+      visual: '📱',
+      features: [
+        { icon: <Zap className="w-4 h-4" />, title: 'Instant QR Access', desc: 'Customers scan and browse immediately' },
+        { icon: <Eye className="w-4 h-4" />, title: 'Visual Menus', desc: 'Rich images and descriptions that sell' },
+        { icon: <Settings className="w-4 h-4" />, title: 'Smart Customization', desc: 'Handle modifications and special requests' },
+        { icon: <Clock className="w-4 h-4" />, title: 'Real-time Updates', desc: 'Menu changes reflect instantly' }
+      ]
+    },
+    {
+      badge: 'BACKEND EFFICIENCY',
+      title: 'Never Run Out, Never Waste',
+      description: 'Automated inventory tracking that prevents both stockouts and waste. Know exactly what you have, what you need, and when to order.',
+      visual: '📦',
+      features: [
+        { icon: <BarChart3 className="w-4 h-4" />, title: 'Auto-tracking', desc: 'Every sale updates stock levels' },
+        { icon: <Shield className="w-4 h-4" />, title: 'Low Stock Alerts', desc: 'Get notified before running out' },
+        { icon: <Package className="w-4 h-4" />, title: 'Supplier Integration', desc: 'Direct ordering from the platform' },
+        { icon: <TrendingUp className="w-4 h-4" />, title: 'Waste Analytics', desc: 'Identify and reduce waste patterns' }
+      ]
+    },
+    {
+      badge: 'SECURE TRANSACTIONS',
+      title: 'Get Paid Every Time',
+      description: 'Eliminate walkouts and payment disputes with integrated digital payments. Multiple options, instant processing, zero friction.',
+      visual: '💳',
+      features: [
+        { icon: <CreditCard className="w-4 h-4" />, title: 'Multiple Methods', desc: 'Card, mobile money, cash options' },
+        { icon: <Users className="w-4 h-4" />, title: 'Split Bills', desc: 'Easy group payment handling' },
+        { icon: <Zap className="w-4 h-4" />, title: 'Instant Settlement', desc: 'Funds in your account faster' },
+        { icon: <Shield className="w-4 h-4" />, title: 'Zero Disputes', desc: 'Digital records of every transaction' }
+      ]
+    },
+    {
+      badge: 'BUSINESS INTELLIGENCE',
+      title: 'Insights That Drive Growth',
+      description: 'Transform raw data into actionable insights. Understand your business like never before with real-time analytics.',
+      visual: '📊',
+      features: [
+        { icon: <BarChart3 className="w-4 h-4" />, title: 'Live Metrics', desc: 'Real-time sales and performance' },
+        { icon: <TrendingUp className="w-4 h-4" />, title: 'Trend Analysis', desc: 'Spot patterns and opportunities' },
+        { icon: <Star className="w-4 h-4" />, title: 'Profit Optimization', desc: 'Identify high-margin opportunities' },
+        { icon: <BarChart3 className="w-4 h-4" />, title: 'Custom Reports', desc: 'Get the data you need, when you need it' }
+      ]
+    }
+  ]
+
+  const integrationCategories = [
+    {
+      title: 'Payment Gateways',
+      items: ['Paystack', 'Yoco', 'SnapScan', 'Zapper']
+    },
+    {
+      title: 'Delivery Platforms',
+      items: ['Uber Eats', 'Mr D Food', 'Checkers Sixty60', 'Custom delivery']
+    },
+    {
+      title: 'Accounting',
+      items: ['QuickBooks', 'Sage', 'Xero', 'Excel export']
+    },
+    {
+      title: 'Marketing',
+      items: ['SMS campaigns', 'Email marketing', 'Loyalty programs', 'Social media']
+    }
+  ]
+
+  const pricingPlans = [
+    {
+      id: 'starter',
+      tier: 'Starter',
+      amount: '1.5%',
+      period: 'per transaction',
+      features: [
+        'Full platform access',
+        'Unlimited orders',
+        'Basic analytics',
+        'Email support',
+        'Free updates',
+        'No setup fees'
+      ],
+      cta: 'Start Free Trial',
+      featured: false
+    },
+    {
+      id: 'professional',
+      tier: 'Professional',
+      amount: 'R3,999',
+      period: 'per month',
+      features: [
+        'Everything in Starter',
+        'Advanced analytics',
+        'Priority support',
+        'Multi-location support',
+        'Custom branding',
+        'API access',
+        'Training included'
+      ],
+      cta: 'Get Started',
+      featured: true
+    },
+    {
+      id: 'enterprise',
+      tier: 'Enterprise',
+      amount: 'Custom',
+      period: 'tailored pricing',
+      features: [
+        'Everything in Professional',
+        'Dedicated account manager',
+        'Custom integrations',
+        'White-label options',
+        'SLA guarantee',
+        'On-site training',
+        'Custom development'
+      ],
+      cta: 'Contact Sales',
+      featured: false
+    }
+  ]
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log('Email submitted:', email)
+    setEmail('')
+  }
+
   return (
     <>
       <Header />
-      <main className="min-h-screen pt-20">
-        {/* Page Header */}
-        <section className="relative py-20 bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end">
-          <div className="absolute inset-0 bg-gradient-to-r from-secondary-purple-start/10 via-transparent to-primary-blue-start/10"></div>
-          <div className="relative z-10 max-w-container mx-auto px-container-mobile lg:px-container-desktop text-center">
-            <h1 className="text-hero-mobile lg:text-hero-desktop text-foreground-primary mb-6">
-              Our Services
-            </h1>
-            <p className="text-body-mobile lg:text-body-desktop text-foreground-secondary max-w-2xl mx-auto">
-              Comprehensive solutions for restaurants and diners to create exceptional dining experiences
-            </p>
+      <main className="min-h-screen bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end">
+        {/* Hero Section */}
+        <section className="relative py-32 md:py-40 overflow-hidden bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end">
+          {/* Star Field Background */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="stars absolute inset-0 opacity-30"></div>
+            <div className="stars2 absolute inset-0 opacity-20"></div>
+            <div className="stars3 absolute inset-0 opacity-10"></div>
           </div>
-        </section>
-
-        {/* Platform Features */}
-        <PlatformFeatures />
-
-        {/* How It Works */}
-        <section id="how-it-works" className="py-section-mobile lg:py-section-desktop bg-gradient-background">
-          {/* How It Works Content */}
-          <CustomerJourney />
           
-          {/* Additional Process Details */}
-          <div className="max-w-container mx-auto px-container-mobile lg:px-container-desktop">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-card-glass backdrop-blur-glass border border-border-glass rounded-lg p-8 shadow-glass">
-                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-subheading-mobile lg:text-subheading-desktop text-foreground-primary mb-4">
-                  Smart Discovery
-                </h3>
-                <p className="text-foreground-secondary">
-                  Our AI-powered search helps you find the perfect restaurant based on your preferences, location, and dining history.
-                </p>
-              </div>
-
-              <div className="bg-card-glass backdrop-blur-glass border border-border-glass rounded-lg p-8 shadow-glass">
-                <div className="w-12 h-12 bg-gradient-secondary rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <h3 className="text-subheading-mobile lg:text-subheading-desktop text-foreground-primary mb-4">
-                  Instant Booking
-                </h3>
-                <p className="text-foreground-secondary">
-                  Book tables instantly with real-time availability. No more waiting for confirmation calls or emails.
-                </p>
-              </div>
-
-              <div className="bg-card-glass backdrop-blur-glass border border-border-glass rounded-lg p-8 shadow-glass">
-                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-subheading-mobile lg:text-subheading-desktop text-foreground-primary mb-4">
-                  Seamless Experience
-                </h3>
-                <p className="text-foreground-secondary">
-                  From discovery to dining, enjoy a smooth experience with personalized recommendations and easy management.
-                </p>
-              </div>
-            </div>
+          {/* Background Gradient Overlays */}
+          <div className="absolute inset-0">
+            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-radial from-primary/20 via-primary/10 to-transparent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-blue-500/20 via-blue-500/10 to-transparent rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-block px-6 py-2 bg-white/5 border border-white/15 rounded-full text-xs uppercase tracking-[2px] text-white/80 mb-8"
+            >
+              COMPREHENSIVE SOLUTIONS
+            </motion.div>
+            
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-5xl md:text-6xl font-bold mb-6"
+            >
+              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                Everything Your Restaurant Needs,
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
+                Nothing It Doesn't
+              </span>
+            </motion.h1>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
+            >
+              From the moment a customer sits down to long after they leave, 
+              Manuvoo handles every aspect of your restaurant operations in one seamless platform.
+            </motion.p>
           </div>
         </section>
-        
-        {/* Restaurant Value */}
-        <RestaurantValue />
-        
-        {/* Service Categories */}
-        <section className="py-section-mobile lg:py-section-desktop bg-gradient-background-darker">
-          <div className="max-w-container mx-auto px-container-mobile lg:px-container-desktop">
-            <div className="text-center mb-16">
-              <h2 className="text-section-mobile lg:text-section-desktop text-foreground-primary mb-6">
-                Complete Restaurant Solutions
-              </h2>
-              <p className="text-body-mobile lg:text-body-desktop text-foreground-secondary max-w-2xl mx-auto">
-                Everything you need to manage and grow your restaurant business
+
+        {/* Core Services Overview */}
+        <section className="py-25 bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-20"
+            >
+              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">The Manuvoo Ecosystem</h2>
+              <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
+                Three powerful modules working in perfect harmony
               </p>
-            </div>
+            </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* For Restaurants */}
-              <div className="bg-card-glass backdrop-blur-glass border border-border-glass rounded-xl p-8 shadow-glass">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-gradient-secondary rounded-lg flex items-center justify-center mr-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
-                  </div>
-                  <h3 className="text-subheading-mobile lg:text-subheading-desktop text-foreground-primary">
-                    For Restaurants
-                  </h3>
-                </div>
-                <ul className="space-y-4 text-foreground-secondary">
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-primary-blue-start mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Real-time reservation management system
-                  </li>
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-primary-blue-start mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Advanced analytics and insights dashboard
-                  </li>
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-primary-blue-start mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Customer relationship management tools
-                  </li>
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-primary-blue-start mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Marketing and promotion features
-                  </li>
-                </ul>
-              </div>
-
-              {/* For Diners */}
-              <div className="bg-card-glass backdrop-blur-glass border border-border-glass rounded-xl p-8 shadow-glass">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mr-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-subheading-mobile lg:text-subheading-desktop text-foreground-primary">
-                    For Diners
-                  </h3>
-                </div>
-                <ul className="space-y-4 text-foreground-secondary">
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-secondary-purple-start mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Personalized restaurant recommendations
-                  </li>
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-secondary-purple-start mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Instant booking with real-time availability
-                  </li>
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-secondary-purple-start mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Dining history and preferences tracking
-                  </li>
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-secondary-purple-start mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Exclusive deals and loyalty rewards
-                  </li>
-                </ul>
-              </div>
+            <div className="grid md:grid-cols-3 gap-12 mb-20">
+              {ecosystemModules.map((module, index) => {
+                const colorClasses = {
+                  '#4ADE80': 'hover:border-green-500/30 [--module-color:theme(colors.green.500)]',
+                  '#3B82F6': 'hover:border-blue-500/30 [--module-color:theme(colors.blue.500)]',
+                  '#F59E0B': 'hover:border-amber-500/30 [--module-color:theme(colors.amber.500)]'
+                }
+                
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className={`group relative bg-white/[0.02] border border-white/[0.08] rounded-3xl p-12 overflow-hidden transition-all duration-400 hover:-translate-y-1 hover:bg-white/[0.03] ${colorClasses[module.color as keyof typeof colorClasses]}`}
+                  >
+                    {/* Top border animation */}
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--module-color)] to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-400" />
+                    
+                    {/* Icon */}
+                    <div className="relative w-18 h-18 mx-auto mb-6 flex items-center justify-center bg-white/5 rounded-2xl text-white group-hover:scale-110 transition-transform duration-300">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[var(--module-color)]/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="text-4xl">
+                        {index === 0 ? '📱' : index === 1 ? '⚙️' : '📊'}
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-xl font-semibold text-white mb-4 text-center">{module.title}</h3>
+                    <p className="text-white/70 leading-relaxed mb-6 text-center">{module.description}</p>
+                    
+                    <ul className="space-y-3">
+                      {module.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center gap-3 text-white/80 text-sm">
+                          <ArrowRight className="w-4 h-4 text-[var(--module-color)] flex-shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )
+              })}
             </div>
           </div>
         </section>
+
+        {/* Detailed Services Section */}
+        <section className="py-25 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4">
+            {detailedServices.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="mb-30 last:mb-0"
+              >
+                <div className={`grid lg:grid-cols-2 gap-20 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+                  {/* Content */}
+                  <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
+                    <div className="inline-block px-4 py-1 bg-green-500/10 border border-green-500/30 rounded-2xl text-xs font-medium text-green-400 mb-6">
+                      {service.badge}
+                    </div>
+                    
+                    <h2 className="text-4xl font-bold text-white mb-6">{service.title}</h2>
+                    <p className="text-lg text-white/70 leading-relaxed mb-8">{service.description}</p>
+                    
+                    <div className="grid grid-cols-2 gap-6">
+                      {service.features.map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-start gap-4">
+                          <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center flex-shrink-0 text-green-400">
+                            {feature.icon}
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="text-white font-medium mb-1">{feature.title}</h4>
+                            <p className="text-white/60 text-sm">{feature.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Visual */}
+                  <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
+                    <div className="relative bg-white/[0.02] border border-white/[0.08] rounded-3xl overflow-hidden h-96">
+                      <img 
+                        src={
+                          index === 0 ? "https://images.pexels.com/photos/4393021/pexels-photo-4393021.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                          index === 1 ? "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                          index === 2 ? "https://images.pexels.com/photos/4099235/pexels-photo-4099235.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                          "https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=800"
+                        }
+                        alt={
+                          index === 0 ? "Digital ordering system" :
+                          index === 1 ? "Inventory management" :
+                          index === 2 ? "Payment processing" :
+                          "Business analytics dashboard"
+                        }
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                      <div className="absolute bottom-6 left-6 right-6">
+                        <div className="text-6xl mb-2 opacity-80">
+                          {index === 0 ? '📱' : index === 1 ? '📦' : index === 2 ? '💳' : '📊'}
+                        </div>
+                        <p className="text-white/90 font-medium">
+                          {index === 0 ? 'Digital Ordering' : index === 1 ? 'Smart Inventory' : index === 2 ? 'Secure Payments' : 'Business Intelligence'}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Integration Capabilities */}
+        <section className="py-25 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-20"
+            >
+              <h2 className="text-4xl font-bold text-white mb-4">Seamlessly Connected</h2>
+              <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
+                Manuvoo integrates with the tools you already use to create a unified restaurant management ecosystem
+              </p>
+            </motion.div>
+
+            {/* Circular Integration Hub */}
+            <div className="relative h-[600px] flex items-center justify-center mb-20">
+              {/* Central Manuvoo Hub */}
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative z-20 w-40 h-40 bg-gradient-to-br from-green-500/30 via-blue-500/30 to-purple-500/30 border-2 border-white/30 rounded-full flex items-center justify-center backdrop-blur-sm"
+              >
+                <div className="text-center">
+                  <div className="w-12 h-12 mx-auto mb-2 bg-white/20 rounded-full flex items-center justify-center">
+                    <Settings className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-1">Manuvoo</h3>
+                  <p className="text-white/70 text-xs">Central Hub</p>
+                </div>
+                
+                {/* Animated pulse rings */}
+                <div className="absolute inset-0 rounded-full border-2 border-green-500/40 animate-ping" style={{ animationDuration: '3s' }} />
+                <div className="absolute inset-[-8px] rounded-full border border-blue-500/20 animate-ping" style={{ animationDuration: '4s', animationDelay: '1s' }} />
+              </motion.div>
+
+              {/* Orbital Circle Layers */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-80 h-80 border-2 border-dashed border-white/30 rounded-full animate-spin-slow" />
+                <div className="absolute w-96 h-96 border-2 border-dashed border-white/20 rounded-full animate-spin-reverse" />
+                <div className="absolute w-[28rem] h-[28rem] border border-dashed border-white/10 rounded-full" />
+              </div>
+
+              {/* Integration Cards in Circle */}
+              {[
+                {
+                  icon: CreditCard,
+                  title: "Payment Gateways",
+                  description: "Secure payment processing with South African providers",
+                  items: ["Paystack", "Yoco", "SnapScan", "Zapper"],
+                  color: "green",
+                  position: { top: "10%", left: "50%", transform: "translate(-50%, -50%)" }
+                },
+                {
+                  icon: Package,
+                  title: "Delivery Platforms",
+                  description: "Seamless integration with major delivery services",
+                  items: ["Uber Eats", "Mr D Food", "Checkers Sixty60"],
+                  color: "blue",
+                  position: { top: "30%", right: "10%", transform: "translate(50%, -50%)" }
+                },
+                {
+                  icon: BarChart3,
+                  title: "Accounting",
+                  description: "Sync financial data with popular accounting software",
+                  items: ["QuickBooks", "Sage", "Xero", "Excel Export"],
+                  color: "purple",
+                  position: { bottom: "10%", left: "50%", transform: "translate(-50%, 50%)" }
+                },
+                {
+                  icon: Mail,
+                  title: "Marketing",
+                  description: "Automated marketing campaigns and customer engagement",
+                  items: ["SMS Campaigns", "Email Marketing", "Push Notifications"],
+                  color: "amber",
+                  position: { top: "30%", left: "10%", transform: "translate(-50%, -50%)" }
+                },
+                {
+                  icon: Smartphone,
+                  title: "POS Systems",
+                  description: "Compatible with leading point-of-sale systems",
+                  items: ["Square", "Clover", "Toast", "Lightspeed"],
+                  color: "cyan",
+                  position: { top: "70%", right: "10%", transform: "translate(50%, -50%)" }
+                },
+                {
+                  icon: Users,
+                  title: "Staff Management",
+                  description: "Integrate with HR and scheduling platforms",
+                  items: ["Deputy", "When I Work", "BambooHR"],
+                  color: "pink",
+                  position: { top: "70%", left: "10%", transform: "translate(-50%, -50%)" }
+                }
+              ].map((integration, index) => {
+                const colorMapping = {
+                  green: { bg: "bg-green-500/20", text: "text-green-400", border: "border-green-500/30", glow: "shadow-green-500/20" },
+                  blue: { bg: "bg-blue-500/20", text: "text-blue-400", border: "border-blue-500/30", glow: "shadow-blue-500/20" },
+                  purple: { bg: "bg-purple-500/20", text: "text-purple-400", border: "border-purple-500/30", glow: "shadow-purple-500/20" },
+                  amber: { bg: "bg-amber-500/20", text: "text-amber-400", border: "border-amber-500/30", glow: "shadow-amber-500/20" },
+                  cyan: { bg: "bg-cyan-500/20", text: "text-cyan-400", border: "border-cyan-500/30", glow: "shadow-cyan-500/20" },
+                  pink: { bg: "bg-pink-500/20", text: "text-pink-400", border: "border-pink-500/30", glow: "shadow-pink-500/20" }
+                };
+                
+                const colorClasses = colorMapping[integration.color as keyof typeof colorMapping] || {
+                  bg: "bg-gray-500/20", text: "text-gray-400", border: "border-gray-500/30", glow: "shadow-gray-500/20"
+                };
+
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                    className="absolute group z-30"
+                    style={integration.position}
+                  >
+                    {/* Integration Card - Circular */}
+                    <div className={`relative bg-white/[0.02] border-2 ${colorClasses.border} rounded-full p-4 w-32 h-32 flex flex-col items-center justify-center text-center hover:bg-white/[0.04] hover:shadow-lg ${colorClasses.glow} transition-all duration-300 hover:scale-110 cursor-pointer group-hover:-translate-y-2`}>
+                      {/* Icon */}
+                      <div className={`w-12 h-12 ${colorClasses.bg} rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300`}>
+                        <integration.icon className={`w-6 h-6 ${colorClasses.text}`} />
+                      </div>
+                      
+                      {/* Title */}
+                      <h4 className="text-white font-semibold text-xs mb-1 leading-tight">{integration.title}</h4>
+                      
+                      {/* Hover Description - Positioned to the Right */}
+                      <div className="absolute top-1/2 left-full transform -translate-y-1/2 ml-4 w-56 bg-black/95 backdrop-blur-sm border border-white/30 rounded-xl p-4 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-[100] shadow-2xl">
+                        <p className="text-white text-sm mb-3 font-medium">{integration.description}</p>
+                        <div className="text-sm text-white/80 space-y-2">
+                          <div className="font-semibold text-white/90 mb-2">Integrations:</div>
+                          {integration.items.map((item, itemIndex) => (
+                            <div key={itemIndex} className="flex items-center gap-2">
+                              <div className={`w-1.5 h-1.5 rounded-full ${colorClasses.bg.replace('/20', '/60')}`} />
+                              <span>{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                        {/* Left Arrow */}
+                        <div className="absolute top-1/2 right-full transform -translate-y-1/2 w-0 h-0 border-t-[6px] border-b-[6px] border-r-[6px] border-transparent border-r-black/95" />
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Additional Integration Benefits */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 1.2 }}
+              className="bg-white/[0.02] border border-white/[0.08] rounded-3xl p-12 text-center"
+            >
+              <h3 className="text-2xl font-bold text-white mb-6">One Platform, Endless Possibilities</h3>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Zap className="w-6 h-6 text-green-400" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="text-white font-semibold mb-1">Real-time Sync</h4>
+                    <p className="text-white/60 text-sm">All your tools work together instantly</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-6 h-6 text-blue-400" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="text-white font-semibold mb-1">Secure Connections</h4>
+                    <p className="text-white/60 text-sm">Bank-level security for all integrations</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Settings className="w-6 h-6 text-purple-400" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="text-white font-semibold mb-1">Easy Setup</h4>
+                    <p className="text-white/60 text-sm">Connect in minutes, not hours</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section className="py-25 bg-gradient-to-br from-[#121824] via-[#111827] to-[#0e1420] relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-20"
+            >
+              <h2 className="text-4xl font-bold text-white mb-4">Simple, Transparent Pricing</h2>
+              <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
+                Choose the plan that fits your restaurant's needs. No hidden fees, no surprises.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {pricingPlans.map((plan, index) => (
+                <motion.div
+                  key={plan.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className={`relative bg-white/[0.02] border rounded-3xl p-12 transition-all duration-300 ${
+                    plan.featured 
+                      ? 'border-green-500 transform scale-105 bg-white/[0.03]' 
+                      : 'border-white/[0.08] hover:-translate-y-1 hover:border-white/20'
+                  }`}
+                >
+                  {plan.featured && (
+                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-green-500 text-black text-xs font-semibold rounded-full">
+                      MOST POPULAR
+                    </div>
+                  )}
+                  
+                  <div className="text-center mb-8">
+                    <h3 className="text-xl font-semibold text-white mb-4">{plan.tier}</h3>
+                    <div className="mb-2">
+                      <span className="text-5xl font-bold text-white">{plan.amount}</span>
+                    </div>
+                    <p className="text-white/60">{plan.period}</p>
+                  </div>
+                  
+                  <ul className="space-y-4 mb-12">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center gap-3 text-white/80">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <button
+                    className={`w-full py-4 px-6 rounded-lg font-semibold transition-all duration-300 ${
+                      plan.featured
+                        ? 'bg-white text-black hover:-translate-y-0.5 hover:shadow-lg'
+                        : 'bg-transparent border-2 border-white/20 text-white hover:bg-white hover:text-black'
+                    }`}
+                  >
+                    {plan.cta}
+                  </button>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Success Stories Section */}
+        <section className="py-25 bg-black">
+          <div className="max-w-6xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-20"
+            >
+              <h2 className="text-4xl font-bold text-white mb-4">Proven Results</h2>
+              <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
+                Real restaurants, real success
+              </p>
+            </motion.div>
+
+            {/* Success Stats */}
+            <div className="grid md:grid-cols-4 gap-12 mb-20">
+              {[
+                { number: '35%', label: 'Average cost reduction' },
+                { number: '2 days', label: 'Setup time' },
+                { number: '99.5%', label: 'Order accuracy' },
+                { number: '40%', label: 'Profit increase' }
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="text-center"
+                >
+                  <div className="text-5xl font-bold text-green-500 mb-2">{stat.number}</div>
+                  <div className="text-white/80">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Testimonial */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-white/[0.02] border border-white/[0.08] rounded-3xl p-12 text-center max-w-4xl mx-auto"
+            >
+              <blockquote className="text-2xl font-light italic text-white/90 leading-relaxed mb-8">
+                "Manuvoo didn't just replace our old systems—it transformed how we think 
+                about restaurant operations. We're serving more customers with less stress 
+                and making more profit than ever before."
+              </blockquote>
+              
+              <div className="flex items-center justify-center gap-4">
+                <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-2xl">
+                  👨‍🍳
+                </div>
+                <div className="text-left">
+                  <div className="text-white font-semibold">Michael Dlamini</div>
+                  <div className="text-white/60 text-sm">Owner, The Local Kitchen</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Call to Action Section */}
+        <section className="py-25 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-30">
+            <div 
+              className="absolute inset-0"
+              style={{
+                backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 1px)',
+                backgroundSize: '40px 40px'
+              }}
+            />
+          </div>
+          
+          <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-5xl font-bold text-white mb-6">
+                Ready to Transform Your Restaurant?
+              </h2>
+              <p className="text-xl text-white/70 leading-relaxed mb-12">
+                See why restaurants are switching to Manuvoo
+              </p>
+              
+              <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto mb-8">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="flex-1 px-6 py-4 bg-white/5 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/10 transition-all duration-300"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="px-8 py-4 bg-white text-black font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-lg hover:shadow-white/20 transition-all duration-300 active:translate-y-0"
+                >
+                  Get Free Demo
+                </button>
+              </form>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-white/70">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  30-day free trial
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  No credit card
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  Setup in 48 hours
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Scroll to Top */}
+        <ScrollToTop />
+        
+        {/* Star Field CSS Animations */}
+        <style jsx>{`
+          @media (prefers-reduced-motion: no-preference) {
+            .stars {
+              background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="0.5" fill="white"/><circle cx="30" cy="25" r="0.3" fill="white"/><circle cx="60" cy="15" r="0.4" fill="white"/><circle cx="80" cy="35" r="0.2" fill="white"/><circle cx="20" cy="50" r="0.3" fill="white"/><circle cx="70" cy="60" r="0.5" fill="white"/><circle cx="40" cy="80" r="0.2" fill="white"/><circle cx="90" cy="75" r="0.4" fill="white"/></svg>') repeat;
+              animation: move-stars 50s linear infinite;
+            }
+            
+            .stars2 {
+              background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="15" cy="20" r="0.3" fill="white"/><circle cx="45" cy="10" r="0.4" fill="white"/><circle cx="75" cy="30" r="0.2" fill="white"/><circle cx="25" cy="60" r="0.5" fill="white"/><circle cx="85" cy="50" r="0.3" fill="white"/></svg>') repeat;
+              animation: move-stars 100s linear infinite;
+            }
+            
+            .stars3 {
+              background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="35" cy="40" r="0.2" fill="white"/><circle cx="65" cy="70" r="0.4" fill="white"/><circle cx="95" cy="20" r="0.3" fill="white"/></svg>') repeat;
+              animation: move-stars 150s linear infinite;
+            }
+            
+            @keyframes move-stars {
+              from { transform: translateX(0); }
+              to { transform: translateX(-100px); }
+            }
+          }
+        `}</style>
       </main>
     </>
   )

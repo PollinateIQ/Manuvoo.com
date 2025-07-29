@@ -3,10 +3,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
-import { CheckCircle, Play, Star } from 'lucide-react'
+import { CheckCircle, Play, Star, MessageCircle, ArrowRight } from 'lucide-react'
 import ReservationDialog from '@/components/reservation/ReservationDialog'
+import ExitIntentPopup from '@/components/landing/exit-intent-popup'
+import { useRouter } from 'next/navigation'
 import { TimeSlot } from '@/types/reservations'
-
+import { Button as MovingBorderButton } from '@/components/ui/moving-border'
 
 
 // Press logos for social proof
@@ -68,28 +70,21 @@ const fallbackTimeSlots: TimeSlot[] = [
 export default function Hero() {
   // Dialog state
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [showExitIntent, setShowExitIntent] = useState(false)
+  const router = useRouter()
   
   // Animation refs and state
   const heroRef = useRef(null)
   const isInView = useInView(heroRef, { once: true, margin: "-100px" })
   
-  // Handle register restaurant click
-  const handleRegisterRestaurant = () => {
-    // Scroll to services section
-    const servicesSection = document.getElementById('services-section')
-    
-    if (servicesSection) {
-      servicesSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      })
-    } else {
-      // Fallback if services section not found
-      window.scrollTo({
-        top: window.innerHeight,
-        behavior: 'smooth'
-      })
-    }
+  // Handle primary CTA click - trigger exit intent popup
+  const handlePrimaryCTA = () => {
+    setShowExitIntent(true)
+  }
+
+  // Handle contact page navigation
+  const handleContactClick = () => {
+    router.push('/contact')
   }
   
   // Hero images for parallax effect - optimized WebP format  
@@ -128,7 +123,7 @@ export default function Hero() {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end"
+      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end pt-24"
     >
       {/* Animated star field background */}
       <div className="absolute inset-0 overflow-hidden">
@@ -137,7 +132,7 @@ export default function Hero() {
         <div className="stars3 absolute inset-0 opacity-10"></div>
       </div>
       
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-20 pt-12 pb-8">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-20 pt-20 pb-8">
         <motion.div 
           className="flex flex-col items-center justify-center text-center space-y-8 max-w-4xl mx-auto mb-20"
           initial={{ opacity: 0 }}
@@ -165,44 +160,61 @@ export default function Hero() {
             </p>
           </motion.div>
           
-          {/* Centered CTAs */}
+          {/* Primary CTAs */}
           <motion.div 
             className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-50"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 30 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <ReservationDialog 
-              isOpen={isDialogOpen} 
-              onOpenChange={setIsDialogOpen}
-              triggerButton={
-                <Button 
-                  size="lg" 
-                  className="bg-white text-slate-900 hover:bg-gray-100 shadow-2xl hover:shadow-3xl transition-all duration-300 px-8 py-3 text-lg font-bold border-2 border-white relative z-50"
-                >
-                  Find a Table
-                </Button>
-              }
-            />
-            
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="border-white/80 text-white hover:bg-white/10 transition-all duration-300 px-8 py-3 text-lg font-semibold border-2"
-              onClick={handleRegisterRestaurant}
+            {/* Get Started Button with Moving Border */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="z-20"
             >
-              List Your Restaurant
-            </Button>
+              <MovingBorderButton
+                onClick={handlePrimaryCTA}
+                borderRadius="1.75rem"
+                containerClassName="h-16 w-52 text-lg font-semibold hover:scale-105 transition-transform duration-300"
+                borderClassName="h-20 w-20 bg-[radial-gradient(#0ea5e9_40%,transparent_60%)] opacity-[0.8]"
+                className="bg-slate-900/[0.8] text-white border-slate-800 backdrop-blur-xl hover:bg-slate-800/[0.9] transition-all duration-300"
+                duration={3000}
+              >
+                <span className="flex items-center gap-2">
+                  Get Started
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </span>
+              </MovingBorderButton>
+            </motion.div>
             
-            <Button 
-              variant="ghost" 
-              size="lg" 
-              className="text-white/90 hover:text-white hover:bg-white/5 group transition-all duration-300 px-8 py-3 text-lg font-semibold border border-white/20"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+              className="z-20"
             >
-              <Play size={20} className="mr-3 group-hover:scale-110 transition-transform" />
-              Watch Demo
-            </Button>
+              <MovingBorderButton
+                onClick={handleContactClick}
+                borderRadius="1.75rem"
+                containerClassName="h-16 w-52 text-lg font-semibold hover:scale-105 transition-transform duration-300"
+                borderClassName="h-20 w-20 bg-[radial-gradient(#ffffff_40%,transparent_60%)] opacity-[0.6]"
+                className="bg-transparent border-white/20 text-white backdrop-blur-xl hover:bg-white/5 transition-all duration-300"
+                duration={4000}
+              >
+                <span className="flex items-center gap-2">
+                  <MessageCircle size={20} className="group-hover:scale-110 transition-transform duration-300" />
+                  Contact Us
+                </span>
+              </MovingBorderButton>
+            </motion.div>
           </motion.div>
+          
+          {/* Exit Intent Popup */}
+          {showExitIntent && (
+            <ExitIntentPopup />
+          )}
           
           {/* Centered Key Features */}
           <motion.div 
@@ -323,7 +335,7 @@ export default function Hero() {
       {/* Bottom fade to ensure smooth transition to next section */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/20 via-black/10 to-transparent z-10" />
       
-      {/* CSS for star field animation */}
+      {/* CSS for star field animation and neon glow effects */}
       <style jsx>{`
         @media (prefers-reduced-motion: no-preference) {
           .stars {
@@ -345,8 +357,42 @@ export default function Hero() {
             from { transform: translateX(0); }
             to { transform: translateX(-100px); }
           }
+          
+          /* Neon Glow Beam Effects */
+          @keyframes beam {
+            0% { transform: translateX(-150%) skewX(-12deg); }
+            50% { transform: translateX(-50%) skewX(-12deg); }
+            100% { transform: translateX(250%) skewX(-12deg); }
+          }
+          
+          @keyframes glow-pulse {
+            0%, 100% { 
+              opacity: 0.6;
+              transform: scale(1);
+            }
+            50% { 
+              opacity: 0.9;
+              transform: scale(1.05);
+            }
+          }
+          
+          .animate-beam {
+            animation: beam 3s ease-in-out infinite;
+            animation-delay: 1s;
+          }
+          
+          .animate-glow-pulse {
+            animation: glow-pulse 2s ease-in-out infinite;
+            animation-delay: 0.5s;
+          }
         }
       `}</style>
+      
+      {/* Exit Intent Popup */}
+      <ExitIntentPopup 
+        isOpen={showExitIntent}
+        onClose={() => setShowExitIntent(false)}
+      />
     </section>
   )
 }

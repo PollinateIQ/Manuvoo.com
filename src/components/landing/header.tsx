@@ -69,19 +69,22 @@ export default function Header() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'backdrop-blur-md shadow-xl border-b border-white/10' : 'backdrop-blur-sm'
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'backdrop-blur-xl bg-black/20 shadow-2xl border-b border-white/10' 
+          : 'backdrop-blur-lg bg-black/10'
       }`}>
-        {/* Enhanced Vibrant Multi-layered Background */}
+        {/* Modern Glass Morphism Background */}
         <div className="absolute inset-0">
-          {/* Base gradient layers with higher opacity */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end"></div>
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary-blue-start/25 via-transparent to-secondary-purple-start/25"></div>
-          <div className="absolute inset-0 bg-gradient-to-bl from-secondary-purple-start/20 via-transparent to-accent-orange/15"></div>
+          {/* Primary glass layer */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/30"></div>
           
-          {/* Strategic radial gradients for dramatic depth */}
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-gradient-radial from-secondary-purple-start/30 via-secondary-purple-start/15 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-gradient-radial from-primary-blue-start/30 via-primary-blue-start/15 to-transparent rounded-full blur-3xl"></div>
+          {/* Subtle accent gradients */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-blue-500/5"></div>
+          
+          {/* Dynamic light effects */}
+          <div className="absolute top-0 left-1/3 w-64 h-32 bg-gradient-radial from-primary/10 via-primary/5 to-transparent rounded-full blur-2xl"></div>
+          <div className="absolute top-0 right-1/3 w-64 h-32 bg-gradient-radial from-blue-500/10 via-blue-500/5 to-transparent rounded-full blur-2xl"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-accent-orange/20 via-transparent to-transparent rounded-full blur-3xl"></div>
           
           {/* Floating gradient orbs for atmospheric depth */}
@@ -106,57 +109,61 @@ export default function Header() {
         <div className="container mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <div className="flex items-center space-x-3">
-              <ManuvooLogo width={40} height={40} className="text-white" />
-              <span className="text-2xl font-bold text-white">Manuvoo</span>
+            <div className="flex items-center space-x-3 group cursor-pointer">
+              <div className="transform transition-transform duration-300 group-hover:scale-110">
+                <ManuvooLogo width={44} height={44} className="text-white" />
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+                Manuvoo
+              </span>
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
+            <nav className="hidden lg:flex items-center space-x-1">
               <button 
                 onClick={() => scrollToSection('#how-it-works')}
-                className="text-gray-300 hover:text-white transition-colors text-lg font-medium relative group"
+                className="text-gray-300 hover:text-white transition-all duration-300 text-base font-medium relative group px-4 py-2 rounded-lg hover:bg-white/5"
               >
                 How It Works
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-blue-start transition-all group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-blue-400 transition-all duration-300 group-hover:w-3/4"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('#services')}
-                className="text-gray-300 hover:text-white transition-colors text-lg font-medium relative group"
+                className="text-gray-300 hover:text-white transition-all duration-300 text-base font-medium relative group px-4 py-2 rounded-lg hover:bg-white/5"
               >
                 Services
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-blue-start transition-all group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-blue-400 transition-all duration-300 group-hover:w-3/4"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('#about')}
-                className="text-gray-300 hover:text-white transition-colors text-lg font-medium relative group"
+                className="text-gray-300 hover:text-white transition-all duration-300 text-base font-medium relative group px-4 py-2 rounded-lg hover:bg-white/5"
               >
                 About
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-blue-start transition-all group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-blue-400 transition-all duration-300 group-hover:w-3/4"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('#contact')}
-                className="text-gray-300 hover:text-white transition-colors text-lg font-medium relative group"
+                className="text-gray-300 hover:text-white transition-all duration-300 text-base font-medium relative group px-4 py-2 rounded-lg hover:bg-white/5"
               >
                 Contact
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-blue-start transition-all group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-blue-400 transition-all duration-300 group-hover:w-3/4"></span>
               </button>
             </nav>
 
             {/* Desktop Auth Buttons */}
-            <div className="hidden lg:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-3">
               <Button 
                 variant="ghost" 
                 onClick={() => setIsLoginOpen(true)}
-                className="text-white hover:bg-white/10 text-lg px-6 py-2 rounded-lg transition-all duration-300 hover:scale-105"
+                className="text-white hover:text-white hover:bg-white/10 text-base font-medium px-5 py-2.5 rounded-xl transition-all duration-300 hover:scale-105 border border-transparent hover:border-white/20 backdrop-blur-sm"
               >
                 Login
               </Button>
               <Button 
                 onClick={() => setIsSignupOpen(true)}
-                className="bg-gradient-primary hover:opacity-90 text-white text-lg px-6 py-2 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg"
+                className="bg-gradient-to-r from-primary to-blue-400 hover:from-primary/90 hover:to-blue-400/90 text-white text-base font-medium px-6 py-2.5 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl border border-primary/20 backdrop-blur-sm"
               >
-                Sign Up
+                Get Started
               </Button>
             </div>
 
