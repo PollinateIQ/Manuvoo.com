@@ -1,6 +1,6 @@
 import { supabase, hasRealCredentials } from '@/lib/supabase';
 import { fallbackRestaurants, fallbackTimeSlots, fallbackTables, fallbackMenuItems, fallbackMenuCategories } from '@/data/fallback-data';
-import { Reservation, Restaurant, TimeSlot, Table, MenuItem, MenuCategory } from '@/types/reservations';
+import { BookingData, Restaurant, TimeSlot, Table, MenuItem, MenuCategory } from '@/types/reservations';
 
 /**
  * Fetch available restaurants
@@ -15,8 +15,8 @@ export async function getRestaurants(searchQuery?: string): Promise<Restaurant[]
       const lowercaseQuery = searchQuery.toLowerCase();
       return fallbackRestaurants.filter(restaurant => 
         restaurant.name.toLowerCase().includes(lowercaseQuery) ||
-        restaurant.cuisine.toLowerCase().includes(lowercaseQuery) ||
-        restaurant.location.toLowerCase().includes(lowercaseQuery)
+        restaurant.cuisine_type.toLowerCase().includes(lowercaseQuery) ||
+        restaurant.address.toLowerCase().includes(lowercaseQuery)
       );
     }
     return fallbackRestaurants;
@@ -197,7 +197,7 @@ export async function getAvailableTimeSlots(
  * @param reservation Reservation data
  * @returns Created reservation
  */
-export async function createReservation(reservation: Reservation): Promise<Reservation> {
+export async function createReservation(reservation: BookingData): Promise<BookingData> {
   // If we don't have real credentials, return a mock successful response
   if (!hasRealCredentials) {
     console.log('Using mock reservation creation');

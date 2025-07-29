@@ -22,6 +22,7 @@ export interface Restaurant {
 
 // Simple booking data structure (no database table)
 export interface BookingData {
+  id?: string;
   restaurant_id: string;
   table_id: string;
   reservation_date: string; // ISO date string
@@ -32,6 +33,8 @@ export interface BookingData {
   customer_phone: string;
   special_requests?: string;
   status: 'pending' | 'confirmed' | 'cancelled';
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface TimeSlot {
