@@ -104,7 +104,7 @@ export const SlidingTabs = ({
     <div className={cn("w-full", className)}>
       {/* Tab Buttons */}
       <div className="relative flex space-x-1 rounded-xl bg-white/5 p-1">
-        {tabs.map((tab, index) => (
+        {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}

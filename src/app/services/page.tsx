@@ -23,7 +23,7 @@ import Header from '@/components/shared/header'
 import ScrollToTop from '@/components/ui/scroll-to-top'
 
 export default function ServicesPage() {
-  const [selectedPlan, setSelectedPlan] = useState('professional')
+
   const [email, setEmail] = useState('')
 
   const ecosystemModules = [
@@ -122,24 +122,7 @@ export default function ServicesPage() {
     }
   ]
 
-  const integrationCategories = [
-    {
-      title: 'Payment Gateways',
-      items: ['Paystack', 'Yoco', 'SnapScan', 'Zapper']
-    },
-    {
-      title: 'Delivery Platforms',
-      items: ['Uber Eats', 'Mr D Food', 'Checkers Sixty60', 'Custom delivery']
-    },
-    {
-      title: 'Accounting',
-      items: ['QuickBooks', 'Sage', 'Xero', 'Excel export']
-    },
-    {
-      title: 'Marketing',
-      items: ['SMS campaigns', 'Email marketing', 'Loyalty programs', 'Social media']
-    }
-  ]
+
 
   const pricingPlans = [
     {
