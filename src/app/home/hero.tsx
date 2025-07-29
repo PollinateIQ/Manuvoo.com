@@ -77,9 +77,9 @@ export default function Hero() {
   const heroRef = useRef(null)
   const isInView = useInView(heroRef, { once: true, margin: "-100px" })
   
-  // Handle primary CTA click - trigger exit intent popup
+  // Handle primary CTA click - navigate to schedule page
   const handlePrimaryCTA = () => {
-    setShowExitIntent(true)
+    router.push('/schedule')
   }
 
   // Handle contact page navigation

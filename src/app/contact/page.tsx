@@ -21,9 +21,15 @@ import {
 } from 'lucide-react'
 import Header from '@/components/shared/header'
 import ScrollToTop from '@/components/ui/scroll-to-top'
+import GoogleMap from '@/components/ui/google-map'
 
 export default function ContactPage() {
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
+  const [locationsDropdownOpen, setLocationsDropdownOpen] = useState(false)
+  const [interestDropdownOpen, setInterestDropdownOpen] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [formErrors, setFormErrors] = useState<{[key: string]: string}>({})
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -46,14 +52,99 @@ export default function ContactPage() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = () => {
+    const errors: {[key: string]: string} = {}
+    
+    if (!formData.firstName.trim()) {
+      errors.firstName = 'First name is required'
+    }
+    
+    if (!formData.lastName.trim()) {
+      errors.lastName = 'Last name is required'
+    }
+    
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = 'Please enter a valid email address'
+    }
+    
+    if (!formData.message.trim()) {
+      errors.message = 'Message is required'
+    }
+    
+    if (!formData.consent) {
+      errors.consent = 'Please agree to receive communications'
+    }
+    
+    return errors
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    // Handle form submission here
+    
+    // Clear previous errors
+    setFormErrors({})
+    
+    // Validate form
+    const errors = validateForm()
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors)
+      return
+    }
+    
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+    
+    try {
+      // Simulate API call - replace with your actual endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          submittedAt: new Date().toISOString(),
+        }),
+      })
+      
+      if (response.ok) {
+        setSubmitStatus('success')
+        // Reset form on success
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          restaurantName: '',
+          locations: '',
+          interest: '',
+          message: '',
+          consent: false
+        })
+      } else {
+        throw new Error('Failed to submit form')
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const toggleAccordion = (index: number) => {
     setActiveAccordion(activeAccordion === index ? null : index)
+  }
+
+  const handleDropdownSelect = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+    if (field === 'locations') {
+      setLocationsDropdownOpen(false)
+    } else if (field === 'interest') {
+      setInterestDropdownOpen(false)
+    }
   }
 
   const contactCards = [
@@ -62,8 +153,9 @@ export default function ContactPage() {
       method: "Talk to Sales",
       details: "Ready to see Manuvoo in action? Our sales team will show you exactly how Manuvoo can transform your restaurant.",
       email: "sales@manuvoo.com",
-      phone: "+27 11 XXX XXXX",
+      phone: "+27 69 684 8796",
       link: "Schedule a Demo →",
+      href: "/schedule",
       availability: "Mon-Fri: 8am-6pm SAST",
       color: "green"
     },
@@ -72,8 +164,9 @@ export default function ContactPage() {
       method: "Get Support",
       details: "Need help with your Manuvoo platform? Our support team is here to ensure your success every step of the way.",
       email: "support@manuvoo.com",
-      phone: "24/7 Support Line",
+      phone: "+27 69 684 8796",
       link: "Access Help Center →",
+      href: "https://help.manuvoo.com",
       availability: "24/7 Support Available",
       color: "blue"
     },
@@ -82,8 +175,9 @@ export default function ContactPage() {
       method: "Partner With Us",
       details: "Interested in reselling, integrating, or partnering with Manuvoo? Let's explore opportunities together.",
       email: "partners@manuvoo.com",
-      phone: "",
+      phone: "+27 69 684 8796",
       link: "Explore Partnerships →",
+      href: "https://partners.manuvoo.com",
       availability: "Response within 48 hours",
       color: "amber"
     }
@@ -202,12 +296,25 @@ export default function ContactPage() {
                     <p className="text-white/70 leading-relaxed mb-6">{card.details}</p>
                     
                     <div className="space-y-2 mb-6">
-                      <p className="text-white font-medium">{card.email}</p>
-                      {card.phone && <p className="text-white/80">{card.phone}</p>}
+                      <a 
+                        href={`mailto:${card.email}`}
+                        className="text-white font-medium hover:text-[var(--card-color)] transition-colors duration-300"
+                      >
+                        {card.email}
+                      </a>
+                      {card.phone && (
+                        <a 
+                          href={`tel:${card.phone}`}
+                          className="block text-white/80 hover:text-white transition-colors duration-300"
+                        >
+                          {card.phone}
+                        </a>
+                      )}
                     </div>
                     
                     <a 
-                      href="#" 
+                      href={card.href} 
+                      {...(card.href.startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       className="inline-flex items-center gap-2 text-white font-medium hover:text-[var(--card-color)] transition-all duration-300 hover:translate-x-1"
                     >
                       {card.link}
@@ -251,9 +358,14 @@ export default function ContactPage() {
                         name="firstName"
                         value={formData.firstName}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300"
+                        className={`w-full px-4 py-4 bg-white/[0.03] border rounded-lg text-white placeholder-white/40 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 ${
+                          formErrors.firstName ? 'border-red-500 focus:border-red-400' : 'border-white/20 focus:border-white/50'
+                        }`}
                         required
                       />
+                      {formErrors.firstName && (
+                        <p className="text-red-400 text-sm mt-1">{formErrors.firstName}</p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-white/80 mb-2">
@@ -264,9 +376,14 @@ export default function ContactPage() {
                         name="lastName"
                         value={formData.lastName}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300"
+                        className={`w-full px-4 py-4 bg-white/[0.03] border rounded-lg text-white placeholder-white/40 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 ${
+                          formErrors.lastName ? 'border-red-500 focus:border-red-400' : 'border-white/20 focus:border-white/50'
+                        }`}
                         required
                       />
+                      {formErrors.lastName && (
+                        <p className="text-red-400 text-sm mt-1">{formErrors.lastName}</p>
+                      )}
                     </div>
                   </div>
 
@@ -281,9 +398,14 @@ export default function ContactPage() {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300"
+                        className={`w-full px-4 py-4 bg-white/[0.03] border rounded-lg text-white placeholder-white/40 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 ${
+                          formErrors.email ? 'border-red-500 focus:border-red-400' : 'border-white/20 focus:border-white/50'
+                        }`}
                         required
                       />
+                      {formErrors.email && (
+                        <p className="text-red-400 text-sm mt-1">{formErrors.email}</p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-white/80 mb-2">
@@ -313,57 +435,94 @@ export default function ContactPage() {
                         className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300"
                       />
                     </div>
-                    <div>
+                    <div className="relative">
                       <label className="block text-sm font-medium text-white/80 mb-2">
                         Number of Locations
                       </label>
-                      <select
-                        name="locations"
-                        value={formData.locations}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300 appearance-none cursor-pointer"
-                        style={{
-                          backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-                          backgroundRepeat: 'no-repeat',
-                          backgroundPosition: 'right 16px center',
-                          backgroundSize: '20px',
-                          paddingRight: '48px'
-                        }}
-                      >
-                        <option value="">Select...</option>
-                        <option value="single">Single location</option>
-                        <option value="2-5">2-5 locations</option>
-                        <option value="6-10">6-10 locations</option>
-                        <option value="10+">10+ locations</option>
-                      </select>
+                      <div className="relative">
+                        <button
+                          type="button"
+                          onClick={() => setLocationsDropdownOpen(!locationsDropdownOpen)}
+                          className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300 text-left flex items-center justify-between"
+                        >
+                          <span className={formData.locations ? 'text-white' : 'text-white/40'}>
+                            {formData.locations ? 
+                              (formData.locations === 'single' ? 'Single location' :
+                               formData.locations === '2-5' ? '2-5 locations' :
+                               formData.locations === '6-10' ? '6-10 locations' :
+                               formData.locations === '10+' ? '10+ locations' : 'Select...') 
+                              : 'Select...'}
+                          </span>
+                          <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${locationsDropdownOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        
+                        {locationsDropdownOpen && (
+                          <div className="absolute top-full left-0 right-0 mt-1 bg-gray-800 border border-white/20 rounded-lg shadow-xl z-50 overflow-hidden">
+                            {[
+                              { value: 'single', label: 'Single location' },
+                              { value: '2-5', label: '2-5 locations' },
+                              { value: '6-10', label: '6-10 locations' },
+                              { value: '10+', label: '10+ locations' }
+                            ].map((option) => (
+                              <button
+                                key={option.value}
+                                type="button"
+                                onClick={() => handleDropdownSelect('locations', option.value)}
+                                className="w-full px-4 py-3 text-left text-white hover:bg-white/10 transition-colors duration-200 border-b border-white/10 last:border-b-0"
+                              >
+                                {option.label}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
 
                   {/* Interest */}
-                  <div>
+                  <div className="relative">
                     <label className="block text-sm font-medium text-white/80 mb-2">
                       I'm interested in:
                     </label>
-                    <select
-                      name="interest"
-                      value={formData.interest}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300 appearance-none cursor-pointer"
-                      style={{
-                        backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'right 16px center',
-                        backgroundSize: '20px',
-                        paddingRight: '48px'
-                      }}
-                    >
-                      <option value="">Select...</option>
-                      <option value="demo">Product Demo</option>
-                      <option value="pricing">Pricing Information</option>
-                      <option value="partnership">Partnership Opportunities</option>
-                      <option value="support">Technical Support</option>
-                      <option value="general">General Inquiry</option>
-                    </select>
+                    <div className="relative">
+                      <button
+                        type="button"
+                        onClick={() => setInterestDropdownOpen(!interestDropdownOpen)}
+                        className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300 text-left flex items-center justify-between"
+                      >
+                        <span className={formData.interest ? 'text-white' : 'text-white/40'}>
+                          {formData.interest ? 
+                            (formData.interest === 'demo' ? 'Product Demo' :
+                             formData.interest === 'pricing' ? 'Pricing Information' :
+                             formData.interest === 'partnership' ? 'Partnership Opportunities' :
+                             formData.interest === 'support' ? 'Technical Support' :
+                             formData.interest === 'general' ? 'General Inquiry' : 'Select...') 
+                            : 'Select...'}
+                        </span>
+                        <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${interestDropdownOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      
+                      {interestDropdownOpen && (
+                        <div className="absolute top-full left-0 right-0 mt-1 bg-gray-800 border border-white/20 rounded-lg shadow-xl z-50 overflow-hidden">
+                          {[
+                            { value: 'demo', label: 'Product Demo' },
+                            { value: 'pricing', label: 'Pricing Information' },
+                            { value: 'partnership', label: 'Partnership Opportunities' },
+                            { value: 'support', label: 'Technical Support' },
+                            { value: 'general', label: 'General Inquiry' }
+                          ].map((option) => (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => handleDropdownSelect('interest', option.value)}
+                              className="w-full px-4 py-3 text-left text-white hover:bg-white/10 transition-colors duration-200 border-b border-white/10 last:border-b-0"
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   {/* Message */}
@@ -377,32 +536,81 @@ export default function ContactPage() {
                       onChange={handleInputChange}
                       rows={5}
                       placeholder="Tell us about your restaurant and how we can help..."
-                      className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300 resize-vertical"
+                      className={`w-full px-4 py-4 bg-white/[0.03] border rounded-lg text-white placeholder-white/40 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 resize-vertical ${
+                        formErrors.message ? 'border-red-500 focus:border-red-400' : 'border-white/20 focus:border-white/50'
+                      }`}
                       required
                     />
+                    {formErrors.message && (
+                      <p className="text-red-400 text-sm mt-1">{formErrors.message}</p>
+                    )}
                   </div>
 
                   {/* Consent Checkbox */}
-                  <div className="flex items-start gap-3 mt-6">
-                    <input
-                      type="checkbox"
-                      name="consent"
-                      checked={formData.consent}
-                      onChange={handleInputChange}
-                      className="w-5 h-5 mt-0.5 accent-green-500"
-                    />
-                    <label className="text-sm text-white/70 leading-relaxed">
-                      I agree to receive communications from Manuvoo about products and services.
-                    </label>
+                  <div className="mt-6">
+                    <div className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        name="consent"
+                        checked={formData.consent}
+                        onChange={handleInputChange}
+                        className={`w-5 h-5 mt-0.5 accent-green-500 ${
+                          formErrors.consent ? 'ring-2 ring-red-500' : ''
+                        }`}
+                      />
+                      <label className="text-sm text-white/70 leading-relaxed">
+                        I agree to receive communications from Manuvoo about products and services.
+                      </label>
+                    </div>
+                    {formErrors.consent && (
+                      <p className="text-red-400 text-sm mt-1 ml-8">{formErrors.consent}</p>
+                    )}
                   </div>
 
                   {/* Submit Button */}
-                  <button
-                    type="submit"
-                    className="w-full mt-6 px-12 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20 hover:from-blue-500 hover:to-blue-400 transition-all duration-300 active:translate-y-0"
-                  >
-                    Send Message
-                  </button>
+                  <div className="mt-6">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className={`w-full px-12 py-4 font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
+                        isSubmitting 
+                          ? 'bg-gray-600 text-gray-300 cursor-not-allowed' 
+                          : 'bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20 hover:from-blue-500 hover:to-blue-400 active:translate-y-0'
+                      }`}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-gray-300 border-t-transparent rounded-full animate-spin"></div>
+                          Sending...
+                        </>
+                      ) : (
+                        'Send Message'
+                      )}
+                    </button>
+                    
+                    {/* Success/Error Messages */}
+                    {submitStatus === 'success' && (
+                      <div className="mt-4 p-4 bg-green-500/10 border border-green-500/20 rounded-lg flex items-center gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <div>
+                          <p className="text-green-400 font-medium">Message sent successfully!</p>
+                          <p className="text-green-300/80 text-sm">We'll get back to you within 24 hours.</p>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {submitStatus === 'error' && (
+                      <div className="mt-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-3">
+                        <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-white text-xs font-bold">!</span>
+                        </div>
+                        <div>
+                          <p className="text-red-400 font-medium">Failed to send message</p>
+                          <p className="text-red-300/80 text-sm">Please try again or contact us directly.</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </form>
               </motion.div>
 
@@ -444,9 +652,15 @@ export default function ContactPage() {
                     <p>Gauteng, South Africa</p>
                   </div>
                   
-                  {/* Map Placeholder */}
-                  <div className="w-full h-48 bg-white/[0.03] border border-white/[0.08] rounded-2xl flex items-center justify-center mb-6 relative overflow-hidden">
-                    <div className="text-5xl opacity-50">📍</div>
+                  {/* Interactive Google Map */}
+                  <div className="w-full h-48 mb-6 relative overflow-hidden">
+                    <GoogleMap 
+                      lat={-26.1336}
+                      lng={28.1708}
+                      title="PollinateIQ PTY LTD - Manuvoo Office"
+                      className="border border-white/[0.08]"
+                      zoom={16}
+                    />
                   </div>
                   
                   <a href="#" className="text-green-500 font-medium hover:underline transition-colors duration-300">
