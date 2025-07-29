@@ -1,22 +1,12 @@
 "use client"
 
-import React, { useState, useEffect, useRef } from 'react'
-import { Button } from '@/components/ui/button'
+import React, { useState, useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
-import { CheckCircle, Play, Star, MessageCircle, ArrowRight } from 'lucide-react'
-import ReservationDialog from '@/components/reservation/ReservationDialog'
+import { CheckCircle, Star, MessageCircle, ArrowRight } from 'lucide-react'
 import ExitIntentPopup from '@/components/landing/exit-intent-popup'
 import { useRouter } from 'next/navigation'
-import { TimeSlot } from '@/types/reservations'
 import { Button as MovingBorderButton } from '@/components/ui/moving-border'
 
-
-// Press logos for social proof
-const pressLogos = [
-  { name: 'TechCrunch', logo: '/assets/press/techcrunch.svg' },
-  { name: 'Forbes', logo: '/assets/press/forbes.svg' },
-  { name: 'Business Day', logo: '/assets/press/businessday.svg' },
-]
 
 // Fallback restaurant data with optimized images
 const fallbackRestaurants = [
@@ -52,24 +42,9 @@ const fallbackRestaurants = [
   }
 ]
 
-// Fallback time slots in case API fails
-const fallbackTimeSlots: TimeSlot[] = [
-  { time: '12:00', available: true }, 
-  { time: '12:30', available: true }, 
-  { time: '13:00', available: true }, 
-  { time: '13:30', available: true }, 
-  { time: '14:00', available: true },
-  { time: '18:00', available: true }, 
-  { time: '18:30', available: true }, 
-  { time: '19:00', available: true }, 
-  { time: '19:30', available: true }, 
-  { time: '20:00', available: true }, 
-  { time: '20:30', available: true }
-]
-
 export default function Hero() {
   // Dialog state
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
   const [showExitIntent, setShowExitIntent] = useState(false)
   const router = useRouter()
   
@@ -113,12 +88,7 @@ export default function Hero() {
   const y3 = useTransform(scrollY, [0, 800], [0, -500])
   const scale = useTransform(scrollY, [0, 400], [1, 1.1])
   
-  // Animation variants - simplified to avoid TypeScript issues
-  const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 }
-  }
+
   
   return (
     <section 

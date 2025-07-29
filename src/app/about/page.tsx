@@ -91,7 +91,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
             >
-              Born from a deep understanding of restaurant challenges, Manuvoo is more than software—we're your partner in prosperity.
+              Born from a deep understanding of restaurant challenges, Manuvoo is more than software—we&apos;re your partner in prosperity.
             </motion.p>
           </div>
         </section>
@@ -124,14 +124,14 @@ export default function AboutPage() {
                   </p>
                   
                   <div className="bg-white/3 border-l-4 border-white/30 pl-8 py-6 my-8 italic text-lg text-white/90">
-                    "We realized the industry didn't need another app—it needed a complete reimagining of restaurant operations."
+                    &quot;We realized the industry didn&apos;t need another app—it needed a complete reimagining of restaurant operations.&quot;
                     <div className="text-sm text-white/60 mt-2 not-italic">
                       - Reginald Nkabinde, Founder
                     </div>
                   </div>
                   
                   <p>
-                    Today, Manuvoo stands as the only truly integrated hospitality platform in Africa. We're not just building technology; we're championing an industry that feeds communities and creates livelihoods.
+                    Today, Manuvoo stands as the only truly integrated hospitality platform in Africa. We&apos;re not just building technology; we&apos;re championing an industry that feeds communities and creates livelihoods.
                   </p>
                 </div>
               </motion.div>
@@ -263,7 +263,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-6">Our Vision</h3>
                 <p className="text-white/80 leading-relaxed">
-                  To become Africa's leading hospitality technology partner, setting new standards for operational excellence while enabling every restaurant—from street corner cafés to fine dining establishments—to thrive in the digital age.
+                  To become Africa&apos;s leading hospitality technology partner, setting new standards for operational excellence while enabling every restaurant—from street corner cafés to fine dining establishments—to thrive in the digital age.
                 </p>
               </motion.div>
             </div>
