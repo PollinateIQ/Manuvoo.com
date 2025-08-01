@@ -188,7 +188,7 @@ export default function ServicesPage() {
       <Header />
       <main className="min-h-screen bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end">
         {/* Hero Section */}
-        <section className="relative py-32 md:py-40 overflow-hidden bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end">
+        <section className="relative py-16 sm:py-24 md:py-32 lg:py-40 overflow-hidden bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end">
           {/* Star Field Background */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="stars absolute inset-0 opacity-30"></div>
@@ -198,16 +198,16 @@ export default function ServicesPage() {
           
           {/* Background Gradient Overlays */}
           <div className="absolute inset-0">
-            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-radial from-primary/20 via-primary/10 to-transparent rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-blue-500/20 via-blue-500/10 to-transparent rounded-full blur-3xl"></div>
+            <div className="absolute top-1/4 right-1/4 w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-gradient-radial from-primary/20 via-primary/10 to-transparent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-1/4 left-1/4 w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-gradient-radial from-blue-500/20 via-blue-500/10 to-transparent rounded-full blur-3xl"></div>
           </div>
           
-          <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
+          <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-block px-6 py-2 bg-white/5 border border-white/15 rounded-full text-xs uppercase tracking-[2px] text-white/80 mb-8"
+              className="inline-block px-4 sm:px-6 py-2 bg-white/5 border border-white/15 rounded-full text-xs sm:text-sm uppercase tracking-[1px] sm:tracking-[2px] text-white/80 mb-6 sm:mb-8"
             >
               COMPREHENSIVE SOLUTIONS
             </motion.div>
@@ -216,13 +216,13 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl md:text-6xl font-bold mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight"
             >
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent block sm:inline">
                 Everything Your Restaurant Needs,
               </span>
-              <br />
-              <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
+              <br className="hidden sm:block" />
+              <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent block sm:inline">
                 Nothing It Doesn&apos;t
               </span>
             </motion.h1>
@@ -231,7 +231,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
+              className="text-base sm:text-lg lg:text-xl text-white/70 leading-relaxed max-w-3xl mx-auto px-2"
             >
               From the moment a customer sits down to long after they leave, 
               Manuvoo handles every aspect of your restaurant operations in one seamless platform.
@@ -240,22 +240,22 @@ export default function ServicesPage() {
         </section>
 
         {/* Core Services Overview */}
-        <section className="py-25 bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end relative overflow-hidden">
-          <div className="max-w-6xl mx-auto px-4">
+        <section className="py-12 sm:py-16 lg:py-25 bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-20"
+              className="text-center mb-12 sm:mb-16 lg:mb-20"
             >
-              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">The Manuvoo Ecosystem</h2>
-              <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">The Manuvoo Ecosystem</h2>
+              <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto px-4">
                 Three powerful modules working in perfect harmony
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-12 mb-20">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 mb-12 sm:mb-16 lg:mb-20">
               {ecosystemModules.map((module, index) => {
                 const colorClasses = {
                   '#4ADE80': 'hover:border-green-500/30 [--module-color:theme(colors.green.500)]',
@@ -270,27 +270,27 @@ export default function ServicesPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className={`group relative bg-white/[0.02] border border-white/[0.08] rounded-3xl p-12 overflow-hidden transition-all duration-400 hover:-translate-y-1 hover:bg-white/[0.03] ${colorClasses[module.color as keyof typeof colorClasses]}`}
+                    className={`group relative bg-white/[0.02] border border-white/[0.08] rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 overflow-hidden transition-all duration-400 hover:-translate-y-1 hover:bg-white/[0.03] ${colorClasses[module.color as keyof typeof colorClasses]} ${index === 2 && 'sm:col-span-2 lg:col-span-1'}`}
                   >
                     {/* Top border animation */}
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--module-color)] to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-400" />
                     
                     {/* Icon */}
-                    <div className="relative w-18 h-18 mx-auto mb-6 flex items-center justify-center bg-white/5 rounded-2xl text-white group-hover:scale-110 transition-transform duration-300">
-                      <div className="absolute inset-0 bg-gradient-to-br from-[var(--module-color)]/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="text-4xl">
+                    <div className="relative w-16 h-16 sm:w-18 sm:h-18 mx-auto mb-4 sm:mb-6 flex items-center justify-center bg-white/5 rounded-xl sm:rounded-2xl text-white group-hover:scale-110 transition-transform duration-300">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[var(--module-color)]/20 to-transparent rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="text-3xl sm:text-4xl">
                         {index === 0 ? '📱' : index === 1 ? '⚙️' : '📊'}
                       </div>
                     </div>
                     
-                    <h3 className="text-xl font-semibold text-white mb-4 text-center">{module.title}</h3>
-                    <p className="text-white/70 leading-relaxed mb-6 text-center">{module.description}</p>
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4 text-center">{module.title}</h3>
+                    <p className="text-sm sm:text-base text-white/70 leading-relaxed mb-4 sm:mb-6 text-center">{module.description}</p>
                     
-                    <ul className="space-y-3">
+                    <ul className="space-y-2 sm:space-y-3">
                       {module.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center gap-3 text-white/80 text-sm">
-                          <ArrowRight className="w-4 h-4 text-[var(--module-color)] flex-shrink-0" />
-                          {feature}
+                        <li key={featureIndex} className="flex items-start gap-3 text-white/80 text-sm sm:text-base">
+                          <ArrowRight className="w-4 h-4 text-[var(--module-color)] flex-shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -302,8 +302,8 @@ export default function ServicesPage() {
         </section>
 
         {/* Detailed Services Section */}
-        <section className="py-25 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] relative overflow-hidden">
-          <div className="max-w-6xl mx-auto px-4">
+        <section className="py-12 sm:py-16 lg:py-25 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             {detailedServices.map((service, index) => (
               <motion.div
                 key={index}
@@ -311,27 +311,27 @@ export default function ServicesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="mb-30 last:mb-0"
+                className="mb-16 sm:mb-20 lg:mb-30 last:mb-0"
               >
-                <div className={`grid lg:grid-cols-2 gap-20 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+                <div className={`grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
                   {/* Content */}
                   <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                    <div className="inline-block px-4 py-1 bg-green-500/10 border border-green-500/30 rounded-2xl text-xs font-medium text-green-400 mb-6">
+                    <div className="inline-block px-3 sm:px-4 py-1 sm:py-2 bg-green-500/10 border border-green-500/30 rounded-full sm:rounded-2xl text-xs sm:text-sm font-medium text-green-400 mb-4 sm:mb-6">
                       {service.badge}
                     </div>
                     
-                    <h2 className="text-4xl font-bold text-white mb-6">{service.title}</h2>
-                    <p className="text-lg text-white/70 leading-relaxed mb-8">{service.description}</p>
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6">{service.title}</h2>
+                    <p className="text-base sm:text-lg text-white/70 leading-relaxed mb-6 sm:mb-8">{service.description}</p>
                     
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       {service.features.map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-start gap-4">
+                        <div key={featureIndex} className="flex items-start gap-3 sm:gap-4">
                           <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center flex-shrink-0 text-green-400">
                             {feature.icon}
                           </div>
-                          <div className="flex-1">
-                            <h4 className="text-white font-medium mb-1">{feature.title}</h4>
-                            <p className="text-white/60 text-sm">{feature.desc}</p>
+                          <div className="flex-1 min-w-0">
+                            <h4 className="text-white font-medium mb-1 text-sm sm:text-base">{feature.title}</h4>
+                            <p className="text-white/60 text-xs sm:text-sm leading-relaxed">{feature.desc}</p>
                           </div>
                         </div>
                       ))}
@@ -339,8 +339,8 @@ export default function ServicesPage() {
                   </div>
                   
                   {/* Visual */}
-                  <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
-                    <div className="relative bg-white/[0.02] border border-white/[0.08] rounded-3xl overflow-hidden h-96">
+                  <div className={`order-first lg:order-none ${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
+                    <div className="relative bg-white/[0.02] border border-white/[0.08] rounded-2xl sm:rounded-3xl overflow-hidden h-64 sm:h-80 lg:h-96">
                       <img 
                         src={
                           index === 0 ? "https://images.pexels.com/photos/4393021/pexels-photo-4393021.jpeg?auto=compress&cs=tinysrgb&w=800" :
@@ -374,23 +374,150 @@ export default function ServicesPage() {
         </section>
 
         {/* Integration Capabilities */}
-        <section className="py-25 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] relative overflow-hidden">
-          <div className="max-w-6xl mx-auto px-4">
+        <section className="py-12 sm:py-16 lg:py-25 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-20"
+              className="text-center mb-12 sm:mb-16 lg:mb-20"
             >
-              <h2 className="text-4xl font-bold text-white mb-4">Seamlessly Connected</h2>
-              <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">Seamlessly Connected</h2>
+              <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto px-4">
                 Manuvoo integrates with the tools you already use to create a unified restaurant management ecosystem
               </p>
             </motion.div>
 
-            {/* Circular Integration Hub */}
-            <div className="relative h-[600px] flex items-center justify-center mb-20">
+            {/* Mobile/Tablet: Grid Layout, Desktop: Circular Layout */}
+            <div className="lg:hidden mb-12 sm:mb-16">
+              {/* Mobile Grid Layout */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                {[
+                  {
+                    icon: CreditCard,
+                    title: "Payment Gateways",
+                    description: "Secure payment processing with South African providers",
+                    items: ["Paystack", "Yoco", "SnapScan", "Zapper"],
+                    color: "green"
+                  },
+                  {
+                    icon: Package,
+                    title: "Delivery Platforms", 
+                    description: "Seamless integration with major delivery services",
+                    items: ["Uber Eats", "Mr D Food", "Checkers Sixty60"],
+                    color: "blue"
+                  },
+                  {
+                    icon: BarChart3,
+                    title: "Accounting",
+                    description: "Sync financial data with popular accounting software", 
+                    items: ["QuickBooks", "Sage", "Xero", "Excel Export"],
+                    color: "purple"
+                  },
+                  {
+                    icon: Mail,
+                    title: "Marketing",
+                    description: "Automated marketing campaigns and customer engagement",
+                    items: ["SMS Campaigns", "Email Marketing", "Push Notifications"],
+                    color: "amber"
+                  },
+                  {
+                    icon: Smartphone,
+                    title: "POS Systems",
+                    description: "Compatible with leading point-of-sale systems",
+                    items: ["Square", "Clover", "Toast", "Lightspeed"],
+                    color: "cyan"
+                  },
+                  {
+                    icon: Users,
+                    title: "Staff Management",
+                    description: "Integrate with HR and scheduling platforms",
+                    items: ["Deputy", "When I Work", "BambooHR"],
+                    color: "pink"
+                  }
+                ].map((integration, index) => {
+                  const colorMapping = {
+                    green: { bg: "bg-green-500/20", text: "text-green-400", border: "border-green-500/30" },
+                    blue: { bg: "bg-blue-500/20", text: "text-blue-400", border: "border-blue-500/30" },
+                    purple: { bg: "bg-purple-500/20", text: "text-purple-400", border: "border-purple-500/30" },
+                    amber: { bg: "bg-amber-500/20", text: "text-amber-400", border: "border-amber-500/30" },
+                    cyan: { bg: "bg-cyan-500/20", text: "text-cyan-400", border: "border-cyan-500/30" },
+                    pink: { bg: "bg-pink-500/20", text: "text-pink-400", border: "border-pink-500/30" }
+                  };
+                  
+                  const colorClasses = colorMapping[integration.color as keyof typeof colorMapping];
+                  
+                  return (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      className={`${index >= 4 ? 'col-span-1 sm:col-span-1' : ''}`}
+                    >
+                      <div className={`bg-white/[0.02] border-2 ${colorClasses.border} rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center hover:bg-white/[0.04] transition-all duration-300 group`}>
+                        <div className={`w-10 h-10 sm:w-12 sm:h-12 ${colorClasses.bg} rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3`}>
+                          <integration.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${colorClasses.text}`} />
+                        </div>
+                        <h4 className="text-white font-semibold text-xs sm:text-sm mb-1 leading-tight">{integration.title}</h4>
+                        <p className="text-white/60 text-xs leading-relaxed hidden sm:block">{integration.description}</p>
+                        
+                        {/* Mobile expanded info on tap/hover */}
+                        <div className="sm:hidden">
+                          <details className="mt-2">
+                            <summary className="text-white/60 text-xs cursor-pointer">Details</summary>
+                            <div className="mt-2 text-left">
+                              <p className="text-white/60 text-xs mb-2">{integration.description}</p>
+                              <div className="text-xs">
+                                {integration.items.map((item, itemIndex) => (
+                                  <div key={itemIndex} className="text-white/70">• {item}</div>
+                                ))}
+                              </div>
+                            </div>
+                          </details>
+                        </div>
+                        
+                        {/* Tablet hover details */}
+                        <div className="hidden sm:block lg:hidden mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="text-xs text-white/80 space-y-1">
+                            {integration.items.map((item, itemIndex) => (
+                              <div key={itemIndex} className="flex items-center gap-1">
+                                <div className={`w-1 h-1 rounded-full ${colorClasses.bg.replace('/20', '/60')}`} />
+                                <span>{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+              
+              {/* Central Hub for Mobile */}
+              <div className="flex justify-center">
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-green-500/30 via-blue-500/30 to-purple-500/30 border-2 border-white/30 rounded-full flex items-center justify-center backdrop-blur-sm"
+                >
+                  <div className="text-center">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-1 bg-white/20 rounded-full flex items-center justify-center">
+                      <Settings className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                    </div>
+                    <h3 className="text-sm sm:text-base font-bold text-white">Manuvoo</h3>
+                    <p className="text-white/70 text-xs">Central Hub</p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Desktop: Circular Integration Hub */}
+            <div className="hidden lg:block relative h-[600px] flex items-center justify-center mb-20">
               {/* Central Manuvoo Hub */}
               <motion.div
                 initial={{ scale: 0, opacity: 0 }}
@@ -530,35 +657,35 @@ export default function ServicesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 1.2 }}
-              className="bg-white/[0.02] border border-white/[0.08] rounded-3xl p-12 text-center"
+              className="bg-white/[0.02] border border-white/[0.08] rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 text-center"
             >
-              <h3 className="text-2xl font-bold text-white mb-6">One Platform, Endless Possibilities</h3>
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Zap className="w-6 h-6 text-green-400" />
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">One Platform, Endless Possibilities</h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                <div className="flex items-start sm:items-center gap-3 sm:gap-4 text-left">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/20 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
                   </div>
-                  <div className="text-left">
-                    <h4 className="text-white font-semibold mb-1">Real-time Sync</h4>
-                    <p className="text-white/60 text-sm">All your tools work together instantly</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Shield className="w-6 h-6 text-blue-400" />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="text-white font-semibold mb-1">Secure Connections</h4>
-                    <p className="text-white/60 text-sm">Bank-level security for all integrations</p>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-white font-semibold mb-1 text-sm sm:text-base">Real-time Sync</h4>
+                    <p className="text-white/60 text-xs sm:text-sm leading-relaxed">All your tools work together instantly</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Settings className="w-6 h-6 text-purple-400" />
+                <div className="flex items-start sm:items-center gap-3 sm:gap-4 text-left">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/20 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
                   </div>
-                  <div className="text-left">
-                    <h4 className="text-white font-semibold mb-1">Easy Setup</h4>
-                    <p className="text-white/60 text-sm">Connect in minutes, not hours</p>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-white font-semibold mb-1 text-sm sm:text-base">Secure Connections</h4>
+                    <p className="text-white/60 text-xs sm:text-sm leading-relaxed">Bank-level security for all integrations</p>
+                  </div>
+                </div>
+                <div className="flex items-start sm:items-center gap-3 sm:gap-4 text-left sm:col-span-2 lg:col-span-1">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500/20 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Settings className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-white font-semibold mb-1 text-sm sm:text-base">Easy Setup</h4>
+                    <p className="text-white/60 text-xs sm:text-sm leading-relaxed">Connect in minutes, not hours</p>
                   </div>
                 </div>
               </div>
@@ -567,22 +694,22 @@ export default function ServicesPage() {
         </section>
 
         {/* Pricing Section */}
-        <section className="py-25 bg-gradient-to-br from-[#121824] via-[#111827] to-[#0e1420] relative overflow-hidden">
-          <div className="max-w-6xl mx-auto px-4">
+        <section className="py-12 sm:py-16 lg:py-25 bg-gradient-to-br from-[#121824] via-[#111827] to-[#0e1420] relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-20"
+              className="text-center mb-12 sm:mb-16 lg:mb-20"
             >
-              <h2 className="text-4xl font-bold text-white mb-4">Simple, Transparent Pricing</h2>
-              <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">Simple, Transparent Pricing</h2>
+              <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto px-4">
                 Choose the plan that fits your restaurant&apos;s needs. No hidden fees, no surprises.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {pricingPlans.map((plan, index) => (
                 <motion.div
                   key={plan.id}
@@ -590,40 +717,40 @@ export default function ServicesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`relative bg-white/[0.02] border rounded-3xl p-12 transition-all duration-300 ${
+                  className={`relative bg-white/[0.02] border rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 transition-all duration-300 ${
                     plan.featured 
-                      ? 'border-green-500 transform scale-105 bg-white/[0.03]' 
+                      ? 'border-green-500 bg-white/[0.03] sm:transform sm:scale-105' 
                       : 'border-white/[0.08] hover:-translate-y-1 hover:border-white/20'
-                  }`}
+                  } ${index === 2 && 'sm:col-span-2 lg:col-span-1'}`}
                 >
                   {plan.featured && (
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-green-500 text-black text-xs font-semibold rounded-full">
+                    <div className="absolute -top-2 sm:-top-3 left-1/2 transform -translate-x-1/2 px-3 sm:px-4 py-1 bg-green-500 text-black text-xs font-semibold rounded-full">
                       MOST POPULAR
                     </div>
                   )}
                   
-                  <div className="text-center mb-8">
-                    <h3 className="text-xl font-semibold text-white mb-4">{plan.tier}</h3>
+                  <div className="text-center mb-6 sm:mb-8">
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">{plan.tier}</h3>
                     <div className="mb-2">
-                      <span className="text-5xl font-bold text-white">{plan.amount}</span>
+                      <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">{plan.amount}</span>
                     </div>
-                    <p className="text-white/60">{plan.period}</p>
+                    <p className="text-white/60 text-sm sm:text-base">{plan.period}</p>
                   </div>
                   
-                  <ul className="space-y-4 mb-12">
+                  <ul className="space-y-3 sm:space-y-4 mb-8 sm:mb-12">
                     {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center gap-3 text-white/80">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                        {feature}
+                      <li key={featureIndex} className="flex items-start gap-3 text-white/80 text-sm sm:text-base">
+                        <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        <span className="leading-relaxed">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   
                   <button
-                    className={`w-full py-4 px-6 rounded-lg font-semibold transition-all duration-300 ${
+                    className={`w-full py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base ${
                       plan.featured
-                        ? 'bg-white text-black hover:-translate-y-0.5 hover:shadow-lg'
-                        : 'bg-transparent border-2 border-white/20 text-white hover:bg-white hover:text-black'
+                        ? 'bg-white text-black hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0'
+                        : 'bg-transparent border-2 border-white/20 text-white hover:bg-white hover:text-black active:bg-white/90'
                     }`}
                   >
                     {plan.cta}
@@ -635,23 +762,23 @@ export default function ServicesPage() {
         </section>
 
         {/* Success Stories Section */}
-        <section className="py-25 bg-black">
-          <div className="max-w-6xl mx-auto px-4">
+        <section className="py-12 sm:py-16 lg:py-25 bg-black">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-20"
+              className="text-center mb-12 sm:mb-16 lg:mb-20"
             >
-              <h2 className="text-4xl font-bold text-white mb-4">Proven Results</h2>
-              <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">Proven Results</h2>
+              <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto px-4">
                 Real restaurants, real success
               </p>
             </motion.div>
 
             {/* Success Stats */}
-            <div className="grid md:grid-cols-4 gap-12 mb-20">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 mb-12 sm:mb-16 lg:mb-20">
               {[
                 { number: '35%', label: 'Average cost reduction' },
                 { number: '2 days', label: 'Setup time' },
@@ -666,8 +793,8 @@ export default function ServicesPage() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="text-5xl font-bold text-green-500 mb-2">{stat.number}</div>
-                  <div className="text-white/80">{stat.label}</div>
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-500 mb-2">{stat.number}</div>
+                  <div className="text-white/80 text-sm sm:text-base leading-relaxed">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -678,21 +805,21 @@ export default function ServicesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-white/[0.02] border border-white/[0.08] rounded-3xl p-12 text-center max-w-4xl mx-auto"
+              className="bg-white/[0.02] border border-white/[0.08] rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 text-center max-w-4xl mx-auto"
             >
-              <blockquote className="text-2xl font-light italic text-white/90 leading-relaxed mb-8">
+              <blockquote className="text-lg sm:text-xl lg:text-2xl font-light italic text-white/90 leading-relaxed mb-6 sm:mb-8">
                 &quot;Manuvoo didn&apos;t just replace our old systems—it transformed how we think 
                 about restaurant operations. We&apos;re serving more customers with less stress 
                 and making more profit than ever before.&quot;
               </blockquote>
               
-              <div className="flex items-center justify-center gap-4">
-                <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-2xl">
+              <div className="flex items-center justify-center gap-3 sm:gap-4">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/10 rounded-full flex items-center justify-center text-xl sm:text-2xl">
                   👨‍🍳
                 </div>
                 <div className="text-left">
-                  <div className="text-white font-semibold">Michael Dlamini</div>
-                  <div className="text-white/60 text-sm">Owner, The Local Kitchen</div>
+                  <div className="text-white font-semibold text-sm sm:text-base">Michael Dlamini</div>
+                  <div className="text-white/60 text-xs sm:text-sm">Owner, The Local Kitchen</div>
                 </div>
               </div>
             </motion.div>
@@ -700,7 +827,7 @@ export default function ServicesPage() {
         </section>
 
         {/* Call to Action Section */}
-        <section className="py-25 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] relative overflow-hidden">
+        <section className="py-12 sm:py-16 lg:py-25 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] relative overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-30">
             <div 
@@ -712,49 +839,49 @@ export default function ServicesPage() {
             />
           </div>
           
-          <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
+          <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-5xl font-bold text-white mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                 Ready to Transform Your Restaurant?
               </h2>
-              <p className="text-xl text-white/70 leading-relaxed mb-12">
+              <p className="text-base sm:text-lg lg:text-xl text-white/70 leading-relaxed mb-8 sm:mb-12 px-4">
                 See why restaurants are switching to Manuvoo
               </p>
               
-              <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto mb-8">
+              <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-lg mx-auto mb-6 sm:mb-8">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="flex-1 px-6 py-4 bg-white/5 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/10 transition-all duration-300"
+                  className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-white/5 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/10 transition-all duration-300 text-sm sm:text-base"
                   required
                 />
                 <button
                   type="submit"
-                  className="px-8 py-4 bg-white text-black font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-lg hover:shadow-white/20 transition-all duration-300 active:translate-y-0"
+                  className="px-6 sm:px-8 py-3 sm:py-4 bg-white text-black font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-lg hover:shadow-white/20 transition-all duration-300 active:translate-y-0 text-sm sm:text-base whitespace-nowrap"
                 >
                   Get Free Demo
                 </button>
               </form>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-white/70">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 text-xs sm:text-sm text-white/70">
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  30-day free trial
+                  <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                  <span>30-day free trial</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  No credit card
+                  <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                  <span>No credit card</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  Setup in 48 hours
+                  <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                  <span>Setup in 48 hours</span>
                 </div>
               </div>
             </motion.div>

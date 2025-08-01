@@ -49,10 +49,10 @@ export default function ComparisonTable() {
   ]
 
   return (
-    <section className="relative py-24 bg-black overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+    <section className="relative py-16 sm:py-20 md:py-24 bg-black overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -60,7 +60,7 @@ export default function ComparisonTable() {
         >
           {/* Header */}
           <motion.h2 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-tight px-2"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -72,7 +72,7 @@ export default function ComparisonTable() {
 
         {/* Comparison Table */}
         <motion.div 
-          className="bg-white/[0.03] border border-white/[0.08] rounded-2xl overflow-hidden"
+          className="bg-white/[0.03] border border-white/[0.08] rounded-xl sm:rounded-2xl overflow-hidden"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -80,12 +80,12 @@ export default function ComparisonTable() {
         >
           {/* Table Header */}
           <div className="grid grid-cols-3 bg-white/[0.05] border-b border-white/[0.08]">
-            <div className="p-6 text-white/60 font-medium"></div>
-            <div className="p-6 text-center">
-              <h3 className="text-xl font-bold text-red-400">Traditional</h3>
+            <div className="p-3 sm:p-4 md:p-6 text-white/60 font-medium text-xs sm:text-sm md:text-base"></div>
+            <div className="p-3 sm:p-4 md:p-6 text-center">
+              <h3 className="text-sm sm:text-lg md:text-xl font-bold text-red-400">Traditional</h3>
             </div>
-            <div className="p-6 text-center">
-              <h3 className="text-xl font-bold text-primary">Manuvoo</h3>
+            <div className="p-3 sm:p-4 md:p-6 text-center">
+              <h3 className="text-sm sm:text-lg md:text-xl font-bold text-primary">Manuvoo</h3>
             </div>
           </div>
 
@@ -100,20 +100,20 @@ export default function ComparisonTable() {
               transition={{ duration: 0.4, delay: 0.3 + (index * 0.05) }}
             >
               {/* Feature Name */}
-              <div className="p-6 font-medium text-white">
+              <div className="p-3 sm:p-4 md:p-6 font-medium text-white text-xs sm:text-sm md:text-base">
                 {item.feature}
               </div>
 
               {/* Traditional Value */}
-              <div className="p-6 text-center">
+              <div className="p-3 sm:p-4 md:p-6 text-center">
                 <div className="flex items-center justify-center">
                   {item.traditional.isBoolean ? (
-                    <div className="flex items-center">
-                      <X className="w-5 h-5 text-red-400 mr-2" />
-                      <span className="text-red-400">{item.traditional.value}</span>
+                    <div className="flex items-center flex-col sm:flex-row gap-1 sm:gap-2">
+                      <X className="w-4 h-4 sm:w-5 sm:h-5 text-red-400" />
+                      <span className="text-red-400 text-xs sm:text-sm">{item.traditional.value}</span>
                     </div>
                   ) : (
-                    <span className={item.traditional.isGood ? "text-green-400" : "text-red-400"}>
+                    <span className={`text-xs sm:text-sm md:text-base ${item.traditional.isGood ? "text-green-400" : "text-red-400"}`}>
                       {item.traditional.value}
                     </span>
                   )}
@@ -121,15 +121,15 @@ export default function ComparisonTable() {
               </div>
 
               {/* Manuvoo Value */}
-              <div className="p-6 text-center">
+              <div className="p-3 sm:p-4 md:p-6 text-center">
                 <div className="flex items-center justify-center">
                   {item.manuvoo.isBoolean ? (
-                    <div className="flex items-center">
-                      <Check className="w-5 h-5 text-primary mr-2" />
-                      <span className="text-primary">{item.manuvoo.value}</span>
+                    <div className="flex items-center flex-col sm:flex-row gap-1 sm:gap-2">
+                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                      <span className="text-primary text-xs sm:text-sm">{item.manuvoo.value}</span>
                     </div>
                   ) : (
-                    <span className={item.manuvoo.isGood ? "text-primary" : "text-red-400"}>
+                    <span className={`text-xs sm:text-sm md:text-base font-semibold ${item.manuvoo.isGood ? "text-primary" : "text-red-400"}`}>
                       {item.manuvoo.value}
                     </span>
                   )}
@@ -141,7 +141,7 @@ export default function ComparisonTable() {
 
         {/* CTA */}
         <motion.div 
-          className="text-center mt-12"
+          className="text-center mt-8 sm:mt-10 md:mt-12 px-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -149,7 +149,7 @@ export default function ComparisonTable() {
         >
           <Button 
             size="lg" 
-            className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full transition-all duration-300 hover:scale-105"
+            className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 hover:scale-105 w-full sm:w-auto text-sm sm:text-base max-w-xs mx-auto"
           >
             See Full Comparison
           </Button>

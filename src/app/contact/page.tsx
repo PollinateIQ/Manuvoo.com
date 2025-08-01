@@ -208,7 +208,7 @@ export default function ContactPage() {
       <Header />
       <main className="min-h-screen bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end">
         {/* Hero Section */}
-        <section className="relative py-32 md:py-40 overflow-hidden bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end">
+        <section className="relative pt-24 pb-16 sm:pt-32 sm:pb-24 md:pt-40 md:pb-32 lg:pt-48 lg:pb-40 overflow-hidden bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end">
           {/* Star Field Background */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="stars absolute inset-0 opacity-30"></div>
@@ -218,17 +218,17 @@ export default function ContactPage() {
           
           {/* Background Gradient Overlays */}
           <div className="absolute inset-0">
-            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-radial from-primary/20 via-primary/10 to-transparent rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-blue-500/20 via-blue-500/10 to-transparent rounded-full blur-3xl"></div>
+            <div className="absolute top-1/4 right-1/4 w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-gradient-radial from-primary/20 via-primary/10 to-transparent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-1/4 left-1/4 w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-gradient-radial from-blue-500/20 via-blue-500/10 to-transparent rounded-full blur-3xl"></div>
           </div>
 
           
-          <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
+          <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-block px-6 py-2 bg-white/5 border border-white/15 rounded-full text-xs uppercase tracking-[2px] text-white/80 mb-8"
+              className="inline-block px-4 sm:px-6 py-2 bg-white/5 border border-white/15 rounded-full text-xs sm:text-sm uppercase tracking-[1px] sm:tracking-[2px] text-white/80 mb-6 sm:mb-8"
             >
               GET IN TOUCH
             </motion.div>
@@ -237,13 +237,13 @@ export default function ContactPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl md:text-6xl font-bold mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight"
             >
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent block sm:inline">
                 Let&apos;s Start Your
               </span>
-              <br />
-              <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
+              <br className="hidden sm:block" />
+              <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent block sm:inline">
                 Success Story
               </span>
             </motion.h1>
@@ -252,7 +252,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
+              className="text-base sm:text-lg lg:text-xl text-white/70 leading-relaxed max-w-3xl mx-auto px-2"
             >
               We&apos;d love to hear from you! Whether you&apos;re a restaurant owner looking to transform your operations or have questions about our platform, our team is here to help. Reach out and let&apos;s discuss how Manuvoo can work for you.
             </motion.p>
@@ -260,9 +260,9 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Options Section */}
-        <section className="py-20 bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="grid md:grid-cols-3 gap-12 mb-20">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 mb-12 sm:mb-16 lg:mb-20">
               {contactCards.map((card, index) => {
                 const colorClasses = {
                   green: 'hover:border-green-500/30 [--card-color:theme(colors.green.500)]',
@@ -277,31 +277,33 @@ export default function ContactPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className={`group relative bg-white/[0.02] border border-white/[0.08] rounded-3xl p-12 text-center overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.03] ${colorClasses[card.color as keyof typeof colorClasses]}`}
+                    className={`group relative bg-white/[0.02] border border-white/[0.08] rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 text-center overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.03] ${colorClasses[card.color as keyof typeof colorClasses]} ${index === 2 && 'sm:col-span-2 lg:col-span-1'}`}
                   >
                     {/* Top border animation */}
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--card-color)] to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-400" />
                     
                     {/* Icon */}
-                    <div className="relative w-20 h-20 mx-auto mb-6 flex items-center justify-center bg-white/5 rounded-2xl text-white group-hover:scale-110 transition-transform duration-300">
-                      <div className="absolute inset-0 bg-gradient-to-br from-[var(--card-color)]/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      {card.icon}
+                    <div className="relative w-16 h-16 sm:w-18 sm:h-18 lg:w-20 lg:h-20 mx-auto mb-4 sm:mb-6 flex items-center justify-center bg-white/5 rounded-xl sm:rounded-2xl text-white group-hover:scale-110 transition-transform duration-300">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[var(--card-color)]/20 to-transparent rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9">
+                        {card.icon}
+                      </div>
                     </div>
                     
-                    <h3 className="text-xl font-semibold text-white mb-4">{card.method}</h3>
-                    <p className="text-white/70 leading-relaxed mb-6">{card.details}</p>
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">{card.method}</h3>
+                    <p className="text-sm sm:text-base text-white/70 leading-relaxed mb-4 sm:mb-6">{card.details}</p>
                     
-                    <div className="space-y-2 mb-6">
+                    <div className="space-y-1 sm:space-y-2 mb-4 sm:mb-6">
                       <a 
                         href={`mailto:${card.email}`}
-                        className="text-white font-medium hover:text-[var(--card-color)] transition-colors duration-300"
+                        className="block text-sm sm:text-base text-white font-medium hover:text-[var(--card-color)] transition-colors duration-300 break-all"
                       >
                         {card.email}
                       </a>
                       {card.phone && (
                         <a 
                           href={`tel:${card.phone}`}
-                          className="block text-white/80 hover:text-white transition-colors duration-300"
+                          className="block text-sm sm:text-base text-white/80 hover:text-white transition-colors duration-300"
                         >
                           {card.phone}
                         </a>
@@ -311,12 +313,12 @@ export default function ContactPage() {
                     <a 
                       href={card.href} 
                       {...(card.href.startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                      className="inline-flex items-center gap-2 text-white font-medium hover:text-[var(--card-color)] transition-all duration-300 hover:translate-x-1"
+                      className="inline-flex items-center gap-2 text-sm sm:text-base text-white font-medium hover:text-[var(--card-color)] transition-all duration-300 hover:translate-x-1 active:translate-x-0"
                     >
                       {card.link}
                     </a>
                     
-                    <p className="text-sm text-white/50 mt-4">{card.availability}</p>
+                    <p className="text-xs sm:text-sm text-white/50 mt-3 sm:mt-4">{card.availability}</p>
                   </motion.div>
                 )
               })}
@@ -325,9 +327,9 @@ export default function ContactPage() {
         </section>
 
         {/* Main Contact Form Section */}
-        <section className="py-25 bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end relative overflow-hidden">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-20 items-start">
+        <section className="py-12 sm:py-16 lg:py-25 bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-start">
               {/* Contact Form */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -335,16 +337,16 @@ export default function ContactPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="mb-12">
-                  <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Send Us a Message</h2>
-                  <p className="text-lg text-white/70 leading-relaxed">
+                <div className="mb-8 sm:mb-12">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Send Us a Message</h2>
+                  <p className="text-base sm:text-lg text-white/70 leading-relaxed">
                     Fill out the form below and we&apos;ll get back to you within 24 hours.
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   {/* Name Fields */}
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-sm font-medium text-white/80 mb-2">
                         First Name*
@@ -354,7 +356,7 @@ export default function ContactPage() {
                         name="firstName"
                         value={formData.firstName}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-4 bg-white/[0.03] border rounded-lg text-white placeholder-white/40 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 ${
+                        className={`w-full px-3 sm:px-4 py-3 sm:py-4 bg-white/[0.03] border rounded-lg text-white placeholder-white/40 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 text-sm sm:text-base ${
                           formErrors.firstName ? 'border-red-500 focus:border-red-400' : 'border-white/20 focus:border-white/50'
                         }`}
                         required
@@ -372,7 +374,7 @@ export default function ContactPage() {
                         name="lastName"
                         value={formData.lastName}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-4 bg-white/[0.03] border rounded-lg text-white placeholder-white/40 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 ${
+                        className={`w-full px-3 sm:px-4 py-3 sm:py-4 bg-white/[0.03] border rounded-lg text-white placeholder-white/40 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 text-sm sm:text-base ${
                           formErrors.lastName ? 'border-red-500 focus:border-red-400' : 'border-white/20 focus:border-white/50'
                         }`}
                         required
@@ -384,7 +386,7 @@ export default function ContactPage() {
                   </div>
 
                   {/* Email and Phone */}
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-sm font-medium text-white/80 mb-2">
                         Email Address*
@@ -394,7 +396,7 @@ export default function ContactPage() {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-4 bg-white/[0.03] border rounded-lg text-white placeholder-white/40 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 ${
+                        className={`w-full px-3 sm:px-4 py-3 sm:py-4 bg-white/[0.03] border rounded-lg text-white placeholder-white/40 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 text-sm sm:text-base ${
                           formErrors.email ? 'border-red-500 focus:border-red-400' : 'border-white/20 focus:border-white/50'
                         }`}
                         required
@@ -412,13 +414,13 @@ export default function ContactPage() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300"
+                        className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300 text-sm sm:text-base"
                       />
                     </div>
                   </div>
 
                   {/* Restaurant Details */}
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-sm font-medium text-white/80 mb-2">
                         Restaurant Name
@@ -428,7 +430,7 @@ export default function ContactPage() {
                         name="restaurantName"
                         value={formData.restaurantName}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300"
+                        className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300 text-sm sm:text-base"
                       />
                     </div>
                     <div className="relative">
@@ -439,7 +441,7 @@ export default function ContactPage() {
                         <button
                           type="button"
                           onClick={() => setLocationsDropdownOpen(!locationsDropdownOpen)}
-                          className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300 text-left flex items-center justify-between"
+                          className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300 text-left flex items-center justify-between text-sm sm:text-base"
                         >
                           <span className={formData.locations ? 'text-white' : 'text-white/40'}>
                             {formData.locations ? 
@@ -481,11 +483,11 @@ export default function ContactPage() {
                       I&apos;m interested in:
                     </label>
                     <div className="relative">
-                      <button
-                        type="button"
-                        onClick={() => setInterestDropdownOpen(!interestDropdownOpen)}
-                        className="w-full px-4 py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300 text-left flex items-center justify-between"
-                      >
+                                              <button
+                          type="button"
+                          onClick={() => setInterestDropdownOpen(!interestDropdownOpen)}
+                          className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-white/[0.03] border border-white/20 rounded-lg text-white focus:outline-none focus:border-white/50 focus:bg-white/[0.05] transition-all duration-300 text-left flex items-center justify-between text-sm sm:text-base"
+                        >
                         <span className={formData.interest ? 'text-white' : 'text-white/40'}>
                           {formData.interest ? 
                             (formData.interest === 'demo' ? 'Product Demo' :
@@ -530,9 +532,9 @@ export default function ContactPage() {
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
-                      rows={5}
+                      rows={4}
                       placeholder="Tell us about your restaurant and how we can help..."
-                      className={`w-full px-4 py-4 bg-white/[0.03] border rounded-lg text-white placeholder-white/40 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 resize-vertical ${
+                      className={`w-full px-3 sm:px-4 py-3 sm:py-4 bg-white/[0.03] border rounded-lg text-white placeholder-white/40 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 resize-vertical text-sm sm:text-base ${
                         formErrors.message ? 'border-red-500 focus:border-red-400' : 'border-white/20 focus:border-white/50'
                       }`}
                       required
@@ -565,11 +567,11 @@ export default function ContactPage() {
                   </div>
 
                   {/* Submit Button */}
-                  <div className="mt-6">
+                  <div className="mt-4 sm:mt-6">
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className={`w-full px-12 py-4 font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
+                      className={`w-full px-6 sm:px-12 py-3 sm:py-4 font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base ${
                         isSubmitting 
                           ? 'bg-gray-600 text-gray-300 cursor-not-allowed' 
                           : 'bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20 hover:from-blue-500 hover:to-blue-400 active:translate-y-0'
@@ -616,11 +618,11 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="sticky top-24"
+                className="lg:sticky lg:top-24"
               >
                 {/* Why Choose Manuvoo */}
-                <div className="bg-white/[0.02] border border-white/[0.08] rounded-3xl p-12 mb-8">
-                  <h3 className="text-2xl font-semibold text-white mb-6">Why Choose Manuvoo?</h3>
+                <div className="bg-white/[0.02] border border-white/[0.08] rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 mb-6 sm:mb-8">
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white mb-4 sm:mb-6">Why Choose Manuvoo?</h3>
                   <ul className="space-y-4">
                     {[
                       { icon: <CheckCircle className="w-6 h-6 text-green-500" />, title: "Free Demo", desc: "See the platform in action" },
@@ -628,11 +630,13 @@ export default function ContactPage() {
                       { icon: <CheckCircle className="w-6 h-6 text-green-500" />, title: "Local Support", desc: "South African team that understands you" },
                       { icon: <CheckCircle className="w-6 h-6 text-green-500" />, title: "No Obligation", desc: "30-day free trial, cancel anytime" }
                     ].map((item, index) => (
-                      <li key={index} className="flex items-center gap-4 py-4 border-b border-white/5 last:border-b-0">
-                        {item.icon}
-                        <div>
-                          <div className="font-medium text-white">{item.title}</div>
-                          <div className="text-white/80 text-sm">{item.desc}</div>
+                      <li key={index} className="flex items-center gap-3 sm:gap-4 py-3 sm:py-4 border-b border-white/5 last:border-b-0">
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 flex-shrink-0">
+                          {item.icon}
+                        </div>
+                        <div className="min-w-0">
+                          <div className="font-medium text-white text-sm sm:text-base">{item.title}</div>
+                          <div className="text-white/80 text-xs sm:text-sm">{item.desc}</div>
                         </div>
                       </li>
                     ))}
@@ -640,26 +644,26 @@ export default function ContactPage() {
                 </div>
 
                 {/* Office Location */}
-                <div className="bg-white/[0.02] border border-white/[0.08] rounded-3xl p-12 text-center">
-                  <h3 className="text-xl font-semibold text-white mb-4">Visit Our Office</h3>
-                  <div className="text-white/70 leading-relaxed mb-6">
+                <div className="bg-white/[0.02] border border-white/[0.08] rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 text-center">
+                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Visit Our Office</h3>
+                  <div className="text-white/70 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
                     <p>PollinateIQ PTY LTD</p>
                     <p>67th on 7th, Edenvale</p>
                     <p>Gauteng, South Africa</p>
                   </div>
                   
                   {/* Interactive Google Map */}
-                  <div className="w-full h-48 mb-6 relative overflow-hidden">
+                  <div className="w-full h-32 sm:h-40 lg:h-48 mb-4 sm:mb-6 relative overflow-hidden">
                     <GoogleMap 
                       lat={-26.1336}
                       lng={28.1708}
                       title="PollinateIQ PTY LTD - Manuvoo Office"
-                      className="border border-white/[0.08]"
+                      className="border border-white/[0.08] rounded-lg"
                       zoom={16}
                     />
                   </div>
                   
-                  <a href="#" className="text-green-500 font-medium hover:underline transition-colors duration-300">
+                  <a href="#" className="text-green-500 font-medium hover:underline transition-colors duration-300 text-sm sm:text-base">
                     Schedule an in-person meeting
                   </a>
                 </div>
@@ -669,7 +673,7 @@ export default function ContactPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-25 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] relative overflow-hidden">
+        <section className="py-12 sm:py-16 lg:py-25 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] relative overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
@@ -679,21 +683,21 @@ export default function ContactPage() {
             }} />
           </div>
           
-          <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
+          <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-12 sm:mb-16"
             >
-              <h2 className="text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-              <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">Frequently Asked Questions</h2>
+              <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto px-4">
                 Got questions? We&apos;ve got answers. Here are the most common questions we receive from restaurant owners.
               </p>
             </motion.div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {faqs.map((faq, index) => (
                 <motion.div
                   key={index}
@@ -701,19 +705,19 @@ export default function ContactPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="bg-white/[0.02] border border-white/[0.08] rounded-2xl overflow-hidden"
+                  className="bg-white/[0.02] border border-white/[0.08] rounded-xl sm:rounded-2xl overflow-hidden"
                 >
                   <button
                     onClick={() => toggleAccordion(index)}
-                    className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors duration-300"
+                    className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors duration-300"
                   >
-                    <span className="text-lg font-medium text-white pr-4">{faq.question}</span>
+                    <span className="text-sm sm:text-base lg:text-lg font-medium text-white pr-3 sm:pr-4 leading-relaxed">{faq.question}</span>
                     <motion.div
                       animate={{ rotate: activeAccordion === index ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
                       className="flex-shrink-0"
                     >
-                      <ChevronDown className="w-6 h-6 text-white/60" />
+                      <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-white/60" />
                     </motion.div>
                   </button>
                   
@@ -726,7 +730,7 @@ export default function ContactPage() {
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className="overflow-hidden"
                   >
-                    <div className="px-8 pb-6 text-white/80 leading-relaxed">
+                    <div className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-5 lg:pb-6 text-white/80 leading-relaxed text-sm sm:text-base">
                       {faq.answer}
                     </div>
                   </motion.div>
@@ -737,7 +741,7 @@ export default function ContactPage() {
         </section>
 
         {/* Bottom CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 relative overflow-hidden">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 relative overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
@@ -747,52 +751,52 @@ export default function ContactPage() {
             }} />
           </div>
           
-          <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
+          <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 px-6 py-2 bg-white/20 rounded-full text-sm font-medium text-white mb-6">
-                <Rocket className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 bg-white/20 rounded-full text-xs sm:text-sm font-medium text-white mb-4 sm:mb-6">
+                <Rocket className="w-3 h-3 sm:w-4 sm:h-4" />
                 Ready to Transform Your Restaurant?
               </div>
               
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                 Let&apos;s Get Started Today
               </h2>
               
-              <p className="text-xl text-white/90 leading-relaxed mb-12 max-w-3xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed mb-8 sm:mb-12 max-w-3xl mx-auto px-4">
                 Join hundreds of restaurants already using Manuvoo to increase revenue, 
                 improve efficiency, and delight customers. Your success story starts here.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                <button className="px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 active:translate-y-0">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12">
+                <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-600 font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 active:translate-y-0 text-sm sm:text-base">
                   Schedule Free Demo
                 </button>
-                <button className="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-all duration-300">
+                <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-all duration-300 text-sm sm:text-base">
                   Call Sales: +27 69 684 8796
                 </button>
               </div>
               
               {/* Emergency Contact */}
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8">
-                <h3 className="text-xl font-semibold text-white mb-4">Need Immediate Assistance?</h3>
-                <div className="grid md:grid-cols-2 gap-6 text-white/90">
-                  <div className="flex items-center gap-3">
-                    <Phone className="w-5 h-5" />
-                    <div>
-                      <div className="font-medium">24/7 Emergency Support</div>
-                      <div className="text-white/80">+27 69 684 8796</div>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8">
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Need Immediate Assistance?</h3>
+                <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 text-white/90">
+                  <div className="flex items-center gap-3 text-left">
+                    <Phone className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                    <div className="min-w-0">
+                      <div className="font-medium text-sm sm:text-base">24/7 Emergency Support</div>
+                      <div className="text-white/80 text-xs sm:text-sm break-all">+27 69 684 8796</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Mail className="w-5 h-5" />
-                    <div>
-                      <div className="font-medium">Priority Email</div>
-                      <div className="text-white/80">info@pollinateiq.co.za</div>
+                  <div className="flex items-center gap-3 text-left">
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                    <div className="min-w-0">
+                      <div className="font-medium text-sm sm:text-base">Priority Email</div>
+                      <div className="text-white/80 text-xs sm:text-sm break-all">info@pollinateiq.co.za</div>
                     </div>
                   </div>
                 </div>
@@ -802,56 +806,56 @@ export default function ContactPage() {
         </section>
 
         {/* Social Proof Bar */}
-        <section className="py-12 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] border-t border-white/[0.08]">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+        <section className="py-8 sm:py-10 lg:py-12 bg-gradient-to-br from-[#0e1420] via-[#111827] to-[#121824] border-t border-white/[0.08]">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8">
               {/* Trust Indicators */}
-              <div className="flex flex-col sm:flex-row items-center gap-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-                    <CheckCircle className="w-6 h-6 text-green-500" />
+              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full lg:w-auto">
+                <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-start">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-500" />
                   </div>
-                  <div>
-                    <div className="text-white font-medium">ISO 27001 Certified</div>
-                    <div className="text-white/60 text-sm">Enterprise Security</div>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                    <CheckCircle className="w-6 h-6 text-blue-500" />
-                  </div>
-                  <div>
-                    <div className="text-white font-medium">GDPR Compliant</div>
-                    <div className="text-white/60 text-sm">Data Protection</div>
+                  <div className="text-center sm:text-left">
+                    <div className="text-white font-medium text-sm sm:text-base">ISO 27001 Certified</div>
+                    <div className="text-white/60 text-xs sm:text-sm">Enterprise Security</div>
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                    <CheckCircle className="w-6 h-6 text-purple-500" />
+                <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-start">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" />
                   </div>
-                  <div>
-                    <div className="text-white font-medium">99.9% Uptime</div>
-                    <div className="text-white/60 text-sm">Guaranteed Reliability</div>
+                  <div className="text-center sm:text-left">
+                    <div className="text-white font-medium text-sm sm:text-base">GDPR Compliant</div>
+                    <div className="text-white/60 text-xs sm:text-sm">Data Protection</div>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-start">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-purple-500" />
+                  </div>
+                  <div className="text-center sm:text-left">
+                    <div className="text-white font-medium text-sm sm:text-base">99.9% Uptime</div>
+                    <div className="text-white/60 text-xs sm:text-sm">Guaranteed Reliability</div>
                   </div>
                 </div>
               </div>
               
               {/* Social Media Links */}
-              <div className="flex items-center gap-4">
-                <span className="text-white/60 text-sm mr-2">Follow us:</span>
-                <a href="#" className="w-10 h-10 bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] rounded-lg flex items-center justify-center text-white/60 hover:text-white transition-all duration-300">
-                  <Linkedin className="w-5 h-5" />
+              <div className="flex items-center gap-3 sm:gap-4">
+                <span className="text-white/60 text-xs sm:text-sm mr-1 sm:mr-2">Follow us:</span>
+                <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] rounded-lg flex items-center justify-center text-white/60 hover:text-white transition-all duration-300">
+                  <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] rounded-lg flex items-center justify-center text-white/60 hover:text-white transition-all duration-300">
-                  <Twitter className="w-5 h-5" />
+                <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] rounded-lg flex items-center justify-center text-white/60 hover:text-white transition-all duration-300">
+                  <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] rounded-lg flex items-center justify-center text-white/60 hover:text-white transition-all duration-300">
-                  <Facebook className="w-5 h-5" />
+                <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] rounded-lg flex items-center justify-center text-white/60 hover:text-white transition-all duration-300">
+                  <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] rounded-lg flex items-center justify-center text-white/60 hover:text-white transition-all duration-300">
-                  <Youtube className="w-5 h-5" />
+                <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] rounded-lg flex items-center justify-center text-white/60 hover:text-white transition-all duration-300">
+                  <Youtube className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
               </div>
             </div>

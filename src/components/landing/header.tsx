@@ -21,6 +21,20 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Handle body scroll lock when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen])
+
   const scrollToSection = (sectionId: string) => {
     const element = document.querySelector(sectionId)
     if (element) {
@@ -74,46 +88,51 @@ export default function Header() {
           ? 'backdrop-blur-xl bg-black/20 shadow-2xl border-b border-white/10' 
           : 'backdrop-blur-lg bg-black/10'
       }`}>
-        {/* Modern Glass Morphism Background */}
-        <div className="absolute inset-0">
-          {/* Primary glass layer */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/30"></div>
+        {/* Premium Background Effects - Matching Hero Section */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Base gradient matching hero */}
+          <div className="absolute inset-0 bg-gradient-to-br from-gradient-dark-start via-gradient-dark-mid to-gradient-dark-end"></div>
           
-          {/* Subtle accent gradients */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-blue-500/5"></div>
+          {/* Animated star field background */}
+          <div className="absolute inset-0 overflow-hidden opacity-20">
+            <div className="stars absolute inset-0 opacity-30"></div>
+            <div className="stars2 absolute inset-0 opacity-20"></div>
+            <div className="stars3 absolute inset-0 opacity-10"></div>
+          </div>
           
-          {/* Dynamic light effects */}
-          <div className="absolute top-0 left-1/3 w-64 h-32 bg-gradient-radial from-primary/10 via-primary/5 to-transparent rounded-full blur-2xl"></div>
-          <div className="absolute top-0 right-1/3 w-64 h-32 bg-gradient-radial from-blue-500/10 via-blue-500/5 to-transparent rounded-full blur-2xl"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-accent-orange/20 via-transparent to-transparent rounded-full blur-3xl"></div>
+          {/* Premium glass morphism layers */}
+          <div className="absolute inset-0 backdrop-blur-xl bg-black/20"></div>
           
-          {/* Floating gradient orbs for atmospheric depth */}
-          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-radial from-secondary-purple-start/40 to-transparent rounded-full blur-2xl animate-pulse"></div>
-          <div className="absolute bottom-40 right-20 w-40 h-40 bg-gradient-radial from-primary-blue-start/35 to-transparent rounded-full blur-2xl animate-pulse" style={{animationDelay: '1s'}}></div>
-          <div className="absolute top-1/3 right-1/3 w-24 h-24 bg-gradient-radial from-accent-orange/45 to-transparent rounded-full blur-xl animate-pulse" style={{animationDelay: '2s'}}></div>
+          {/* Dynamic gradient overlays */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-blue-500/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
           
-          {/* Modern mesh gradient overlay for sophisticated depth */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-secondary-purple-start/15 to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-blue-start/15 to-transparent"></div>
+          {/* Floating light effects */}
+          <div className="absolute top-0 left-1/4 w-96 h-24 bg-gradient-radial from-primary/15 via-primary/5 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute top-0 right-1/4 w-96 h-24 bg-gradient-radial from-blue-500/15 via-blue-500/5 to-transparent rounded-full blur-3xl"></div>
           
-          {/* Grainy texture overlay */}
-          <div className="absolute inset-0 opacity-30" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E")`,
-            backgroundSize: '200px 200px'
-          }}></div>
+          {/* Animated orbs */}
+          <div className="absolute top-1/2 left-10 w-20 h-20 bg-gradient-radial from-primary/20 to-transparent rounded-full blur-2xl animate-pulse"></div>
+          <div className="absolute top-1/2 right-10 w-20 h-20 bg-gradient-radial from-blue-400/20 to-transparent rounded-full blur-2xl animate-pulse" style={{animationDelay: '1s'}}></div>
           
+          {/* Enhanced scrolled state */}
           {isScrolled && (
-            <div className="absolute inset-0 bg-gradient-to-r from-gradient-dark-start/98 via-gradient-dark-mid/95 to-gradient-dark-start/98"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-black/40 backdrop-blur-2xl"></div>
           )}
+          
+          {/* Border effects */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
         </div>
         <div className="container mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <div className="flex items-center space-x-3 group cursor-pointer">
-              <div className="transform transition-transform duration-300 group-hover:scale-110">
-                <ManuvooLogo width={44} height={44} className="text-white" />
+            {/* Logo - Enhanced */}
+            <div className="flex items-center space-x-3 group cursor-pointer min-w-0 relative">
+              <div className="flex-shrink-0 relative">
+                {/* Glow effect behind logo */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-blue-400/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <ManuvooLogo width={44} height={44} className="sm:w-12 sm:h-12 group-hover:scale-110 transition-transform duration-300 relative z-10 text-white" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+              <span className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-white via-white to-blue-200 bg-clip-text text-transparent truncate group-hover:from-primary group-hover:to-blue-400 transition-all duration-300">
                 Manuvoo
               </span>
             </div>
@@ -150,76 +169,81 @@ export default function Header() {
               </button>
             </nav>
 
-            {/* Desktop Auth Buttons */}
-            <div className="hidden lg:flex items-center space-x-3">
+            {/* Desktop Auth Buttons - Premium Style */}
+            <div className="hidden lg:flex items-center space-x-4">
               <Button 
                 variant="ghost" 
                 onClick={() => setIsLoginOpen(true)}
-                className="text-white hover:text-white hover:bg-white/10 text-base font-medium px-5 py-2.5 rounded-xl transition-all duration-300 hover:scale-105 border border-transparent hover:border-white/20 backdrop-blur-sm"
+                className="group relative text-white hover:text-white backdrop-blur-xl bg-white/5 hover:bg-white/10 text-base font-medium px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 border border-white/10 hover:border-white/30 shadow-lg hover:shadow-white/10 overflow-hidden"
               >
-                Login
+                <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10">Login</span>
               </Button>
               <Button 
                 onClick={() => setIsSignupOpen(true)}
-                className="bg-gradient-to-r from-primary to-blue-400 hover:from-primary/90 hover:to-blue-400/90 text-white text-base font-medium px-6 py-2.5 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl border border-primary/20 backdrop-blur-sm"
+                className="group relative bg-gradient-to-r from-primary/90 to-blue-400/90 hover:from-primary hover:to-blue-400 text-white text-base font-medium px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-primary/25 border border-primary/30 backdrop-blur-xl overflow-hidden"
               >
-                Get Started
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-blue-400/50 rounded-xl blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10">Get Started</span>
               </Button>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Premium Style */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+              className="lg:hidden group relative p-3 text-white backdrop-blur-xl bg-white/5 hover:bg-white/10 rounded-xl transition-all duration-300 flex-shrink-0 border border-white/10 hover:border-white/20 shadow-lg hover:scale-105 overflow-hidden"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              {isMenuOpen ? <X size={20} className="relative z-10" /> : <Menu size={20} className="relative z-10" />}
             </button>
           </div>
 
           {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="lg:hidden relative rounded-2xl mt-4 p-6 space-y-6 border border-white/10 shadow-xl backdrop-blur-md overflow-hidden">
+            <div className="lg:hidden absolute top-full left-0 right-0 rounded-xl sm:rounded-2xl mt-3 sm:mt-4 mx-4 sm:mx-6 lg:mx-8 p-4 sm:p-6 space-y-4 sm:space-y-6 border border-white/10 shadow-xl backdrop-blur-md overflow-hidden max-h-[calc(100vh-120px)] overflow-y-auto z-40">
               {/* Mobile Menu Background */}
               <div className="absolute inset-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-gradient-dark-start/95 via-gradient-dark-mid/90 to-gradient-dark-start/95"></div>
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-blue-start/10 via-transparent to-secondary-purple-start/10"></div>
               </div>
               <div className="relative z-10">
-              <nav className="flex flex-col space-y-4">
+              <nav className="flex flex-col space-y-2 sm:space-y-3">
                 <button 
                   onClick={() => scrollToSection('#how-it-works')}
-                  className="text-gray-300 hover:text-white transition-colors text-lg font-medium text-left py-2 px-3 rounded-lg hover:bg-white/5"
+                  className="text-gray-300 hover:text-white transition-colors text-base sm:text-lg font-medium text-left py-2 sm:py-2.5 px-3 rounded-lg hover:bg-white/5"
                 >
                   How It Works
                 </button>
                 <button 
                   onClick={() => scrollToSection('#services')}
-                  className="text-gray-300 hover:text-white transition-colors text-lg font-medium text-left py-2 px-3 rounded-lg hover:bg-white/5"
+                  className="text-gray-300 hover:text-white transition-colors text-base sm:text-lg font-medium text-left py-2 sm:py-2.5 px-3 rounded-lg hover:bg-white/5"
                 >
                   Services
                 </button>
                 <button 
                   onClick={() => scrollToSection('#about')}
-                  className="text-gray-300 hover:text-white transition-colors text-lg font-medium text-left py-2 px-3 rounded-lg hover:bg-white/5"
+                  className="text-gray-300 hover:text-white transition-colors text-base sm:text-lg font-medium text-left py-2 sm:py-2.5 px-3 rounded-lg hover:bg-white/5"
                 >
                   About
                 </button>
                 <button 
                   onClick={() => scrollToSection('#contact')}
-                  className="text-gray-300 hover:text-white transition-colors text-lg font-medium text-left py-2 px-3 rounded-lg hover:bg-white/5"
+                  className="text-gray-300 hover:text-white transition-colors text-base sm:text-lg font-medium text-left py-2 sm:py-2.5 px-3 rounded-lg hover:bg-white/5"
                 >
                   Contact
                 </button>
               </nav>
               
-              <div className="border-t border-white/20 pt-6 space-y-3">
+              <div className="border-t border-white/20 pt-4 sm:pt-6 space-y-2 sm:space-y-3">
                 <Button 
                   variant="ghost" 
                   onClick={() => {
                     setIsLoginOpen(true)
                     setIsMenuOpen(false)
                   }}
-                  className="w-full text-white hover:bg-white/10 text-lg rounded-lg"
+                  className="w-full text-white hover:bg-white/10 text-base sm:text-lg rounded-lg py-2.5 sm:py-3"
                 >
                   Login
                 </Button>
@@ -228,7 +252,7 @@ export default function Header() {
                     setIsSignupOpen(true)
                     setIsMenuOpen(false)
                   }}
-                  className="w-full bg-gradient-primary hover:opacity-90 text-white text-lg rounded-lg"
+                  className="w-full bg-gradient-primary hover:opacity-90 text-white text-base sm:text-lg rounded-lg py-2.5 sm:py-3"
                 >
                   Sign Up
                 </Button>
@@ -257,6 +281,31 @@ export default function Header() {
           setIsLoginOpen(true)
         }}
       />
+      
+      {/* Premium CSS Animations - Star Field */}
+      <style jsx>{`
+        @media (prefers-reduced-motion: no-preference) {
+          .stars {
+            background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="0.5" fill="white"/><circle cx="30" cy="25" r="0.3" fill="white"/><circle cx="60" cy="15" r="0.4" fill="white"/><circle cx="80" cy="35" r="0.2" fill="white"/><circle cx="20" cy="50" r="0.3" fill="white"/><circle cx="70" cy="60" r="0.5" fill="white"/><circle cx="40" cy="80" r="0.2" fill="white"/><circle cx="90" cy="75" r="0.4" fill="white"/></svg>') repeat;
+            animation: move-stars 60s linear infinite;
+          }
+          
+          .stars2 {
+            background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="15" cy="20" r="0.3" fill="white"/><circle cx="45" cy="10" r="0.4" fill="white"/><circle cx="75" cy="30" r="0.2" fill="white"/><circle cx="25" cy="60" r="0.5" fill="white"/><circle cx="85" cy="50" r="0.3" fill="white"/></svg>') repeat;
+            animation: move-stars 120s linear infinite;
+          }
+          
+          .stars3 {
+            background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="35" cy="40" r="0.2" fill="white"/><circle cx="65" cy="70" r="0.4" fill="white"/><circle cx="95" cy="20" r="0.3" fill="white"/></svg>') repeat;
+            animation: move-stars 180s linear infinite;
+          }
+          
+          @keyframes move-stars {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100px); }
+          }
+        }
+      `}</style>
     </>
   )
 }

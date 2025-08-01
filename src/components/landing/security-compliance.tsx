@@ -38,10 +38,10 @@ export default function SecurityCompliance() {
   ]
 
   return (
-    <section className="relative py-20 bg-white/[0.02] border-t border-b border-white/[0.08] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+    <section className="relative py-16 sm:py-20 bg-white/[0.02] border-t border-b border-white/[0.08] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-10 md:mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -49,7 +49,7 @@ export default function SecurityCompliance() {
         >
           {/* Header */}
           <motion.h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-tight px-2"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -61,7 +61,7 @@ export default function SecurityCompliance() {
 
         {/* Security Badges Grid */}
         <motion.div 
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-10 md:mb-12"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -72,26 +72,26 @@ export default function SecurityCompliance() {
             return (
               <motion.div
                 key={badge.title}
-                className="group text-center p-6 bg-white/[0.03] border border-white/[0.08] rounded-xl hover:bg-white/[0.05] hover:border-white/[0.15] transition-all duration-300 hover:-translate-y-1"
+                className="group text-center p-3 sm:p-4 md:p-6 bg-white/[0.03] border border-white/[0.08] rounded-lg sm:rounded-xl hover:bg-white/[0.05] hover:border-white/[0.15] transition-all duration-300 hover:-translate-y-1"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.3 + (index * 0.1) }}
               >
-                <div className="w-12 h-12 mx-auto mb-3 flex items-center justify-center bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors duration-300">
-                  <IconComponent className="w-6 h-6 text-primary" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 flex items-center justify-center bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors duration-300">
+                  <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                 </div>
                 
-                <h3 className="font-bold text-white text-sm mb-1">
+                <h3 className="font-bold text-white text-xs sm:text-sm mb-1">
                   {badge.title}
                 </h3>
                 
-                <p className="text-xs text-white/60">
+                <p className="text-xs text-white/60 leading-tight">
                   {badge.description}
                 </p>
                 
                 {badge.title === "SOC 2" && (
-                  <div className="mt-2">
+                  <div className="mt-1 sm:mt-2">
                     <span className="inline-block px-2 py-1 text-xs bg-yellow-500/20 text-yellow-400 rounded-full">
                       Coming Soon
                     </span>
@@ -104,13 +104,13 @@ export default function SecurityCompliance() {
 
         {/* Bottom Message */}
         <motion.div 
-          className="text-center"
+          className="text-center px-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <p className="text-lg text-white/80 italic">
+          <p className="text-sm sm:text-base md:text-lg text-white/80 italic leading-relaxed">
             "Your data is safer with us than in a filing cabinet"
           </p>
         </motion.div>

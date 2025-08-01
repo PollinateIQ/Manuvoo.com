@@ -58,64 +58,64 @@ export default function Footer() {
         </div>
       </div>
       {/* Content */}
-      <div className="relative z-10 container mx-auto max-w-7xl px-6 lg:px-8 py-16">
+      <div className="relative z-10 container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         {/* Main Footer Content */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12">
           {/* Brand Column */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2 group">
-                <div className="w-20 h-20 transition-transform duration-300 group-hover:scale-110">
+          <div className="sm:col-span-2 lg:col-span-2 space-y-4 sm:space-y-6">
+            <div className="space-y-3 sm:space-y-4">
+              <div className="flex items-center space-x-2 sm:space-x-3 group">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
                   <img 
                     src="/manuvoo.svg" 
                     alt="Manuvoo Logo" 
                     className="w-full h-full object-contain filter brightness-100 group-hover:brightness-110 transition-all duration-300"
                   />
                 </div>
-                <span className="text-4xl font-bold text-white group-hover:text-primary transition-colors duration-300">Manuvoo</span>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white group-hover:text-primary transition-colors duration-300">Manuvoo</span>
               </div>
-              <p className="text-gray-300 max-w-sm leading-relaxed">
+              <p className="text-gray-300 text-sm sm:text-base max-w-sm leading-relaxed">
                 Revolutionizing the dining experience by connecting restaurants and diners through intelligent reservation management and personalized recommendations.
               </p>
             </div>
             
-            <div className="space-y-2">
+            <div className="space-y-1.5 sm:space-y-2">
               <div className="flex items-center space-x-2 text-gray-300">
-                <Mail className="w-4 h-4 text-primary" />
-                <span className="text-sm">info@pollinateiq.co.za</span>
+                <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+                <span className="text-xs sm:text-sm break-all">info@pollinateiq.co.za</span>
               </div>
               <div className="flex items-center space-x-2 text-gray-300">
-                <Phone className="w-4 h-4 text-primary" />
-                <span className="text-sm">+27 69 684 8796</span>
+                <Phone className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+                <span className="text-xs sm:text-sm">+27 69 684 8796</span>
               </div>
               <div className="flex items-center space-x-2 text-gray-300">
-                <MapPin className="w-4 h-4 text-primary" />
-                <span className="text-sm">67th on 7th, Edenvale, Gauteng</span>
+                <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+                <span className="text-xs sm:text-sm">67th on 7th, Edenvale, Gauteng</span>
               </div>
             </div>
 
-            <div className="flex space-x-4">
+            <div className="flex space-x-3 sm:space-x-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
-                  className="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:scale-110 transition-all duration-300 backdrop-blur-sm border border-white/10"
+                  className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:scale-110 transition-all duration-300 backdrop-blur-sm border border-white/10"
                   aria-label={social.label}
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
               ))}
             </div>
           </div>
 
-          <div className="space-y-6">
-            <h3 className="text-white font-semibold text-lg">Company</h3>
-            <ul className="space-y-3">
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-white font-semibold text-base sm:text-lg">Company</h3>
+            <ul className="space-y-2 sm:space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors duration-300 block py-1 hover:translate-x-1"
+                    className="text-gray-300 hover:text-white transition-colors duration-300 block py-1 hover:translate-x-1 text-sm sm:text-base"
                   >
                     {link.label}
                   </a>
@@ -124,14 +124,14 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="space-y-6">
-            <h3 className="text-white font-semibold text-lg">Product</h3>
-            <ul className="space-y-3">
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-white font-semibold text-base sm:text-lg">Product</h3>
+            <ul className="space-y-2 sm:space-y-3">
               {productLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors duration-300 block py-1 hover:translate-x-1"
+                    className="text-gray-300 hover:text-white transition-colors duration-300 block py-1 hover:translate-x-1 text-sm sm:text-base"
                   >
                     {link.label}
                   </a>
@@ -140,14 +140,14 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="space-y-6">
-            <h3 className="text-white font-semibold text-lg">Support</h3>
-            <ul className="space-y-3">
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-white font-semibold text-base sm:text-lg">Support</h3>
+            <ul className="space-y-2 sm:space-y-3">
               {supportLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors duration-300 block py-1 hover:translate-x-1"
+                    className="text-gray-300 hover:text-white transition-colors duration-300 block py-1 hover:translate-x-1 text-sm sm:text-base"
                   >
                     {link.label}
                   </a>
@@ -157,18 +157,18 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/20 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-gray-300">
+        <div className="border-t border-white/20 pt-6 sm:pt-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 text-center sm:text-left">
+            <div className="text-gray-300 text-sm">
               {currentYear} Manuvoo. All rights reserved.
             </div>
 
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6">
               {legalLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-gray-300 hover:text-white transition-colors duration-300 text-sm"
+                  className="text-gray-300 hover:text-white transition-colors duration-300 text-xs sm:text-sm"
                 >
                   {link.label}
                 </a>
@@ -176,8 +176,8 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="mt-6 pt-6 border-t border-white/10 text-center">
-            <p className="text-gray-400 text-xs leading-relaxed max-w-4xl mx-auto">
+          <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-white/10 text-center">
+            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-4xl mx-auto px-2">
               Manuvoo is committed to protecting your privacy and complying with the Protection of Personal Information Act (POPIA). 
               We use secure payment processing and never store sensitive card information. 
               All restaurant partners are verified and meet our quality standards.

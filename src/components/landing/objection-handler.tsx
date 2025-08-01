@@ -24,10 +24,10 @@ export default function ObjectionHandler() {
   ]
 
   return (
-    <section className="relative py-24 bg-gray-950 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+    <section className="relative py-16 sm:py-20 md:py-24 bg-gray-950 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -35,7 +35,7 @@ export default function ObjectionHandler() {
         >
           {/* Header */}
           <motion.h2 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-tight px-2"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -46,38 +46,38 @@ export default function ObjectionHandler() {
         </motion.div>
 
         {/* Objection Cards Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           {objections.map((objection, index) => (
             <motion.div
               key={index}
-              className="group bg-white/[0.03] border border-white/[0.08] rounded-2xl p-8 hover:bg-white/[0.05] hover:border-white/[0.15] transition-all duration-300 hover:-translate-y-1"
+              className="group bg-white/[0.03] border border-white/[0.08] rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 hover:bg-white/[0.05] hover:border-white/[0.15] transition-all duration-300 hover:-translate-y-1"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 + (index * 0.1) }}
             >
               {/* Concern */}
-              <div className="mb-6">
+              <div className="mb-4 sm:mb-6">
                 <div className="flex items-start mb-3">
-                  <div className="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                    <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-500/20 flex items-center justify-center mr-2 sm:mr-3 mt-1 flex-shrink-0">
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-400"></div>
                   </div>
-                  <h3 className="text-xl font-bold text-white leading-tight">
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-white leading-tight">
                     "{objection.concern}"
                   </h3>
                 </div>
               </div>
 
               {/* Arrow */}
-              <div className="flex justify-center mb-6">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                  <ArrowRight className="w-6 h-6 text-primary" />
+              <div className="flex justify-center mb-4 sm:mb-6">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                  <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                 </div>
               </div>
 
               {/* Answer */}
               <div className="text-center">
-                <p className="text-white/80 leading-relaxed">
+                <p className="text-white/80 leading-relaxed text-sm sm:text-base">
                   "{objection.answer}"
                 </p>
               </div>
