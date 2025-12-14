@@ -1,91 +1,61 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json()
-    
-    // Validate required fields
-    const { firstName, lastName, email, message, consent } = body
-    
-    if (!firstName || !lastName || !email || !message || !consent) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
-    }
-    
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: 'Invalid email format' },
-        { status: 400 }
-      )
-    }
-    
-    // Log the form submission (in production, you'd save to database or send email)
-    console.log('Contact form submission:', {
-      firstName,
-      lastName,
-      email,
-      phone: body.phone || '',
-      restaurantName: body.restaurantName || '',
-      locations: body.locations || '',
-      interest: body.interest || '',
-      message,
-      consent,
-      submittedAt: body.submittedAt,
-      userAgent: request.headers.get('user-agent'),
-      ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'
-    })
-    
-    // Here you would typically:
-    // 1. Save to database (e.g., Supabase, MongoDB, etc.)
-    // 2. Send email notification to your team
-    // 3. Send confirmation email to the user
-    // 4. Add to CRM system
-    
-    // For now, we'll simulate processing time and return success
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    // Example of how you might send an email notification:
-    // await sendEmailNotification({
-    //   to: 'sales@manuvoo.com',
-    //   subject: `New Contact Form Submission from ${firstName} ${lastName}`,
-    //   body: `
-    //     Name: ${firstName} ${lastName}
-    //     Email: ${email}
-    //     Phone: ${body.phone || 'Not provided'}
-    //     Restaurant: ${body.restaurantName || 'Not provided'}
-    //     Locations: ${body.locations || 'Not provided'}
-    //     Interest: ${body.interest || 'Not provided'}
-    //     Message: ${message}
-    //   `
-    // })
-    
-    return NextResponse.json(
-      { 
-        success: true, 
-        message: 'Contact form submitted successfully',
-        id: `contact_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-      },
-      { status: 200 }
-    )
-    
-  } catch (error) {
-    console.error('Contact form submission error:', error)
-    
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
-  }
+type ContactPayload = {
+  name?: string;
+  email?: string;
+  company?: string;
+  locations?: string;
+  message?: string;
+};
+
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-// Handle other HTTP methods
-export async function GET() {
+export async function POST(req: Request) {
+  let body: ContactPayload;
+
+  try {
+    body = (await req.json()) as ContactPayload;
+  } catch {
+    return NextResponse.json(
+      { ok: false, message: "Invalid JSON body." },
+      { status: 400 }
+    );
+  }
+
+  const name = (body.name ?? "").trim();
+  const email = (body.email ?? "").trim();
+  const company = (body.company ?? "").trim();
+  const locations = (body.locations ?? "").trim();
+  const message = (body.message ?? "").trim();
+
+  if (!name || !email || !company || !locations || !message) {
+    return NextResponse.json(
+      { ok: false, message: "Please fill in all fields." },
+      { status: 400 }
+    );
+  }
+
+  if (!isValidEmail(email)) {
+    return NextResponse.json(
+      { ok: false, message: "Please provide a valid email address." },
+      { status: 400 }
+    );
+  }
+
+  // Deploy-safe placeholder: log the submission server-side.
+  // Later: integrate an email provider or CRM webhook.
+  console.log("[contact] submission", {
+    name,
+    email,
+    company,
+    locations,
+    messageLength: message.length,
+  });
+
   return NextResponse.json(
-    { error: 'Method not allowed' },
-    { status: 405 }
-  )
+    { ok: true, message: "Thanks — we’ll reach out to book a demo." },
+    { status: 200 }
+  );
 }
