@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   },
   description:
     "Run smarter hospitality operations — from table to cash-up. Orders, bills, payments, menu, inventory, and staff in one real-time platform.",
+  icons: {
+    icon: "/Main Logo bwb 3d.png",
+    shortcut: "/Main Logo bwb 3d.png",
+    apple: "/Main Logo bwb 3d.png",
+  },
 };
 
 export default function RootLayout({

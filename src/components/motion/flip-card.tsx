@@ -34,7 +34,7 @@ export function FlipCard({ front, back, className }: FlipCardProps) {
           scale: isFlipped ? 1.05 : 1,
           zIndex: isFlipped ? 50 : 0 
         }}
-        transition={{ duration: 0.6, animationDirection: "normal" }}
+        transition={{ duration: 0.6 }}
         onAnimationComplete={() => setIsAnimating(false)}
       >
         <div className="h-full w-full [backface-visibility:hidden]">

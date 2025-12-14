@@ -88,7 +88,7 @@ export default function HelpCenterPage() {
                     </li>
                   ))}
                 </ul>
-              </CardCardBody>
+              </CardBody>
             </Card>
           ))}
         </div>

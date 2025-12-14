@@ -7,6 +7,7 @@ import { Card, CardBody, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/cn";
 
 type ContactPayload = {
   name: string;
@@ -22,7 +23,12 @@ type SubmitState =
   | { status: "success"; message: string }
   | { status: "error"; message: string };
 
-export function ContactForm() {
+interface ContactFormProps {
+  embedded?: boolean;
+  className?: string;
+}
+
+export function ContactForm({ embedded = false, className }: ContactFormProps) {
   const [form, setForm] = React.useState<ContactPayload>({
     name: "",
     email: "",
@@ -69,114 +75,129 @@ export function ContactForm() {
     }
   }
 
+  const Wrapper = embedded ? "div" : Card;
+  const wrapperProps = embedded ? { className } : { className };
+
   return (
-    <Card>
-      <CardHeader>
-        <p className="text-xs font-medium text-text3">Contact</p>
-        <h3 className="mt-2 text-lg font-semibold text-text1">Book a demo</h3>
-        <p className="mt-2 text-sm leading-7 text-text2">
-          Tell us a bit about your operation and what you’re trying to improve.
-        </p>
-      </CardHeader>
-      <CardBody>
-        <form onSubmit={onSubmit} className="grid gap-4">
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="grid gap-2">
-              <label className="text-xs font-medium text-text2" htmlFor="name">
-                Name
-              </label>
-              <Input
-                id="name"
-                required
-                value={form.name}
-                onChange={(e) => setForm((v) => ({ ...v, name: e.target.value }))}
-                placeholder="Your name"
-              />
+    <Wrapper {...wrapperProps}>
+      <div className={embedded ? "p-0" : ""}>
+         {!embedded ? (
+            <CardHeader>
+               <p className="text-xs font-medium text-text3">Contact</p>
+               <h3 className="mt-2 text-lg font-semibold text-text1">Book a demo</h3>
+               <p className="mt-2 text-sm leading-7 text-text2">
+               Tell us a bit about your operation and what you’re trying to improve.
+               </p>
+            </CardHeader>
+         ) : (
+            <div className="mb-8">
+               <h3 className="text-xl font-semibold text-text1">Book a demo</h3>
+               <p className="mt-2 text-sm text-text2">
+               Tell us a bit about your operation and what you’re trying to improve.
+               </p>
             </div>
-            <div className="grid gap-2">
-              <label className="text-xs font-medium text-text2" htmlFor="email">
-                Email
-              </label>
-              <Input
-                id="email"
-                type="email"
-                required
-                value={form.email}
-                onChange={(e) =>
-                  setForm((v) => ({ ...v, email: e.target.value }))
-                }
-                placeholder="you@company.com"
-              />
-            </div>
-          </div>
+         )}
+         
+         <div className={embedded ? "" : "p-6 pt-0"}>
+            <form onSubmit={onSubmit} className="grid gap-4">
+               <div className="grid gap-4 md:grid-cols-2">
+               <div className="grid gap-2">
+                  <label className="text-xs font-medium text-text2" htmlFor="name">
+                     Name
+                  </label>
+                  <Input
+                     id="name"
+                     required
+                     value={form.name}
+                     onChange={(e) => setForm((v) => ({ ...v, name: e.target.value }))}
+                     placeholder="Your name"
+                  />
+               </div>
+               <div className="grid gap-2">
+                  <label className="text-xs font-medium text-text2" htmlFor="email">
+                     Email
+                  </label>
+                  <Input
+                     id="email"
+                     type="email"
+                     required
+                     value={form.email}
+                     onChange={(e) =>
+                     setForm((v) => ({ ...v, email: e.target.value }))
+                     }
+                     placeholder="you@company.com"
+                  />
+               </div>
+               </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="grid gap-2">
-              <label className="text-xs font-medium text-text2" htmlFor="company">
-                Company / Restaurant
-              </label>
-              <Input
-                id="company"
-                required
-                value={form.company}
-                onChange={(e) =>
-                  setForm((v) => ({ ...v, company: e.target.value }))
-                }
-                placeholder="Business name"
-              />
-            </div>
-            <div className="grid gap-2">
-              <label className="text-xs font-medium text-text2" htmlFor="locations">
-                Number of locations
-              </label>
-              <Select
-                id="locations"
-                value={form.locations}
-                onChange={(e) =>
-                  setForm((v) => ({ ...v, locations: e.target.value }))
-                }
-              >
-                <option value="1">1</option>
-                <option value="2-3">2–3</option>
-                <option value="4-10">4–10</option>
-                <option value="10+">10+</option>
-              </Select>
-            </div>
-          </div>
+               <div className="grid gap-4 md:grid-cols-2">
+               <div className="grid gap-2">
+                  <label className="text-xs font-medium text-text2" htmlFor="company">
+                     Company / Restaurant
+                  </label>
+                  <Input
+                     id="company"
+                     required
+                     value={form.company}
+                     onChange={(e) =>
+                     setForm((v) => ({ ...v, company: e.target.value }))
+                     }
+                     placeholder="Business name"
+                  />
+               </div>
+               <div className="grid gap-2">
+                  <label className="text-xs font-medium text-text2" htmlFor="locations">
+                     Number of locations
+                  </label>
+                  <Select
+                     id="locations"
+                     value={form.locations}
+                     onChange={(e) =>
+                     setForm((v) => ({ ...v, locations: e.target.value }))
+                     }
+                  >
+                     <option value="1">1</option>
+                     <option value="2-3">2–3</option>
+                     <option value="4-10">4–10</option>
+                     <option value="10+">10+</option>
+                  </Select>
+               </div>
+               </div>
 
-          <div className="grid gap-2">
-            <label className="text-xs font-medium text-text2" htmlFor="message">
-              Message
-            </label>
-            <Textarea
-              id="message"
-              required
-              value={form.message}
-              onChange={(e) =>
-                setForm((v) => ({ ...v, message: e.target.value }))
-              }
-              placeholder="What are you trying to improve (tables, stations, payments, inventory, staff)?"
-            />
-          </div>
+               <div className="grid gap-2">
+               <label className="text-xs font-medium text-text2" htmlFor="message">
+                  Message
+               </label>
+               <Textarea
+                  id="message"
+                  required
+                  value={form.message}
+                  onChange={(e) =>
+                  setForm((v) => ({ ...v, message: e.target.value }))
+                  }
+                  placeholder="What are you trying to improve (tables, stations, payments, inventory, staff)?"
+               />
+               </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <Button
-              type="submit"
-              size="lg"
-              disabled={state.status === "submitting"}
-            >
-              {state.status === "submitting" ? "Sending…" : "Send"}
-            </Button>
+               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mt-2">
+               <Button
+                  type="submit"
+                  size="lg"
+                  disabled={state.status === "submitting"}
+               >
+                  {state.status === "submitting" ? "Sending…" : "Send"}
+               </Button>
 
-            {state.status === "success" ? (
-              <p className="text-sm text-text2">{state.message}</p>
-            ) : null}
-            {state.status === "error" ? (
-              <p className="text-sm text-accent2">{state.message}</p>
-            ) : null}
-          </div>
-        </form>
-      </CardBody>
-    </Card>
+               {state.status === "success" ? (
+                  <p className="text-sm text-text2">{state.message}</p>
+               ) : null}
+               {state.status === "error" ? (
+                  <p className="text-sm text-accent2">{state.message}</p>
+               ) : null}
+               </div>
+            </form>
+         </div>
+      </div>
+    </Wrapper>
   );
 }

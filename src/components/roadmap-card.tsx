@@ -133,7 +133,7 @@ export function RoadmapCard({
         
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between gap-4 mb-3">
-            <Badge variant="outline" className={cn("border-0", categoryColor)}>
+            <Badge variant="implemented" className={cn("border-0", categoryColor)}>
               {category}
             </Badge>
             {/* Mobile Only Status/Date - shown here for consistency with original design */}
@@ -178,10 +178,10 @@ export function RoadmapCard({
                       <Icon className="h-10 w-10" />
                    </div>
                    <div className="space-y-2">
-                      <Badge variant="outline" className={cn("border-0", categoryColor)}>
+                      <Badge variant="implemented" className={cn("border-0", categoryColor)}>
                         {category}
                       </Badge>
-                      <Badge variant="secondary" className="flex items-center gap-1 mx-auto w-fit">
+                      <Badge variant="implemented" className="flex items-center gap-1 mx-auto w-fit">
                            <StatusIcon className={cn("h-3 w-3", statusColor)} />
                            {status}
                       </Badge>
