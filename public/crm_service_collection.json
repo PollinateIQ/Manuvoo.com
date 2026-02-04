@@ -1,0 +1,419 @@
+{
+  "info": {
+    "_postman_id": "crm-service-collection",
+    "name": "CRM Service API",
+    "description": "Standalone CRM Service - All endpoints are PUBLIC (no auth required).\n\nIncludes:\n- Contacts\n- Inquiries/Leads\n- Feedback\n- Support Tickets\n- Communications",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Inquiries",
+      "description": "Lead/inquiry management endpoints",
+      "item": [
+        {
+          "name": "Create Inquiry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phone_number\": \"+27821234567\",\n  \"username\": \"johnd\",\n  \"venue_type\": \"restaurant\",\n  \"tenant_type\": \"independent\",\n  \"description\": \"Looking for a POS system\",\n  \"message\": \"I have a small restaurant with 10 tables.\",\n  \"source\": \"website\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/inquiries",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "inquiries"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Inquiries",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/inquiries?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "inquiries"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" },
+                { "key": "status", "value": "new", "disabled": true },
+                { "key": "venue_type", "value": "restaurant", "disabled": true }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Inquiry by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/inquiries/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "inquiries", ":id"],
+              "variable": [
+                { "key": "id", "value": "{{inquiry_id}}" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Inquiry Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"contacted\",\n  \"assigned_to\": \"sales@company.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/inquiries/:id/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "inquiries", ":id", "status"],
+              "variable": [
+                { "key": "id", "value": "{{inquiry_id}}" }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Feedback",
+      "description": "Customer feedback endpoints",
+      "item": [
+        {
+          "name": "Create Feedback",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Great platform! Easy to use.\",\n  \"full_name\": \"Happy Customer\",\n  \"email\": \"happy@example.com\",\n  \"rating\": 5,\n  \"category\": \"product\",\n  \"subject\": \"Excellent Experience\",\n  \"is_public\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/feedback",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "feedback"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Feedback (Anonymous)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Please add dark mode.\",\n  \"rating\": 4,\n  \"category\": \"feature_request\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/feedback",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "feedback"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Feedback",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/feedback?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "feedback"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" },
+                { "key": "category", "value": "product", "disabled": true },
+                { "key": "min_rating", "value": "4", "disabled": true }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Support Tickets",
+      "description": "Support ticket management endpoints",
+      "item": [
+        {
+          "name": "Create Support Ticket",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"Cannot login to my account\",\n  \"description\": \"I am getting an error when trying to login.\",\n  \"full_name\": \"Bob Wilson\",\n  \"email\": \"bob.wilson@example.com\",\n  \"phone_number\": \"+27829876543\",\n  \"priority\": \"high\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/support-tickets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "support-tickets"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Support Ticket (Minimal)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"General question\",\n  \"description\": \"How do I export my data?\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/support-tickets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "support-tickets"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Support Tickets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/support-tickets?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "support-tickets"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" },
+                { "key": "status", "value": "open", "disabled": true },
+                { "key": "priority", "value": "high", "disabled": true }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Support Ticket by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/support-tickets/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "support-tickets", ":id"],
+              "variable": [
+                { "key": "id", "value": "{{ticket_id}}" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Support Ticket Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"in_progress\",\n  \"assigned_to\": \"support@company.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/support-tickets/:id/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "support-tickets", ":id", "status"],
+              "variable": [
+                { "key": "id", "value": "{{ticket_id}}" }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Communications",
+      "description": "Communication log endpoints (emails, SMS, etc.)",
+      "item": [
+        {
+          "name": "Create Communication (Email)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"email\",\n  \"direction\": \"outbound\",\n  \"subject\": \"Welcome to our platform\",\n  \"payload_json\": {\n    \"to\": \"john.doe@example.com\",\n    \"from\": \"support@company.com\",\n    \"body\": \"Thank you for your inquiry.\",\n    \"html\": \"<p>Thank you for your inquiry.</p>\"\n  },\n  \"status\": \"sent\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/communications",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "communications"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Communication (SMS)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"sms\",\n  \"direction\": \"outbound\",\n  \"payload_json\": {\n    \"to\": \"+27821234567\",\n    \"body\": \"Your support ticket has been received.\"\n  },\n  \"status\": \"pending\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/communications",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "communications"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Communications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/communications?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "communications"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" },
+                { "key": "channel", "value": "email", "disabled": true },
+                { "key": "status", "value": "sent", "disabled": true },
+                { "key": "contact_id", "value": "", "disabled": true }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Communication Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"delivered\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/communications/:id/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "communications", ":id", "status"],
+              "variable": [
+                { "key": "id", "value": "{{communication_id}}" }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Contacts",
+      "description": "Contact management endpoints",
+      "item": [
+        {
+          "name": "List Contacts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/contacts?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "contacts"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" },
+                { "key": "search", "value": "john", "disabled": true }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Contact by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/crm/contacts/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crm", "contacts", ":id"],
+              "variable": [
+                { "key": "id", "value": "{{contact_id}}" }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

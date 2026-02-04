@@ -1,17 +1,23 @@
 [build]
-  publish = ".next"
-  command = "npm run build"
+  # Build command - installs and uses Bun
+  command = "chmod +x netlify-build.sh && ./netlify-build.sh"
+  
+  # Directory where build output is located
+  publish = "dist"
+  
+  # Environment variables
+  [build.environment]
+    NODE_VERSION = "20"
+    # Tell build to use bash
+    SHELL = "/bin/bash"
 
-[build.environment]
-  NODE_VERSION = "20"
-  NPM_FLAGS = "--production=false"
-  NEXT_TELEMETRY_DISABLED = "1"
+# Redirect all requests to index.html for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
-# Next.js plugin for Netlify
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
-# Headers for security and performance
+# Optional: Set custom headers for better security and performance
 [[headers]]
   for = "/*"
   [headers.values]
@@ -19,46 +25,8 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-
-# Cache static assets
-[[headers]]
-  for = "/static/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/_next/static/*"
+  for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-
-# Redirect www to non-www (optional - adjust based on your preference)
-[[redirects]]
-  from = "https://www.manuvoo.com/*"
-  to = "https://manuvoo.com/:splat"
-  status = 301
-  force = true
-
-# Prerender key pages for better SEO
-[build.processing]
-  skip_processing = false
-
-[build.processing.css]
-  bundle = true
-  minify = true
-
-[build.processing.js]
-  bundle = true
-  minify = true
-
-[build.processing.html]
-  pretty_urls = true
-
-#[context.production.environment]
-#  NODE_ENV = "production"
-#
-#[context.deploy-preview.environment]
-#  NODE_ENV = "development"
-#
-#[context.branch-deploy.environment]
-#  NODE_ENV = "development"

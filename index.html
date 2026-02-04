@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Transform your hospitality operations with Manuvoo's cloud-based platform. Streamline bookings, guest management, housekeeping, maintenance, and more." />
+    <meta name="keywords" content="hospitality management software, hotel management system, property management system, PMS, hotel operations" />
+    <meta name="author" content="Manuvoo" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://manuvoo.com/" />
+    <meta property="og:title" content="Manuvoo - Hospitality Operations Platform" />
+    <meta property="og:description" content="All-in-one cloud-based platform for modern hospitality operations" />
+    <meta property="og:image" content="https://manuvoo.com/images/og-image.jpg" />
+    <meta property="og:site_name" content="Manuvoo" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://manuvoo.com/" />
+    <meta name="twitter:title" content="Manuvoo - Hospitality Operations Platform" />
+    <meta name="twitter:description" content="All-in-one cloud-based platform for modern hospitality operations" />
+    <meta name="twitter:image" content="https://manuvoo.com/images/og-image.jpg" />
+    
+    <title>Manuvoo - Hospitality Operations Platform</title>
+    <script>
+      // Initialize theme before page renders to prevent flash
+      (function() {
+        const stored = localStorage.getItem('manuvoo-theme');
+        if (stored && (stored === 'dark' || stored === 'light')) {
+          document.documentElement.classList.add(stored);
+          document.documentElement.style.colorScheme = stored;
+        } else {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = prefersDark ? 'dark' : 'light';
+          document.documentElement.classList.add(theme);
+          document.documentElement.style.colorScheme = theme;
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
