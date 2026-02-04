@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from 'react-v19-helmet-async';
 import type { SEOConfig } from '@/config/seo';
 
 interface SEOProps {

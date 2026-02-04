@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider } from 'react-v19-helmet-async';
 import { ThemeProvider } from '@/hooks/useTheme';
 import { Navbar } from '@/components/Navbar';
 import { SplashScreen } from '@/components/SplashScreen';
