@@ -1,5 +1,5 @@
 [build]
-  # Build command - installs and uses Bun
+  # Build command - uses npm
   command = "chmod +x netlify-build.sh && ./netlify-build.sh"
   
   # Directory where build output is located
@@ -8,8 +8,8 @@
   # Environment variables
   [build.environment]
     NODE_VERSION = "20"
-    # Tell build to use bash
-    SHELL = "/bin/bash"
+    # Skip Next.js plugin - this is a Vite/React project
+    NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 # Redirect all requests to index.html for client-side routing
 [[redirects]]
