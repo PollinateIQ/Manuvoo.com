@@ -208,6 +208,32 @@ export function Footer() {
             }`}>
               Cookie Policy
             </NavLink>
+            <NavLink to="/intellectual-property" className={`transition-colors ${
+              theme === 'dark' ? 'text-gray-500 hover:text-white' : 'text-gray-500 hover:text-black'
+            }`}>
+              Intellectual Property
+            </NavLink>
+          </div>
+          
+          {/* PollinateIQ Branding */}
+          <div className={`mt-4 pt-4 border-t w-full max-w-md mx-auto text-center ${
+            theme === 'dark' ? 'border-white/10' : 'border-gray-200'
+          }`}>
+            <p className="text-sm text-gray-500">
+              A Product of{' '}
+              <a 
+                href="https://pollinateiq.co.za" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={`font-semibold transition-colors ${
+                  theme === 'dark' 
+                    ? 'text-orange-400 hover:text-orange-300' 
+                    : 'text-orange-600 hover:text-orange-500'
+                }`}
+              >
+                PollinateIQ
+              </a>
+            </p>
           </div>
         </div>
       </div>

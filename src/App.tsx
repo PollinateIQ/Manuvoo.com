@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { HelmetProvider } from 'react-v19-helmet-async';
+import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from '@/hooks/useTheme';
 import { Navbar } from '@/components/Navbar';
 import { SplashScreen } from '@/components/SplashScreen';
@@ -15,6 +15,7 @@ import { Pricing } from '@/pages/Pricing';
 import { RoadmapPage } from '@/pages/Roadmap';
 import { Contact } from '@/pages/Contact';
 import { CookiePolicy } from '@/pages/CookiePolicy';
+import { IntellectualProperty } from '@/pages/IntellectualProperty';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -42,6 +43,7 @@ function AppContent() {
           <Route path="/roadmap" element={<RoadmapPage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
+          <Route path="/intellectual-property" element={<IntellectualProperty />} />
         </Routes>
       </main>
       <Footer />
