@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail } from 'lucide-react';
 import { AnimatedSection } from '@/components/AnimatedSection';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { NavLink } from 'react-router-dom';
 import { CalButton } from '@/components/CalButton';
 
@@ -62,36 +62,42 @@ export function CTA() {
         <AnimatedSection delay={0.2}>
           <div className="flex flex-wrap justify-center gap-4">
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <CalButton className="inline-flex" eventType="demo">
-                <Button
-                  size="lg"
-                  className="bg-white text-orange-600 hover:bg-white/90 font-semibold px-8 py-6 text-base"
-                >
-                  Get started
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
+              <CalButton
+                className={buttonVariants({
+                  size: 'lg',
+                  className:
+                    'bg-white text-orange-600 hover:bg-white/90 font-semibold px-8 py-6 text-base',
+                })}
+                eventType="demo"
+              >
+                Get started
+                <ArrowRight className="w-5 h-5 ml-2" />
               </CalButton>
             </motion.div>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <CalButton className="inline-flex" eventType="training">
-                <Button
-                  size="lg"
-                  className="bg-white text-orange-600 hover:bg-white/90 font-semibold px-8 py-6 text-base"
-                >
-                  Book training
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
+              <CalButton
+                className={buttonVariants({
+                  size: 'lg',
+                  className:
+                    'bg-white text-orange-600 hover:bg-white/90 font-semibold px-8 py-6 text-base',
+                })}
+                eventType="training"
+              >
+                Book training
+                <ArrowRight className="w-5 h-5 ml-2" />
               </CalButton>
             </motion.div>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <CalButton className="inline-flex" eventType="quick-chat">
-                <Button
-                  size="lg"
-                  className="bg-orange-600 text-white hover:bg-white hover:text-orange-600 font-semibold px-8 py-6 text-base transition-colors border-2 border-white"
-                >
-                  Book a call
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
+              <CalButton
+                className={buttonVariants({
+                  size: 'lg',
+                  className:
+                    'bg-orange-600 text-white hover:bg-white hover:text-orange-600 font-semibold px-8 py-6 text-base transition-colors border-2 border-white',
+                })}
+                eventType="quick-chat"
+              >
+                Book a call
+                <ArrowRight className="w-5 h-5 ml-2" />
               </CalButton>
             </motion.div>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>

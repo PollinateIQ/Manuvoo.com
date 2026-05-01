@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Check, ArrowRight, HelpCircle } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
 import { seoConfig } from '@/config/seo';
@@ -7,11 +7,11 @@ import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/Ani
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
 const plans = [
   {
@@ -179,7 +179,7 @@ export function Pricing() {
 
       {/* FAQ */}
       <section className="py-24 lg:py-32">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
               Frequently asked questions
@@ -189,38 +189,26 @@ export function Pricing() {
             </p>
           </AnimatedSection>
 
-          <TooltipProvider>
-            <StaggerContainer className="space-y-6" staggerDelay={0.1}>
-              {faqs.map((faq) => (
-                <StaggerItem key={faq.question}>
-                  <motion.div
-                    className="bg-card border border-border rounded-xl p-6"
-                    whileHover={{ borderColor: 'rgba(249, 115, 22, 0.3)' }}
-                    transition={{ duration: 0.3 }}
+          <AnimatedSection>
+            <div className="rounded-2xl border border-border bg-card/80 p-2 shadow-xl shadow-black/5 backdrop-blur-sm">
+              <Accordion type="single" collapsible className="w-full">
+                {faqs.map((faq, index) => (
+                  <AccordionItem
+                    key={faq.question}
+                    value={`faq-${index}`}
+                    className="border-border px-4 last:border-b-0"
                   >
-                    <div className="flex items-start gap-4">
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <HelpCircle className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Click to learn more</p>
-                        </TooltipContent>
-                      </Tooltip>
-                      <div>
-                        <h3 className="font-semibold text-foreground mb-2">
-                          {faq.question}
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          {faq.answer}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
-          </TooltipProvider>
+                    <AccordionTrigger className="py-5 text-left text-base font-semibold text-foreground hover:text-orange-500 hover:no-underline">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-5 text-sm leading-relaxed text-muted-foreground">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </div>

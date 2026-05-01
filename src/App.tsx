@@ -1,36 +1,38 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { HelmetProvider } from 'react-helmet-async';
-import { ThemeProvider } from '@/hooks/useTheme';
-import { Navbar } from '@/components/Navbar';
-import { SplashScreen } from '@/components/SplashScreen';
-import { CookieConsent } from '@/components/CookieConsent';
-import { Toaster } from '@/components/ui/sonner';
-import { Footer } from '@/sections/Footer';
-import { Home } from '@/pages/Home';
-import { About } from '@/pages/About';
-import { Services } from '@/pages/Services';
-import { Features } from '@/pages/Features';
-import { Pricing } from '@/pages/Pricing';
-import { RoadmapPage } from '@/pages/Roadmap';
-import { Contact } from '@/pages/Contact';
-import { CookiePolicy } from '@/pages/CookiePolicy';
-import { IntellectualProperty } from '@/pages/IntellectualProperty';
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { HelmetProvider } from "react-helmet-async";
+import { ThemeProvider } from "@/hooks/useTheme";
+import { Navbar } from "@/components/Navbar";
+import { ScrollProgressBar } from "@/components/ScrollProgressBar";
+import { SplashScreen } from "@/components/SplashScreen";
+import { CookieConsent } from "@/components/CookieConsent";
+import { Toaster } from "@/components/ui/sonner";
+import { Footer } from "@/sections/Footer";
+import { Home } from "@/pages/Home";
+import { About } from "@/pages/About";
+import { Services } from "@/pages/Services";
+import { Features } from "@/pages/Features";
+import { Pricing } from "@/pages/Pricing";
+import { RoadmapPage } from "@/pages/Roadmap";
+import { Contact } from "@/pages/Contact";
+import { CookiePolicy } from "@/pages/CookiePolicy";
+import { IntellectualProperty } from "@/pages/IntellectualProperty";
 
 // Scroll to top on route change
 function ScrollToTop() {
   const { pathname } = useLocation();
-  
+
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [pathname]);
-  
+
   return null;
 }
 
 function AppContent() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <ScrollProgressBar />
       <Navbar />
       <ScrollToTop />
       <main>
@@ -43,7 +45,10 @@ function AppContent() {
           <Route path="/roadmap" element={<RoadmapPage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
-          <Route path="/intellectual-property" element={<IntellectualProperty />} />
+          <Route
+            path="/intellectual-property"
+            element={<IntellectualProperty />}
+          />
         </Routes>
       </main>
       <Footer />

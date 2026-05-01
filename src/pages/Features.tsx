@@ -161,9 +161,9 @@ export function Features() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection>
               <img
-                src="/images/oms-interface.jpg"
+                src="/images/generated/oms-tablet-flow.png"
                 alt="OMS Interface"
-                className="rounded-2xl border border-border shadow-2xl"
+                className="rounded-2xl border border-border shadow-2xl shadow-black/10"
               />
             </AnimatedSection>
 
