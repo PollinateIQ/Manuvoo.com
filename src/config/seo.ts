@@ -140,6 +140,76 @@ export const seoConfig: Record<string, SEOConfig> = {
     ogImage: defaultOgImage,
     canonical: `${baseUrl}/cookie-policy`,
     noindex: true
+  },
+  terms: {
+    title: "Terms & Conditions | Manuvoo",
+    description: "The terms and conditions governing use of the Manuvoo platform and all orders and payments made through it. All transactions are in South African Rand (ZAR). Country of domicile: South Africa.",
+    keywords: [
+      "terms and conditions",
+      "terms of service",
+      "Manuvoo terms",
+      "governing law",
+      "jurisdiction South Africa",
+      "ecommerce terms",
+      "ZAR transactions"
+    ],
+    ogImage: defaultOgImage,
+    canonical: `${baseUrl}/terms`
+  },
+  privacyPolicy: {
+    title: "Privacy Policy - How We Use Your Information | Manuvoo",
+    description: "How Manuvoo collects, uses, stores and protects the personal information of customers and venues, in line with South Africa's Protection of Personal Information Act (POPIA).",
+    keywords: [
+      "privacy policy",
+      "POPIA",
+      "data protection South Africa",
+      "personal information",
+      "customer data",
+      "Manuvoo privacy"
+    ],
+    ogImage: defaultOgImage,
+    canonical: `${baseUrl}/privacy-policy`
+  },
+  refundPolicy: {
+    title: "Refund & Return Policy | Manuvoo",
+    description: "Manuvoo's refund and return policy for food, beverage and platform orders. Refunds are credited to the original card, in South African Rand, within 10 business days.",
+    keywords: [
+      "refund policy",
+      "return policy",
+      "food refund",
+      "card refund",
+      "chargeback",
+      "Manuvoo refunds"
+    ],
+    ogImage: defaultOgImage,
+    canonical: `${baseUrl}/refund-policy`
+  },
+  cancellationPolicy: {
+    title: "Cancellation Policy | Manuvoo",
+    description: "When and how a customer can cancel an order on the Manuvoo platform, when a venue may cancel, and how cancelled payments are reversed to the original payment method.",
+    keywords: [
+      "cancellation policy",
+      "cancel order",
+      "order cancellation",
+      "payment reversal",
+      "Manuvoo cancellations"
+    ],
+    ogImage: defaultOgImage,
+    canonical: `${baseUrl}/cancellation-policy`
+  },
+  deliveryPolicy: {
+    title: "Delivery & Shipping Policy | Manuvoo",
+    description: "How orders placed through Manuvoo are fulfilled: dine-in table service, counter and pickup collection, and delivery. Fulfilment takes place within South Africa only.",
+    keywords: [
+      "delivery policy",
+      "shipping policy",
+      "fulfilment",
+      "pickup collection",
+      "delivery South Africa",
+      "export restrictions"
+    ],
+    ogImage: defaultOgImage,
+    canonical: `${baseUrl}/delivery-policy`
   }
 };
 
@@ -167,18 +237,43 @@ export const organizationSchema = {
   "offers": {
     "@type": "Offer",
     "price": "0",
-    "priceCurrency": "USD",
+    "priceCurrency": "ZAR",
     "description": "Free trial available"
   },
   "description": "All-in-one hospitality operations platform for hotels, resorts, and hospitality businesses",
   "provider": {
     "@type": "Organization",
-    "name": "Manuvoo",
+    "name": "Manuvoo (Pty) Ltd",
+    "legalName": "Manuvoo (Pty) Ltd",
     "url": baseUrl,
     "logo": `${baseUrl}/images/logo.svg`,
+    "email": "info@manuvoo.com",
+    "telephone": "+27696848796",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "18 Angola Rd, Selcourt",
+      "addressLocality": "Springs",
+      "addressRegion": "Gauteng",
+      "postalCode": "1567",
+      "addressCountry": "ZA"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "info@manuvoo.com",
+      "telephone": "+27696848796",
+      "areaServed": "ZA",
+      "availableLanguage": "English"
+    },
     "sameAs": [
       // Add social media profiles here when available
     ]
+  },
+  "currenciesAccepted": "ZAR",
+  "paymentAccepted": "Visa, Mastercard",
+  "areaServed": {
+    "@type": "Country",
+    "name": "South Africa"
   },
   "featureList": [
     "Guest Management",

@@ -12,25 +12,32 @@ import {
 import { NavLink } from "react-router-dom";
 import { useTheme } from "@/hooks/useTheme";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
+import { PaymentMethods } from "@/components/PaymentMethods";
+import { company, addressOneLine } from "@/config/company";
 
+/**
+ * Every link appears exactly once across the three columns — no link is
+ * repeated elsewhere in the footer.
+ */
 const footerLinks = {
   Company: [
     { label: "About Us", href: "/about" },
-    { label: "Our Story", href: "#" },
-    { label: "Careers", href: "#" },
-    { label: "Press", href: "#" },
-  ],
-  Product: [
-    { label: "For Restaurants", href: "/restaurants" },
-    { label: "For Diners", href: "/diners" },
+    { label: "Services", href: "/services" },
     { label: "Features", href: "/features" },
     { label: "Pricing", href: "/pricing" },
-  ],
-  Support: [
-    { label: "Help Center", href: "#" },
+    { label: "Roadmap", href: "/roadmap" },
     { label: "Contact Us", href: "/contact" },
-    { label: "Restaurant Support", href: "#" },
-    { label: "Technical Support", href: "#" },
+  ],
+  "Customer Policies": [
+    { label: "Refunds & Returns", href: "/refund-policy" },
+    { label: "Cancellations", href: "/cancellation-policy" },
+    { label: "Delivery & Shipping", href: "/delivery-policy" },
+  ],
+  Legal: [
+    { label: "Terms & Conditions", href: "/terms" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Cookie Policy", href: "/cookie-policy" },
+    { label: "Intellectual Property", href: "/intellectual-property" },
   ],
 };
 
@@ -116,16 +123,6 @@ export function Footer() {
             </a>
           </div>
 
-          {/* Address */}
-          <div
-            className={`flex items-center gap-2.5 text-base mb-10 ${
-              theme === "dark" ? "text-gray-500" : "text-gray-500"
-            }`}
-          >
-            <MapPin className="w-5 h-5" />
-            <span>18 Angola Rd, Selcourt, Springs, 1567</span>
-          </div>
-
           {/* Social Links */}
           <div className="flex gap-4">
             {socialLinks.map((social) => (
@@ -205,63 +202,58 @@ export function Footer() {
           }`}
         ></div>
 
-        {/* Bottom Section */}
-        <div className="flex flex-col items-center gap-5">
-          <p className="text-base text-gray-500">
-            © 2025 Manuvoo. All rights reserved.
+        {/*
+          Section 1 — registered business identity. Centred, on its own,
+          between dividers. This is the site's only copy of these details.
+        */}
+        <address className="not-italic text-center mb-8">
+          <span
+            className={`block text-base font-semibold ${
+              theme === "dark" ? "text-white" : "text-black"
+            }`}
+          >
+            {company.legalName}
+          </span>
+          <span className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-base text-gray-500">
+            <MapPin className="w-4 h-4 flex-shrink-0" />
+            <span>{addressOneLine}</span>
+          </span>
+          <span className="mt-1 block text-sm text-gray-500">
+            Company Registration No. {company.registrationNumber}
+          </span>
+        </address>
+
+        {/* Divider */}
+        <div
+          className={`border-t mb-8 ${
+            theme === "dark" ? "border-white/10" : "border-gray-200"
+          }`}
+        ></div>
+
+        {/*
+          Section 2 — card acceptance, currency and country of domicile.
+          Its own centred row after the navigation links and before the
+          copyright line, which is the standard e-commerce footer pattern.
+        */}
+        <PaymentMethods className="mb-8" />
+
+        {/* Divider */}
+        <div
+          className={`border-t mb-8 ${
+            theme === "dark" ? "border-white/10" : "border-gray-200"
+          }`}
+        ></div>
+
+        {/* Copyright, governing law and attribution */}
+        <div className="flex flex-col items-center gap-3">
+          <p className="text-base text-gray-500 text-center">
+            © {new Date().getFullYear()} {company.legalName}. All rights
+            reserved.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-7 text-base">
-            <a
-              href="#"
-              className={`transition-colors ${
-                theme === "dark"
-                  ? "text-gray-500 hover:text-white"
-                  : "text-gray-500 hover:text-black"
-              }`}
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="#"
-              className={`transition-colors ${
-                theme === "dark"
-                  ? "text-gray-500 hover:text-white"
-                  : "text-gray-500 hover:text-black"
-              }`}
-            >
-              Terms of Service
-            </a>
-            <a
-              href="#"
-              className={`transition-colors ${
-                theme === "dark"
-                  ? "text-gray-500 hover:text-white"
-                  : "text-gray-500 hover:text-black"
-              }`}
-            >
-              POPIA Compliance
-            </a>
-            <NavLink
-              to="/cookie-policy"
-              className={`transition-colors ${
-                theme === "dark"
-                  ? "text-gray-500 hover:text-white"
-                  : "text-gray-500 hover:text-black"
-              }`}
-            >
-              Cookie Policy
-            </NavLink>
-            <NavLink
-              to="/intellectual-property"
-              className={`transition-colors ${
-                theme === "dark"
-                  ? "text-gray-500 hover:text-white"
-                  : "text-gray-500 hover:text-black"
-              }`}
-            >
-              Intellectual Property
-            </NavLink>
-          </div>
+          <p className="max-w-2xl text-center text-sm text-gray-500">
+            Governed by the laws of the Republic of South Africa. No goods are
+            shipped or exported outside South Africa.
+          </p>
 
           {/* PollinateIQ Branding */}
           <div

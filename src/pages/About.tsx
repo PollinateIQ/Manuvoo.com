@@ -1,8 +1,19 @@
 import { motion } from 'framer-motion';
-import { Smartphone, TrendingUp, Zap, Database, Layers, Check } from 'lucide-react';
+import {
+  Smartphone,
+  TrendingUp,
+  Zap,
+  Database,
+  Layers,
+  Check,
+  UtensilsCrossed,
+  Store,
+} from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
 import { seoConfig } from '@/config/seo';
 import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
+import { company } from '@/config/company';
 
 const values = [
   {
@@ -24,6 +35,48 @@ const values = [
     icon: Zap,
     title: 'Operational Clarity',
     description: 'Clear order, payment, inventory, and service signals in one flow.',
+  },
+];
+
+/**
+ * Complete description of the goods and services offered, published as required
+ * by the Visa / MasterCard e-commerce website requirements.
+ */
+const offerings = [
+  {
+    icon: UtensilsCrossed,
+    audience: 'For diners',
+    title: 'Food and beverage ordering',
+    description:
+      'Scan a QR code at a table or pickup station, browse the venue’s live digital menu, place your order and pay from your own phone. The goods you buy are the food and beverage items on that menu, prepared and supplied by the venue.',
+    items: [
+      'Live digital menus with item descriptions, allergens and photographs',
+      'Table ordering, counter and pickup ordering, and delivery where the venue offers it',
+      'Split and shared bills across a table',
+      'Secure card and instant EFT payment with 3D Secure authentication',
+      'Live order status, unique pickup codes and digital receipts',
+      'Loyalty rewards, discounts and customer reviews',
+    ],
+    pricing:
+      'The price you pay is the price shown on the menu. It already includes the Manuvoo service fee. Any delivery fee is shown separately before you confirm payment.',
+  },
+  {
+    icon: Store,
+    audience: 'For venues',
+    title: 'Hospitality operations platform',
+    description:
+      'A cloud subscription for restaurants, taverns, food trucks and hotels covering the full operating day — ordering, kitchen, stock, staff and money. Access is provisioned electronically; there is no physical product and nothing is shipped.',
+    items: [
+      'QR, table, counter and pickup order capture routed straight to the kitchen',
+      'Kitchen display workflow with preparation, ready and served timestamps',
+      'Inventory, recipe-level costing, supplier and stock requests',
+      'Staff scheduling, shift management and payroll',
+      'Loyalty, discounting, customer reviews and real-time analytics',
+      'Automated daily settlement and reconciliation, traceable to every order',
+      'Multi-venue support with consolidated reporting under one account',
+    ],
+    pricing:
+      'A flat service fee per item on a completed transaction, built into the menu price. No monthly licence fee, no minimum term. A venue that does not trade pays nothing.',
   },
 ];
 
@@ -180,6 +233,100 @@ export function About() {
                   {item}
                 </span>
               ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Goods & Services Offered — complete description (card scheme requirement) */}
+      <section className="py-24 lg:py-32">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center mb-14">
+            <span className="text-sm font-medium text-orange-500 uppercase tracking-wider mb-4 block">
+              What We Offer
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
+              The goods and services we sell
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Manuvoo is a cloud-based hospitality commerce platform operating in
+              South Africa. Two groups buy from us — diners ordering food and
+              drink from a participating venue, and venues subscribing to the
+              platform itself. Everything we sell is set out below.
+            </p>
+          </AnimatedSection>
+
+          <StaggerContainer
+            className="grid md:grid-cols-2 gap-6"
+            staggerDelay={0.1}
+          >
+            {offerings.map((offering) => (
+              <StaggerItem key={offering.title}>
+                <motion.div
+                  className="bg-card border border-border rounded-xl p-8 h-full"
+                  whileHover={{ y: -4, borderColor: 'rgba(249, 115, 22, 0.3)' }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="w-12 h-12 rounded-lg bg-orange-500/10 flex items-center justify-center mb-5">
+                    <offering.icon className="w-6 h-6 text-orange-500" />
+                  </div>
+                  <span className="text-xs font-medium text-orange-500 uppercase tracking-wider mb-2 block">
+                    {offering.audience}
+                  </span>
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                    {offering.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-5 leading-relaxed">
+                    {offering.description}
+                  </p>
+                  <ul className="space-y-2">
+                    {offering.items.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-2.5 text-sm text-muted-foreground"
+                      >
+                        <Check className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-5 pt-5 border-t border-border text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">
+                      Pricing:
+                    </span>{' '}
+                    {offering.pricing}
+                  </p>
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/*
+        Registered business details, customer service contacts, card marks,
+        currency, domicile, export restrictions and governing law all live in
+        the Footer, which appears on this page too. They are not repeated here.
+      */}
+      <section className="pb-24 lg:pb-32">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection>
+            <div className="rounded-xl border border-border bg-muted/30 p-8 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+              <p className="text-muted-foreground leading-relaxed">
+                <span className="font-semibold text-foreground">
+                  {company.legalName}
+                </span>{' '}
+                is registered and domiciled in {company.countryOfDomicile}. Our
+                registered address, customer service contacts, accepted payment
+                methods and transaction currency are shown in the footer of
+                every page.
+              </p>
+              <NavLink
+                to="/terms"
+                className="inline-flex flex-shrink-0 items-center gap-2 px-6 py-3 rounded-full bg-orange-500 text-white text-sm font-medium hover:bg-orange-600 transition-colors"
+              >
+                Read our Terms & Conditions
+              </NavLink>
             </div>
           </AnimatedSection>
         </div>

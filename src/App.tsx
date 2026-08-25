@@ -16,6 +16,11 @@ import { RoadmapPage } from "@/pages/Roadmap";
 import { Contact } from "@/pages/Contact";
 import { CookiePolicy } from "@/pages/CookiePolicy";
 import { IntellectualProperty } from "@/pages/IntellectualProperty";
+import { Terms } from "@/pages/Terms";
+import { PrivacyPolicy } from "@/pages/PrivacyPolicy";
+import { RefundPolicy } from "@/pages/RefundPolicy";
+import { CancellationPolicy } from "@/pages/CancellationPolicy";
+import { DeliveryPolicy } from "@/pages/DeliveryPolicy";
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -48,6 +53,16 @@ function AppContent() {
             path="/intellectual-property"
             element={<IntellectualProperty />}
           />
+
+          {/* Legal & e-commerce policy pages (Visa / MasterCard requirements) */}
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/terms-and-conditions" element={<Terms />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/return-policy" element={<RefundPolicy />} />
+          <Route path="/cancellation-policy" element={<CancellationPolicy />} />
+          <Route path="/delivery-policy" element={<DeliveryPolicy />} />
+          <Route path="/shipping-policy" element={<DeliveryPolicy />} />
         </Routes>
       </main>
       <Footer />

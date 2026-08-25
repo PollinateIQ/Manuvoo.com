@@ -3,6 +3,7 @@ import {
   Mail,
   Phone,
   MapPin,
+  MessageCircle,
   Send,
   ArrowRight,
   CheckCircle2,
@@ -28,6 +29,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Newsletter } from "@/sections/Newsletter";
 import { createInquiry } from "@/lib/api";
+import { company, addressOneLine } from "@/config/company";
 import {
   Form,
   FormControl,
@@ -39,22 +41,33 @@ import {
 
 const contactInfo = [
   {
-    icon: Mail,
-    label: "Email",
-    value: "info@manuvoo.com",
-    href: "mailto:info@manuvoo.com",
+    icon: Phone,
+    label: "Telephone",
+    value: company.contact.telephone,
+    href: company.contact.telephoneHref,
+    note: company.contact.hours,
   },
   {
-    icon: Phone,
+    icon: Mail,
+    label: "Email",
+    value: company.contact.email,
+    href: `mailto:${company.contact.email}`,
+    note: "We reply within one business day",
+  },
+  {
+    icon: MessageCircle,
     label: "WhatsApp",
-    value: "+27 69 684 8796",
-    href: "https://wa.me/27696848796",
+    value: company.contact.telephone,
+    href: company.contact.whatsapp,
+    note: "Fastest route for order and payment queries",
   },
   {
     icon: MapPin,
-    label: "Location",
-    value: "18 Angola Rd, Selcourt, Springs, 1567",
+    label: "Physical Address",
+    value: addressOneLine,
     href: "#",
+    // Registered name and number are in the Footer — not repeated here.
+    note: "Visits by appointment only",
   },
 ];
 
@@ -183,6 +196,11 @@ export function Contact() {
                       <p className="font-medium text-foreground">
                         {item.value}
                       </p>
+                      {item.note && (
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          {item.note}
+                        </p>
+                      )}
                     </div>
                   </motion.a>
                 ))}

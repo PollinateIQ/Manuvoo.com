@@ -68,4 +68,52 @@
     <priority>0.3</priority>
   </url>
 
+  <!-- Terms & Conditions -->
+  <url>
+    <loc>https://manuvoo.com/terms</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://manuvoo.com/privacy-policy</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Refund & Return Policy -->
+  <url>
+    <loc>https://manuvoo.com/refund-policy</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Cancellation Policy -->
+  <url>
+    <loc>https://manuvoo.com/cancellation-policy</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Delivery & Shipping Policy -->
+  <url>
+    <loc>https://manuvoo.com/delivery-policy</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Intellectual Property -->
+  <url>
+    <loc>https://manuvoo.com/intellectual-property</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>
