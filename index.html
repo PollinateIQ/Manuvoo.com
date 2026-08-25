@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="light" style="color-scheme: light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,6 +12,8 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/android-chrome-192x192.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
@@ -29,21 +31,6 @@
     <meta name="twitter:image" content="https://manuvoo.com/images/og-image.jpg" />
     
     <title>Manuvoo - Hospitality Operations Platform</title>
-    <script>
-      // Initialize theme before page renders to prevent flash
-      (function() {
-        const stored = localStorage.getItem('manuvoo-theme');
-        if (stored && (stored === 'dark' || stored === 'light')) {
-          document.documentElement.classList.add(stored);
-          document.documentElement.style.colorScheme = stored;
-        } else {
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const theme = prefersDark ? 'dark' : 'light';
-          document.documentElement.classList.add(theme);
-          document.documentElement.style.colorScheme = theme;
-        }
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,40 +1,12 @@
 import { motion } from 'framer-motion';
 import { Sparkles, Clock, CheckCircle2 } from 'lucide-react';
 import { AnimatedSection } from '@/components/AnimatedSection';
+import { roadmapItems } from '@/data/roadmap';
 
-const roadmapItems = [
-  {
-    title: 'Multi-tenant Access & Switching',
-    description: 'Seamlessly switch between different restaurant brands and locations with a single login.',
-    date: 'Dec 14, 2025',
-    version: 'v1.2.0',
-    status: 'completed',
-    module: 'Admin Portal',
-  },
-  {
-    title: 'Orders & Transactions Hub',
-    description: 'Centralized view for all live orders, bill status, and payment tracking in real-time.',
-    date: 'Dec 10, 2025',
-    version: 'v1.1.5',
-    status: 'completed',
-    module: 'OMS',
-  },
-  {
-    title: 'Advanced Analytics Dashboard',
-    description: 'Deep insights into sales trends, customer behavior, and operational efficiency.',
-    date: 'Jan 2026',
-    version: 'v1.3.0',
-    status: 'upcoming',
-    module: 'Admin Portal',
-  },
-  {
-    title: 'Loyalty & Rewards Program',
-    description: 'Built-in customer loyalty system with points, rewards, and personalized offers.',
-    date: 'Feb 2026',
-    version: 'v1.4.0',
-    status: 'upcoming',
-    module: 'Customer App',
-  },
+// Home-page teaser: the latest shipped work plus what's next.
+const timeline = [
+  ...roadmapItems.filter((item) => item.status === 'completed').slice(0, 2),
+  ...roadmapItems.filter((item) => item.status !== 'completed').slice(0, 2),
 ];
 
 export function Roadmap() {
@@ -59,7 +31,7 @@ export function Roadmap() {
           <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-charcoal-600 -translate-x-1/2" />
 
           <div className="space-y-12">
-            {roadmapItems.map((item, index) => (
+            {timeline.map((item, index) => (
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 30 }}

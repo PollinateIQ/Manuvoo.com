@@ -6,39 +6,6 @@
 
 @layer base {
     :root {
-        /* Dark theme (default) */
-        --background: 0 0% 4%;
-        --foreground: 0 0% 100%;
-        --card: 0 0% 8%;
-        --card-foreground: 0 0% 100%;
-        --popover: 0 0% 8%;
-        --popover-foreground: 0 0% 100%;
-        --primary: 24 95% 53%;
-        --primary-foreground: 0 0% 100%;
-        --secondary: 0 0% 12%;
-        --secondary-foreground: 0 0% 100%;
-        --muted: 0 0% 15%;
-        --muted-foreground: 240 5% 65%;
-        --accent: 24 95% 53%;
-        --accent-foreground: 0 0% 100%;
-        --destructive: 0 84% 60%;
-        --destructive-foreground: 0 0% 100%;
-        --border: 0 0% 18%;
-        --input: 0 0% 18%;
-        --ring: 24 95% 53%;
-        --radius: 0.625rem;
-
-        /* Custom colors */
-        --orange-500: #f97316;
-        --orange-600: #ea580c;
-        --orange-glow: rgba(249, 115, 22, 0.3);
-        --charcoal-900: #0a0a0a;
-        --charcoal-800: #141414;
-        --charcoal-700: #1a1a1a;
-        --charcoal-600: #27272a;
-    }
-
-    .light {
         /* Light theme */
         --background: 0 0% 98%;
         --foreground: 240 10% 10%;
@@ -59,7 +26,18 @@
         --border: 240 6% 90%;
         --input: 240 6% 90%;
         --ring: 24 95% 53%;
+        --radius: 0.625rem;
+
+        /* Custom colors */
+        --orange-500: #f97316;
+        --orange-600: #ea580c;
+        --orange-glow: rgba(249, 115, 22, 0.3);
+        --charcoal-900: #0a0a0a;
+        --charcoal-800: #141414;
+        --charcoal-700: #1a1a1a;
+        --charcoal-600: #27272a;
     }
+
 }
 
 @layer base {

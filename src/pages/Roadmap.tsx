@@ -4,56 +4,12 @@ import { SEO } from '@/components/SEO';
 import { seoConfig } from '@/config/seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { Badge } from '@/components/ui/badge';
+import { roadmapCounts, roadmapItems } from '@/data/roadmap';
 
-const roadmapItems = [
-  {
-    title: 'Multi-tenant Access & Switching',
-    description: 'Seamlessly switch between different restaurant brands and locations with a single login.',
-    date: 'Dec 14, 2025',
-    version: 'v1.2.0',
-    status: 'completed',
-    module: 'Admin Portal',
-  },
-  {
-    title: 'Orders & Transactions Hub',
-    description: 'Centralized view for all live orders, bill status, and payment tracking in real-time.',
-    date: 'Dec 10, 2025',
-    version: 'v1.1.5',
-    status: 'completed',
-    module: 'OMS',
-  },
-  {
-    title: 'Advanced Analytics Dashboard',
-    description: 'Deep insights into sales trends, customer behavior, and operational efficiency.',
-    date: 'Jan 2026',
-    version: 'v1.3.0',
-    status: 'upcoming',
-    module: 'Admin Portal',
-  },
-  {
-    title: 'Loyalty & Rewards Program',
-    description: 'Built-in customer loyalty system with points, rewards, and personalized offers.',
-    date: 'Feb 2026',
-    version: 'v1.4.0',
-    status: 'upcoming',
-    module: 'Customer App',
-  },
-  {
-    title: 'AI-Powered Demand Forecasting',
-    description: 'Predict busy periods and optimize staffing and inventory accordingly.',
-    date: 'Mar 2026',
-    version: 'v1.5.0',
-    status: 'planned',
-    module: 'Analytics',
-  },
-  {
-    title: 'Multi-language Support',
-    description: 'Support for multiple languages to serve diverse customer bases.',
-    date: 'Q2 2026',
-    version: 'v2.0.0',
-    status: 'planned',
-    module: 'Platform',
-  },
+const summary = [
+  { label: 'Shipped', value: roadmapCounts.shipped, className: 'text-green-500' },
+  { label: 'Coming soon', value: roadmapCounts.upcoming, className: 'text-orange-500' },
+  { label: 'Planned', value: roadmapCounts.planned, className: 'text-blue-500' },
 ];
 
 export function RoadmapPage() {
@@ -77,6 +33,25 @@ export function RoadmapPage() {
               Track our progress across the entire suite. New features, 
               improvements, and what's coming next.
             </p>
+          </AnimatedSection>
+
+          {/* Status summary */}
+          <AnimatedSection delay={0.15}>
+            <div className="mx-auto mt-12 grid max-w-xl grid-cols-3 gap-4">
+              {summary.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-xl border border-border bg-card px-4 py-5 dark:border-charcoal-600 dark:bg-charcoal-800"
+                >
+                  <div className={`text-3xl font-bold ${stat.className}`}>
+                    {stat.value}
+                  </div>
+                  <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
           </AnimatedSection>
         </div>
       </section>

@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion';
 import { 
-  Utensils, 
-  Smartphone, 
-  Store, 
-  Calendar, 
-  Star, 
-  Bell,
-  Clock,
+  Utensils,
+  Smartphone,
+  Store,
+  Building2,
+  CreditCard,
+  Package,
   Shield,
   Zap
 } from 'lucide-react';
@@ -17,47 +16,47 @@ import { Architecture } from '@/sections/Architecture';
 
 const services = [
   {
+    icon: Smartphone,
+    title: 'Guest Ordering & Payment',
+    description: 'A mobile journey that connects the guest directly to the venue service flow.',
+    items: ['Digital menu', 'Mobile ordering', 'Payment flow', 'Order updates'],
+  },
+  {
     icon: Utensils,
-    title: 'Restaurant Management',
-    description: 'Complete solution for restaurants to manage operations, orders, and customer experience.',
-    items: ['Table management', 'Menu builder', 'Order processing', 'Kitchen display'],
+    title: 'Order Management & Routing',
+    description: 'Keep orders, tables, and service stations visible while the venue is moving.',
+    items: ['Live queues', 'Table activity', 'Kitchen routing', 'Prep and ready states'],
   },
   {
     icon: Smartphone,
-    title: 'Customer App',
-    description: 'Native mobile app for diners to browse, book, and order from their favorite restaurants.',
-    items: ['Easy reservations', 'Menu browsing', 'Order tracking', 'Loyalty rewards'],
+    title: 'TPOS for Service Teams',
+    description: 'Give staff a connected tablet interface for orders, payments, and station coordination.',
+    items: ['Staff order entry', 'Item routing', 'Payment status', 'Live service updates'],
   },
   {
     icon: Store,
-    title: 'Vendor Portal',
-    description: 'Dedicated portal for restaurant owners and managers to control their business.',
-    items: ['Dashboard analytics', 'Menu management', 'Staff scheduling', 'Financial reports'],
+    title: 'Admin & Venue Control',
+    description: 'Manage the business from one cloud dashboard across connected locations.',
+    items: ['Venue setup', 'Menu control', 'Order visibility', 'Performance overview'],
   },
   {
-    icon: Calendar,
-    title: 'Reservation System',
-    description: 'Intelligent reservation management with real-time availability and automated confirmations.',
-    items: ['Online bookings', 'Waitlist management', 'SMS reminders', 'Walk-in handling'],
+    icon: CreditCard,
+    title: 'Payments & Cash-up',
+    description: 'Connect payment status and reconciliation to the orders that created them.',
+    items: ['Payment tracking', 'Bill history', 'Cash-up visibility', 'Reconciliation support'],
   },
   {
-    icon: Star,
-    title: 'Review Management',
-    description: 'Collect, manage, and respond to customer reviews to build your reputation.',
-    items: ['Review collection', 'Response templates', 'Rating analytics', 'Reputation insights'],
-  },
-  {
-    icon: Bell,
-    title: 'Marketing Tools',
-    description: 'Built-in marketing features to attract and retain customers.',
-    items: ['Email campaigns', 'Push notifications', 'Promo codes', 'Customer segmentation'],
+    icon: Package,
+    title: 'Inventory & Multi-venue Operations',
+    description: 'Keep stock signals and venue activity visible as the business grows.',
+    items: ['Stock tracking', 'Receiving and waste', 'Location visibility', 'Shared operational data'],
   },
 ];
 
 const highlights = [
-  { icon: Zap, title: 'Real-time Updates', description: 'Instant notifications and live updates across all platforms' },
-  { icon: Shield, title: 'Secure Platform', description: 'Bank-level security to protect your data and transactions' },
-  { icon: Clock, title: 'Always Available', description: '99.9% uptime guarantee with 24/7 customer support' },
+  { icon: Zap, title: 'Live Operations', description: 'Service updates move across the platform as the venue works' },
+  { icon: Shield, title: 'One Source of Truth', description: 'Guests, staff, and owners work from the same cloud data' },
+  { icon: Building2, title: 'Built for Many Venue Types', description: 'Restaurants, food trucks, events, shops, hotels, and lodges' },
 ];
 
 export function Services() {

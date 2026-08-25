@@ -7,7 +7,6 @@ import { ProductSuite } from '@/sections/ProductSuite';
 import { Architecture } from '@/sections/Architecture';
 import { HowItWorks } from '@/sections/HowItWorks';
 import { Industries } from '@/sections/Industries';
-import { Testimonials } from '@/sections/Testimonials';
 import { Newsletter } from '@/sections/Newsletter';
 import { CTA } from '@/sections/CTA';
 
@@ -22,7 +21,6 @@ export function Home() {
       <Architecture />
       <HowItWorks />
       <Industries />
-      <Testimonials />
       <Newsletter />
       <CTA />
     </>

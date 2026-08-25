@@ -1,37 +1,37 @@
 import { motion } from 'framer-motion';
-import { Leaf, Smartphone, TrendingUp, Zap, Database, Layers, Check } from 'lucide-react';
+import { Smartphone, TrendingUp, Zap, Database, Layers, Check } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { seoConfig } from '@/config/seo';
 import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 
 const values = [
   {
-    icon: Leaf,
-    title: 'Eco-Conscious',
-    description: 'Reducing paper waste through digital receipts and orders.',
-  },
-  {
     icon: Smartphone,
     title: 'Digital First',
-    description: 'Leveraging the power of mobile technology for seamless interactions.',
+    description: 'Practical tools that work across the devices hospitality teams already use.',
+  },
+  {
+    icon: Database,
+    title: 'Cloud Connected',
+    description: 'One shared source of truth for guests, service teams, and owners.',
   },
   {
     icon: TrendingUp,
-    title: 'Business Growth',
-    description: 'Driving productivity and efficiency to help venues thrive.',
+    title: 'Built for Growth',
+    description: 'A platform that can grow from one venue to many locations.',
   },
   {
     icon: Zap,
-    title: 'Efficiency',
-    description: 'Streamlining operations from order processing to management.',
+    title: 'Operational Clarity',
+    description: 'Clear order, payment, inventory, and service signals in one flow.',
   },
 ];
 
 const stats = [
-  { value: '500+', label: 'Venues Served' },
-  { value: '10M+', label: 'Orders Processed' },
-  { value: '99.9%', label: 'Uptime' },
-  { value: '24/7', label: 'Support' },
+  { value: '3+', label: 'Venues Connected' },
+  { value: '10K+', label: 'Orders Processed' },
+  { value: '4', label: 'Product Surfaces' },
+  { value: '1', label: 'Cloud Platform' },
 ];
 
 export function About() {
@@ -49,22 +49,22 @@ export function About() {
                 About Manuvoo
               </span>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-                Digitizing hospitality,{' '}
-                <span className="text-orange-500">one order at a time.</span>
+                Built in South Africa,{' '}
+                <span className="text-orange-500">for hospitality everywhere.</span>
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                We are on a mission to become the world's number one digital hospitality 
-                platform, driving efficiency, growth, and seamless experiences for venues 
-                and their guests.
+                Manuvoo is a Black-owned South African technology company building
+                one cloud platform for guest ordering, live service, payments, and
+                venue management.
               </p>
               <div className="flex flex-wrap gap-4">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Database className="w-5 h-5 text-orange-500" />
-                  <span>One Shared Database</span>
+                  <span>One Shared Cloud System</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Layers className="w-5 h-5 text-orange-500" />
-                  <span>Three Integrated Layers</span>
+                  <span>Four Connected Product Surfaces</span>
                 </div>
               </div>
             </AnimatedSection>
@@ -73,9 +73,9 @@ export function About() {
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-3xl blur-2xl" />
                 <img
-                  src="/images/admin-portal.jpg"
-                  alt="Manuvoo Platform"
-                  className="relative rounded-2xl border border-border shadow-2xl"
+                  src="/images/generated/about-team-v2.webp"
+                  alt="Black South African Manuvoo team collaborating around the connected hospitality platform"
+                  className="relative aspect-[4/3] w-full rounded-2xl border border-border object-cover shadow-2xl"
                 />
               </div>
             </AnimatedSection>
@@ -96,20 +96,19 @@ export function About() {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  The hospitality industry is tough. It's busy, fast-paced, and 
-                  administration often eats into the time that should be spent on 
-                  customers. We saw a gap where technology could step in not just 
-                  to manage, but to understand the day-to-day needs of the business.
+                  Hospitality is fast, physical, and constantly moving. Yet many
+                  venues still rely on disconnected tools that make it difficult to
+                  see what is happening across guests, service stations, and management.
                 </p>
                 <p>
-                  We created Manuvoo to bring efficiency to this chaos. By reducing 
-                  paper usage and embracing smartphones, we're not just modernizing 
-                  the process; we're empowering businesses to grow and helping customers 
-                  be more money-conscious about their hospitality spending.
+                  We built Manuvoo to connect that work in the cloud. Guests can
+                  order and pay from their phones, teams can manage live service on
+                  tablets, and owners can run the business from a laptop.
                 </p>
                 <p>
-                  Our goal is simple: take care of the admin so you can focus on 
-                  what matters most—your guests and your growth.
+                  Our goal is simple: give hospitality businesses clear, practical
+                  technology so they can focus on their guests, their teams, and
+                  sustainable growth.
                 </p>
               </div>
             </AnimatedSection>

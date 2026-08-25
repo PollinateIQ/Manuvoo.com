@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, type ReactNode } from 'react';
 
 type Theme = 'dark' | 'light';
 
@@ -11,66 +11,20 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('dark');
-
-  // Initialize theme on mount
   useEffect(() => {
-    // Check for stored theme or system preference
-    const stored = localStorage.getItem('manuvoo-theme') as Theme;
-    if (stored && (stored === 'dark' || stored === 'light')) {
-      setThemeState(stored);
-      applyTheme(stored);
-    } else {
-      // Check system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const initialTheme = prefersDark ? 'dark' : 'light';
-      setThemeState(initialTheme);
-      applyTheme(initialTheme);
-    }
-
-    // Listen for system theme changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => {
-      if (!localStorage.getItem('manuvoo-theme')) {
-        const newTheme = e.matches ? 'dark' : 'light';
-        setThemeState(newTheme);
-        applyTheme(newTheme);
-      }
-    };
-    
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    const root = document.documentElement;
+    root.classList.remove('dark');
+    root.classList.add('light');
+    root.style.colorScheme = 'light';
+    localStorage.removeItem('manuvoo-theme');
   }, []);
 
-  const applyTheme = (newTheme: Theme) => {
-    const root = document.documentElement;
-    
-    if (newTheme === 'dark') {
-      root.classList.add('dark');
-      root.classList.remove('light');
-      root.style.colorScheme = 'dark';
-    } else {
-      root.classList.add('light');
-      root.classList.remove('dark');
-      root.style.colorScheme = 'light';
-    }
-  };
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setThemeState(newTheme);
-    applyTheme(newTheme);
-    localStorage.setItem('manuvoo-theme', newTheme);
-  };
-
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
-    applyTheme(newTheme);
-    localStorage.setItem('manuvoo-theme', newTheme);
-  };
+  const keepLightMode = () => undefined;
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider
+      value={{ theme: 'light', toggleTheme: keepLightMode, setTheme: keepLightMode }}
+    >
       {children}
     </ThemeContext.Provider>
   );

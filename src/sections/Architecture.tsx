@@ -1,492 +1,403 @@
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { 
-  Database, 
-  Users, 
-  Heart, 
+import {
+  Database,
+  LayoutDashboard,
+  MonitorCheck,
   Smartphone,
-  ArrowRight,
-  ArrowLeft,
-  ArrowUp,
-  ArrowDown,
-  RefreshCw
+  Check,
 } from 'lucide-react';
 import { AnimatedSection } from '@/components/AnimatedSection';
 
-interface ComponentCardProps {
+type NodeId = 'admin' | 'hub' | 'oms' | 'mobile';
+
+interface FlowNode {
+  id: NodeId;
   icon: React.ElementType;
   title: string;
   subtitle: string;
+  tag: string;
   features: string[];
-  isCenter?: boolean;
-  onHover: (isHovered: boolean) => void;
-  isHighlighted?: boolean;
 }
 
-function ComponentCard({ 
-  icon: Icon, 
-  title, 
-  subtitle, 
-  features, 
+const nodes: Record<NodeId, FlowNode> = {
+  admin: {
+    id: 'admin',
+    icon: LayoutDashboard,
+    title: 'Admin Portal',
+    subtitle: 'Owners & managers',
+    tag: 'Web',
+    features: ['Menu & settings', 'Reports & analytics', 'Team management'],
+  },
+  hub: {
+    id: 'hub',
+    icon: Database,
+    title: 'Central Hub',
+    subtitle: 'Cloud database',
+    tag: 'Cloud',
+    features: ['One shared record', 'Real-time sync', 'Always up to date'],
+  },
+  oms: {
+    id: 'oms',
+    icon: MonitorCheck,
+    title: 'OMS',
+    subtitle: 'Floor & kitchen staff',
+    tag: 'Tablet',
+    features: ['Orders & payments', 'Menu & tables', 'Staff check-in'],
+  },
+  mobile: {
+    id: 'mobile',
+    icon: Smartphone,
+    title: 'Mobile App',
+    subtitle: 'Your guests',
+    tag: 'Phone',
+    features: ['Scan, order & pay', 'Live order status', 'Syncs with OMS'],
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as const },
+  }),
+};
+
+/* ---------------------------------------------------------------- card --- */
+
+interface ComponentCardProps {
+  node: FlowNode;
+  isCenter?: boolean;
+  isActive?: boolean;
+  onHover: (isHovered: boolean) => void;
+}
+
+function ComponentCard({
+  node,
   isCenter = false,
+  isActive = false,
   onHover,
-  isHighlighted = false
 }: ComponentCardProps) {
+  const { icon: Icon, title, subtitle, tag, features } = node;
+
   return (
     <motion.div
-      className={`relative bg-card dark:bg-charcoal-800 border rounded-2xl p-6 transition-all duration-300 ${
-        isCenter 
-          ? 'border-orange-500/50 shadow-lg shadow-orange-500/10' 
-          : isHighlighted 
-            ? 'border-orange-500/30' 
+      className={`group relative flex h-full flex-col rounded-2xl border bg-card p-6 transition-colors duration-300 dark:bg-charcoal-800 ${
+        isCenter
+          ? 'border-orange-500/50 shadow-glow'
+          : isActive
+            ? 'border-orange-500/40'
             : 'border-border dark:border-charcoal-600'
       }`}
-      whileHover={{ 
-        y: -8, 
-        scale: 1.02,
-        borderColor: 'rgba(249, 115, 22, 0.5)',
-      }}
-      transition={{ duration: 0.3 }}
+      whileHover={{ y: -6, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
       onMouseEnter={() => onHover(true)}
       onMouseLeave={() => onHover(false)}
     >
-      {/* Icon */}
-      <div className={`w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4 ${
-        isCenter ? 'bg-orange-500' : 'bg-orange-500/10'
-      }`}>
-        <Icon className={`w-7 h-7 ${isCenter ? 'text-white' : 'text-orange-500'}`} />
+      {/* Surface tag — the hub shows a live-sync pulse instead */}
+      <span
+        className={`absolute right-4 top-4 flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider ${
+          isCenter
+            ? 'border-orange-500/40 bg-orange-500/10 text-orange-500'
+            : 'border-border text-muted-foreground dark:border-charcoal-600'
+        }`}
+      >
+        {isCenter && (
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500 opacity-70" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-orange-500" />
+          </span>
+        )}
+        {isCenter ? 'Live' : tag}
+      </span>
+
+      {/* Icon + heading */}
+      <div className="mb-5 flex items-center gap-3 pr-14">
+        <div
+          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${
+            isCenter
+              ? 'bg-orange-500 text-white'
+              : 'bg-orange-500/10 text-orange-500 group-hover:bg-orange-500 group-hover:text-white'
+          }`}
+        >
+          <Icon className="h-5 w-5" />
+        </div>
+        <div className="min-w-0">
+          <h3 className="truncate text-lg font-semibold leading-tight text-foreground">
+            {title}
+          </h3>
+          <p className="truncate text-sm text-muted-foreground">{subtitle}</p>
+        </div>
       </div>
 
-      {/* Title & Subtitle */}
-      <h3 className="text-xl font-semibold text-foreground text-center mb-1">
-        {title}
-      </h3>
-      <p className="text-sm text-orange-500 text-center mb-4">
-        {subtitle}
-      </p>
-
       {/* Features */}
-      {features.length > 0 && (
-        <div className="space-y-2">
-          {features.map((feature) => (
-            <div
-              key={feature}
-              className="bg-muted/50 dark:bg-charcoal-700 rounded-lg px-4 py-2 text-sm text-center text-muted-foreground"
-            >
-              {feature}
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Center card extra info */}
-      {isCenter && (
-        <p className="text-sm text-muted-foreground text-center mt-4">
-          Real-time sync across all components
-        </p>
-      )}
+      <ul className="space-y-2.5 border-t border-border pt-4 dark:border-charcoal-700">
+        {features.map((feature) => (
+          <li
+            key={feature}
+            className="flex items-start gap-2.5 text-sm text-muted-foreground"
+          >
+            <Check className="mt-0.5 h-4 w-4 shrink-0 text-orange-500" />
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
     </motion.div>
   );
 }
 
-function AnimatedArrow({ 
-  direction, 
-  isVisible,
-  isHighlighted = false 
-}: { 
+/* ----------------------------------------------------------- connector --- */
+
+interface FlowLineProps {
   direction: 'horizontal' | 'vertical';
+  label?: string;
+  isActive?: boolean;
   isVisible: boolean;
-  isHighlighted?: boolean;
-}) {
-  const arrowVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      transition: { duration: 0.5, ease: 'easeOut' as const }
-    }
-  };
+  delay?: number;
+}
 
-  if (direction === 'horizontal') {
-    return (
-      <motion.div 
-        className="flex items-center justify-center gap-1"
-        variants={arrowVariants}
-        initial="hidden"
-        animate={isVisible ? "visible" : "hidden"}
-      >
-        <motion.div
-          animate={{ x: isHighlighted ? [0, 4, 0] : 0 }}
-          transition={{ duration: 1, repeat: isHighlighted ? Infinity : 0 }}
-        >
-          <ArrowRight className={`w-5 h-5 ${isHighlighted ? 'text-orange-500' : 'text-muted-foreground'}`} />
-        </motion.div>
-        <motion.div
-          animate={{ x: isHighlighted ? [0, -4, 0] : 0 }}
-          transition={{ duration: 1, repeat: isHighlighted ? Infinity : 0 }}
-        >
-          <ArrowLeft className={`w-5 h-5 ${isHighlighted ? 'text-orange-500' : 'text-muted-foreground'}`} />
-        </motion.div>
-      </motion.div>
-    );
-  }
+function FlowLine({
+  direction,
+  label,
+  isActive = false,
+  isVisible,
+  delay = 0,
+}: FlowLineProps) {
+  const reduceMotion = useReducedMotion();
+  const horizontal = direction === 'horizontal';
 
-  return (
-    <motion.div 
-      className="flex flex-col items-center justify-center gap-1"
-      variants={arrowVariants}
-      initial="hidden"
-      animate={isVisible ? "visible" : "hidden"}
+  // 2px, not 1px: a hairline landing on a half-pixel position gets split across
+  // two pixel rows/columns by the browser and washes out to nothing.
+  const track = horizontal ? 'h-0.5 w-full' : 'h-full w-0.5';
+
+  // Explicit stops keep the line solid across its middle. A plain `via-`
+  // gradient fades over the whole length, which made short runs invisible.
+  const lineColor = isActive
+    ? 'rgba(249, 115, 22, 0.9)'
+    : 'hsl(var(--muted-foreground) / 0.45)';
+  const lineImage = `linear-gradient(${
+    horizontal ? 'to right' : 'to bottom'
+  }, transparent 0%, ${lineColor} 14%, ${lineColor} 86%, transparent 100%)`;
+
+  const dotTravel = (reverse: boolean) =>
+    reduceMotion
+      ? {}
+      : {
+          [horizontal ? 'left' : 'top']: reverse
+            ? ['100%', '0%']
+            : ['0%', '100%'],
+          opacity: [0, 1, 1, 0],
+        };
+
+  const labelClass = `whitespace-nowrap text-[10px] font-medium uppercase tracking-wider transition-colors duration-300 ${
+    isActive ? 'text-orange-500' : 'text-muted-foreground/70'
+  }`;
+
+  const line = (
+    <div
+      className={`relative ${track} transition-all duration-300`}
+      style={{ backgroundImage: lineImage }}
     >
-      <motion.div
-        animate={{ y: isHighlighted ? [0, -4, 0] : 0 }}
-        transition={{ duration: 1, repeat: isHighlighted ? Infinity : 0 }}
-      >
-        <ArrowUp className={`w-5 h-5 ${isHighlighted ? 'text-orange-500' : 'text-muted-foreground'}`} />
-      </motion.div>
-      <motion.div
-        animate={{ y: isHighlighted ? [0, 4, 0] : 0 }}
-        transition={{ duration: 1, repeat: isHighlighted ? Infinity : 0 }}
-      >
-        <ArrowDown className={`w-5 h-5 ${isHighlighted ? 'text-orange-500' : 'text-muted-foreground'}`} />
-      </motion.div>
+      {[false, true].map((reverse) => (
+        <motion.span
+          key={String(reverse)}
+          className="absolute h-1.5 w-1.5 rounded-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.9)]"
+          style={
+            horizontal
+              ? { top: '50%', marginTop: -3, marginLeft: -3 }
+              : { left: '50%', marginLeft: -3, marginTop: -3 }
+          }
+          animate={dotTravel(reverse)}
+          transition={{
+            duration: isActive ? 1.4 : 2.4,
+            repeat: Infinity,
+            ease: 'linear',
+            delay: reverse ? 1 : 0,
+          }}
+        />
+      ))}
+    </div>
+  );
+
+  // Both directions render the same way: an unbroken line with a small plain
+  // label — above it when horizontal, beside it when vertical.
+  return (
+    <motion.div
+      className={
+        horizontal
+          ? 'flex w-full flex-col items-center justify-center gap-2'
+          : 'relative flex h-full w-full items-center justify-center'
+      }
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isVisible ? 1 : 0 }}
+      transition={{ duration: 0.6, delay }}
+    >
+      {horizontal && label && <span className={labelClass}>{label}</span>}
+      {line}
+      {!horizontal && label && (
+        <span
+          className={`absolute left-1/2 top-1/2 ml-3 -translate-y-1/2 ${labelClass}`}
+        >
+          {label}
+        </span>
+      )}
     </motion.div>
   );
 }
+
+/* -------------------------------------------------------------- section --- */
 
 export function Architecture() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
-  
-  const [hoveredComponent, setHoveredComponent] = useState<string | null>(null);
+  const [hovered, setHovered] = useState<NodeId | null>(null);
 
-  const components = {
-    admin: {
-      icon: Users,
-      title: 'Admin Portal',
-      subtitle: 'Owner Dashboard',
-      features: ['Menu & Settings', 'Reports & Analytics', 'Team Management']
-    },
-    central: {
-      icon: Database,
-      title: 'Central Hub',
-      subtitle: 'Database',
-      features: []
-    },
-    oms: {
-      icon: Heart,
-      title: 'OMS',
-      subtitle: 'Staff Operations',
-      features: ['Orders & Payments', 'Menu & Tables', 'Staff Check-In']
-    },
-    mobile: {
-      icon: Smartphone,
-      title: 'Mobile App',
-      subtitle: 'Customer Experience',
-      features: []
-    }
-  };
+  const linkActive = (id: NodeId) => hovered === id || hovered === 'hub';
+  const cardActive = (id: NodeId) => hovered === 'hub' && id !== 'hub';
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (delay: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        delay,
-        ease: [0.16, 1, 0.3, 1] as const
-      }
-    })
-  };
+  const stacked: NodeId[] = ['admin', 'hub', 'oms', 'mobile'];
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      className="relative py-24 lg:py-32 bg-muted/30 dark:bg-charcoal-900/50 overflow-hidden"
+      className="relative overflow-hidden bg-muted/30 py-24 dark:bg-charcoal-900/50 lg:py-32"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Soft glow behind the hub */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/10 blur-[120px]" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <AnimatedSection className="text-center mb-16">
-          <span className="text-sm font-medium text-orange-500 uppercase tracking-wider mb-4 block">
+        <AnimatedSection className="mb-16 text-center">
+          <span className="mb-4 block text-sm font-medium uppercase tracking-wider text-orange-500">
             Architecture
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            How It All{' '}
-            <span className="text-orange-500">Connects</span>
+          <h2 className="mb-6 text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
+            How It All <span className="text-orange-500">Connects</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A unified ecosystem where every component works together seamlessly
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+            Every surface writes to the same live record — so the guest&apos;s
+            phone, the floor, and the back office never disagree.
           </p>
         </AnimatedSection>
 
-        {/* Desktop Layout */}
+        {/* Desktop diagram */}
         <div className="hidden lg:block">
-          <div className="grid grid-cols-5 gap-6 items-center">
-            {/* Admin Portal */}
+          <div className="grid grid-cols-[minmax(0,1fr)_130px_minmax(0,1.05fr)_130px_minmax(0,1fr)] items-stretch">
             <motion.div
-              className="col-span-1"
               variants={cardVariants}
               initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              animate={isInView ? 'visible' : 'hidden'}
               custom={0.1}
             >
               <ComponentCard
-                {...components.admin}
-                onHover={(h) => setHoveredComponent(h ? 'admin' : null)}
-                isHighlighted={hoveredComponent === 'central'}
+                node={nodes.admin}
+                isActive={cardActive('admin')}
+                onHover={(h) => setHovered(h ? 'admin' : null)}
               />
             </motion.div>
 
-            {/* Arrow Left */}
-            <div className="col-span-1 flex justify-center">
-              <AnimatedArrow 
-                direction="horizontal" 
+            <div className="flex items-center px-4">
+              <FlowLine
+                direction="horizontal"
+                label="Menu & reports"
                 isVisible={isInView}
-                isHighlighted={hoveredComponent === 'admin' || hoveredComponent === 'central'}
+                isActive={linkActive('admin')}
+                delay={0.35}
               />
             </div>
 
-            {/* Central Hub */}
             <motion.div
-              className="col-span-1"
               variants={cardVariants}
               initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              animate={isInView ? 'visible' : 'hidden'}
               custom={0.2}
             >
               <ComponentCard
-                {...components.central}
+                node={nodes.hub}
                 isCenter
-                onHover={(h) => setHoveredComponent(h ? 'central' : null)}
+                onHover={(h) => setHovered(h ? 'hub' : null)}
               />
             </motion.div>
 
-            {/* Arrow Right */}
-            <div className="col-span-1 flex justify-center">
-              <AnimatedArrow 
-                direction="horizontal" 
+            <div className="flex items-center px-4">
+              <FlowLine
+                direction="horizontal"
+                label="Live orders"
                 isVisible={isInView}
-                isHighlighted={hoveredComponent === 'oms' || hoveredComponent === 'central'}
+                isActive={linkActive('oms')}
+                delay={0.45}
               />
             </div>
 
-            {/* OMS */}
             <motion.div
-              className="col-span-1"
               variants={cardVariants}
               initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              animate={isInView ? 'visible' : 'hidden'}
               custom={0.3}
             >
               <ComponentCard
-                {...components.oms}
-                onHover={(h) => setHoveredComponent(h ? 'oms' : null)}
-                isHighlighted={hoveredComponent === 'central'}
+                node={nodes.oms}
+                isActive={cardActive('oms')}
+                onHover={(h) => setHovered(h ? 'oms' : null)}
               />
             </motion.div>
           </div>
 
-          {/* Vertical Arrow */}
-          <div className="flex justify-center my-6">
-            <AnimatedArrow 
-              direction="vertical" 
+          {/* Hub to Mobile */}
+          <div className="mx-auto flex h-24 w-full max-w-xs justify-center">
+            <FlowLine
+              direction="vertical"
+              label="Guest orders & payments"
               isVisible={isInView}
-              isHighlighted={hoveredComponent === 'mobile' || hoveredComponent === 'central'}
+              isActive={linkActive('mobile')}
+              delay={0.55}
             />
           </div>
 
-          {/* Mobile App */}
           <motion.div
-            className="max-w-md mx-auto"
+            className="mx-auto w-full max-w-sm"
             variants={cardVariants}
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            custom={0.4}
-          >
-            <motion.div
-              className={`relative bg-card dark:bg-charcoal-800 border rounded-2xl p-6 transition-all duration-300 ${
-                hoveredComponent === 'central' 
-                  ? 'border-orange-500/30' 
-                  : 'border-border dark:border-charcoal-600'
-              }`}
-              whileHover={{ 
-                y: -8, 
-                scale: 1.02,
-                borderColor: 'rgba(249, 115, 22, 0.5)',
-              }}
-              transition={{ duration: 0.3 }}
-              onMouseEnter={() => setHoveredComponent('mobile')}
-              onMouseLeave={() => setHoveredComponent(null)}
-            >
-              <div className="flex items-center justify-center gap-8">
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-xl bg-orange-500/10 flex items-center justify-center">
-                  <Smartphone className="w-7 h-7 text-orange-500" />
-                </div>
-
-                {/* Content */}
-                <div className="text-left">
-                  <h3 className="text-xl font-semibold text-foreground mb-1">
-                    {components.mobile.title}
-                  </h3>
-                  <p className="text-sm text-orange-500 mb-2">
-                    {components.mobile.subtitle}
-                  </p>
-                </div>
-
-                {/* Sync indicator */}
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span>Orders & Pay</span>
-                  <RefreshCw className="w-4 h-4 text-orange-500" />
-                  <span>Syncs with OMS</span>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Tablet Layout */}
-        <div className="hidden md:block lg:hidden">
-          <div className="grid grid-cols-2 gap-8">
-            {/* Admin Portal */}
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-              custom={0.1}
-            >
-              <ComponentCard
-                {...components.admin}
-                onHover={(h) => setHoveredComponent(h ? 'admin' : null)}
-              />
-            </motion.div>
-
-            {/* OMS */}
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-              custom={0.2}
-            >
-              <ComponentCard
-                {...components.oms}
-                onHover={(h) => setHoveredComponent(h ? 'oms' : null)}
-              />
-            </motion.div>
-          </div>
-
-          {/* Arrows pointing to center */}
-          <div className="flex justify-center my-6">
-            <AnimatedArrow direction="vertical" isVisible={isInView} />
-          </div>
-
-          {/* Central Hub */}
-          <motion.div
-            className="max-w-sm mx-auto mb-8"
-            variants={cardVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            custom={0.3}
-          >
-            <ComponentCard
-              {...components.central}
-              isCenter
-              onHover={(h) => setHoveredComponent(h ? 'central' : null)}
-            />
-          </motion.div>
-
-          {/* Arrow to mobile */}
-          <div className="flex justify-center my-6">
-            <AnimatedArrow direction="vertical" isVisible={isInView} />
-          </div>
-
-          {/* Mobile App */}
-          <motion.div
-            className="max-w-sm mx-auto"
-            variants={cardVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            animate={isInView ? 'visible' : 'hidden'}
             custom={0.4}
           >
             <ComponentCard
-              {...components.mobile}
-              features={['Orders & Pay', 'Syncs with OMS']}
-              onHover={(h) => setHoveredComponent(h ? 'mobile' : null)}
+              node={nodes.mobile}
+              isActive={cardActive('mobile')}
+              onHover={(h) => setHovered(h ? 'mobile' : null)}
             />
           </motion.div>
         </div>
 
-        {/* Mobile Layout */}
-        <div className="md:hidden space-y-6">
-          {/* Admin Portal */}
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            custom={0.1}
-          >
-            <ComponentCard
-              {...components.admin}
-              onHover={() => {}}
-            />
-          </motion.div>
+        {/* Tablet & mobile diagram */}
+        <div className="mx-auto max-w-md lg:hidden">
+          {stacked.map((id, index) => (
+            <div key={id}>
+              <motion.div
+                variants={cardVariants}
+                initial="hidden"
+                animate={isInView ? 'visible' : 'hidden'}
+                custom={0.1 + index * 0.1}
+              >
+                <ComponentCard
+                  node={nodes[id]}
+                  isCenter={id === 'hub'}
+                  onHover={(h) => setHovered(h ? id : null)}
+                />
+              </motion.div>
 
-          {/* Arrow */}
-          <div className="flex justify-center">
-            <AnimatedArrow direction="vertical" isVisible={isInView} />
-          </div>
-
-          {/* Central Hub */}
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            custom={0.2}
-          >
-            <ComponentCard
-              {...components.central}
-              isCenter
-              onHover={() => {}}
-            />
-          </motion.div>
-
-          {/* Arrow */}
-          <div className="flex justify-center">
-            <AnimatedArrow direction="vertical" isVisible={isInView} />
-          </div>
-
-          {/* OMS */}
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            custom={0.3}
-          >
-            <ComponentCard
-              {...components.oms}
-              onHover={() => {}}
-            />
-          </motion.div>
-
-          {/* Arrow */}
-          <div className="flex justify-center">
-            <AnimatedArrow direction="vertical" isVisible={isInView} />
-          </div>
-
-          {/* Mobile App */}
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            custom={0.4}
-          >
-            <ComponentCard
-              {...components.mobile}
-              features={['Orders & Pay', 'Syncs with OMS']}
-              onHover={() => {}}
-            />
-          </motion.div>
+              {index < stacked.length - 1 && (
+                <div className="flex h-14 justify-center">
+                  <FlowLine
+                    direction="vertical"
+                    isVisible={isInView}
+                    isActive={linkActive(stacked[index + 1])}
+                    delay={0.2 + index * 0.1}
+                  />
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -8,10 +8,8 @@ import {
   Mail,
   Map,
   User,
-  Moon,
   CreditCard,
   LayoutDashboard,
-  Sun,
 } from "lucide-react";
 import { ImWhatsapp } from "react-icons/im";
 import { NavLink, useLocation } from "react-router-dom";
@@ -19,6 +17,7 @@ import { useTheme } from "@/hooks/useTheme";
 
 const desktopNavLinks = [
   { href: "/", label: "Home", icon: Home },
+  { href: "/about", label: "About Us", icon: User },
   { href: "/features", label: "Features", icon: LayoutDashboard },
   { href: "/services", label: "Services", icon: Sparkles },
   { href: "/pricing", label: "Pricing", icon: CreditCard },
@@ -38,6 +37,12 @@ const mobileMenuCards = [
     label: "Home",
     description: "Landing page and platform overview",
     icon: Home,
+  },
+  {
+    href: "/about",
+    label: "About Us",
+    description: "Our story, mission, and hospitality vision",
+    icon: User,
   },
   {
     href: "/features",
@@ -82,7 +87,7 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   // Track scroll position for navbar styling
   useEffect(() => {
@@ -175,27 +180,6 @@ export function Navbar() {
 
             {/* Contact & WhatsApp Buttons - Right */}
             <div className="flex items-center gap-2 flex-shrink-0 pr-2">
-              <motion.button
-                onClick={toggleTheme}
-                className={`flex items-center justify-center w-12 h-12 rounded-full transition-all duration-200 ${
-                  theme === "dark"
-                    ? "text-white hover:bg-white/10 border border-white/10"
-                    : "text-black hover:bg-black/10 border border-black/10"
-                }`}
-                whileTap={{ scale: 0.95 }}
-                aria-label={
-                  theme === "dark"
-                    ? "Switch to light mode"
-                    : "Switch to dark mode"
-                }
-              >
-                {theme === "dark" ? (
-                  <Moon className="w-5 h-5" />
-                ) : (
-                  <Sun className="w-5 h-5" />
-                )}
-              </motion.button>
-
               <NavLink to="/contact">
                 <motion.div
                   whileHover={{ scale: 1.02 }}
@@ -267,36 +251,6 @@ export function Navbar() {
             </motion.div>
           </NavLink>
 
-          {/* Theme Toggle Only - Hamburger moved to bottom nav */}
-          <div className="flex items-center">
-            {/* Theme Toggle Button */}
-            <motion.button
-              onClick={toggleTheme}
-              className={`p-2.5 rounded-xl transition-colors ${
-                theme === "dark"
-                  ? "text-white hover:bg-white/10"
-                  : "text-black hover:bg-black/10"
-              }`}
-              whileTap={{ scale: 0.95 }}
-              aria-label={
-                theme === "dark"
-                  ? "Switch to light mode"
-                  : "Switch to dark mode"
-              }
-            >
-              <motion.div
-                initial={false}
-                animate={{ rotate: theme === "dark" ? 0 : 180 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              >
-                {theme === "dark" ? (
-                  <Moon className="w-5 h-5" />
-                ) : (
-                  <Sun className="w-5 h-5" />
-                )}
-              </motion.div>
-            </motion.button>
-          </div>
         </div>
       </motion.header>
 
@@ -348,7 +302,7 @@ export function Navbar() {
                     const active = isActiveRoute(link.href);
                     return (
                     <motion.div
-                      key={link.href}
+                      key={link.label}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.05 }}

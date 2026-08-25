@@ -8,8 +8,6 @@ import {
   Phone,
   MapPin,
   ArrowUp,
-  Moon,
-  Sun,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useTheme } from "@/hooks/useTheme";
@@ -44,7 +42,7 @@ const socialLinks = [
 ];
 
 export function Footer() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const { scrollPosition } = useScrollPosition();
 
   const scrollToTop = () => {
@@ -290,11 +288,10 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Smart Action Button - Hidden on mobile/tablet, visible on desktop */}
-      {/* Shows theme toggle when at top, scroll to top button when scrolled down */}
+      {/* Scroll-to-top button - hidden on mobile/tablet */}
       <div className="hidden lg:block fixed bottom-8 right-8 z-50">
         <AnimatePresence mode="wait">
-          {isNearBottom ? (
+          {isNearBottom && (
             <motion.button
               key="scroll-to-top"
               onClick={scrollToTop}
@@ -312,29 +309,6 @@ export function Footer() {
               aria-label="Scroll to top"
             >
               <ArrowUp className="w-6 h-6 group-hover:animate-bounce" />
-            </motion.button>
-          ) : (
-            <motion.button
-              key="theme-toggle"
-              onClick={toggleTheme}
-              className={`w-16 h-16 rounded-full backdrop-blur-sm border shadow-lg flex items-center justify-center transition-all duration-300 group ${
-                theme === "dark"
-                  ? "bg-gradient-to-tr from-white/10 to-white/5 border-white/20 shadow-black/50 text-white hover:from-white/20 hover:to-white/10 hover:border-white/30 hover:shadow-xl hover:shadow-black/60"
-                  : "bg-gradient-to-tr from-black/10 to-black/5 border-gray-300 shadow-black/10 text-black hover:from-black/20 hover:to-black/10 hover:border-gray-400 hover:shadow-xl hover:shadow-black/20"
-              }`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              initial={{ opacity: 0, scale: 0.8, rotate: -180 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.8, rotate: 180 }}
-              transition={{ duration: 0.3 }}
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? (
-                <Sun className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" />
-              ) : (
-                <Moon className="w-6 h-6 group-hover:-rotate-12 transition-transform duration-300" />
-              )}
             </motion.button>
           )}
         </AnimatePresence>

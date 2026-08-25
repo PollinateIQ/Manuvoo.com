@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { getCalApi } from '@calcom/embed-react';
 import { CAL_USERNAME, CAL_EVENT_TYPE, CAL_DOMAIN } from '@/config/booking';
+import { cn } from '@/lib/utils';
 
 interface CalButtonProps {
   children: React.ReactNode;
@@ -41,7 +42,7 @@ export function CalButton({ children, className, eventType }: CalButtonProps) {
   return (
     <button
       onClick={handleClick}
-      className={className}
+      className={cn(className)}
       type="button"
     >
       {children}

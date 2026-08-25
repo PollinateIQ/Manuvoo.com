@@ -1,10 +1,9 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "@/hooks/useTheme";
 import { Navbar } from "@/components/Navbar";
 import { ScrollProgressBar } from "@/components/ScrollProgressBar";
-import { SplashScreen } from "@/components/SplashScreen";
 import { CookieConsent } from "@/components/CookieConsent";
 import { Toaster } from "@/components/ui/sonner";
 import { Footer } from "@/sections/Footer";
@@ -58,20 +57,11 @@ function AppContent() {
   );
 }
 
-function AppWithSplash() {
-  const [showSplash, setShowSplash] = useState(true);
-
-  const handleSplashComplete = () => {
-    setShowSplash(false);
-  };
-
+function AppRouter() {
   return (
-    <>
-      {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
-      <BrowserRouter>
-        <AppContent />
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
@@ -79,7 +69,7 @@ function App() {
   return (
     <HelmetProvider>
       <ThemeProvider>
-        <AppWithSplash />
+        <AppRouter />
       </ThemeProvider>
     </HelmetProvider>
   );

@@ -9,7 +9,7 @@ const screens = [
   {
     title: "Admin Portal",
     subtitle: "Owners & managers run the business",
-    image: "/images/generated/admin-laptop-flow.png",
+    image: "/images/generated/platform-admin-light-v2.webp",
     features: [
       "Track orders across kitchen, bar, and kiosk stations",
       "Reconcile payments, inventory, and cash-up",
@@ -19,7 +19,7 @@ const screens = [
   {
     title: "OMS",
     subtitle: "Stations, routing, and live table statuses",
-    image: "/images/generated/oms-tablet-flow.png",
+    image: "/images/generated/platform-oms-light-v2.webp",
     features: [
       "Monitor table activity and order queues",
       "Route items to the right service station",
@@ -27,13 +27,13 @@ const screens = [
     ],
   },
   {
-    title: "Customer App",
-    subtitle: "Scan, browse, order, pay",
-    image: "/images/generated/mobile-guest-flow.png",
+    title: "Connected Service",
+    subtitle: "Guests, staff, and owners share one live flow",
+    image: "/images/generated/venue-restaurant-v2.webp",
     features: [
-      "Guests scan from the table",
-      "Orders, cart, and payment stay on mobile",
-      "Tracking updates keep the guest informed",
+      "Guests order and pay from their phones",
+      "Teams see the same order across service stations",
+      "Owners keep the full venue visible in the cloud",
     ],
   },
 ];
@@ -47,12 +47,12 @@ export function PlatformPreview() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="mb-16 text-center">
           <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
-            Three layers.{" "}
-            <span className="text-orange-500">One connected service flow.</span>
+            Every service surface.{" "}
+            <span className="text-orange-500">One connected cloud.</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Guest ordering, live operations, and admin control share the same
-            restaurant context instead of feeling like separate tools.
+            Guest ordering, live operations, and admin control work together
+            across phones, tablets, and laptops.
           </p>
         </AnimatedSection>
 
@@ -68,7 +68,7 @@ export function PlatformPreview() {
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div className="relative flex h-full min-h-[460px] flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 group-hover:border-orange-500/30 group-hover:shadow-glow dark:border-charcoal-600 dark:bg-charcoal-800">
-                  <div className="relative h-[230px] overflow-hidden bg-charcoal-900 sm:h-[250px] md:h-[220px] lg:h-[250px]">
+                  <div className="relative h-[230px] overflow-hidden bg-muted sm:h-[250px] md:h-[220px] lg:h-[250px]">
                     <img
                       src={screen.image}
                       alt={screen.title}

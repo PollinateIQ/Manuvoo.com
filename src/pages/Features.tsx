@@ -2,11 +2,10 @@ import { motion } from 'framer-motion';
 import { 
   Monitor, 
   QrCode, 
-  CreditCard, 
-  Package, 
-  Users, 
-  BarChart3, 
-  Clock,
+  CreditCard,
+  Package,
+  Layers,
+  TabletSmartphone,
   Shield,
   Zap
 } from 'lucide-react';
@@ -18,45 +17,45 @@ const features = [
   {
     icon: Monitor,
     title: 'Admin Portal',
-    description: 'Comprehensive dashboard for owners and managers to control every aspect of their business.',
-    items: ['Real-time KPIs', 'Sales reports', 'Menu builder', 'Team management'],
+    description: 'A clear business view for owners and managers across every connected venue.',
+    items: ['Order visibility', 'Payment reconciliation', 'Inventory signals', 'Venue performance'],
   },
   {
     icon: QrCode,
-    title: 'QR Table Ordering',
-    description: 'Customers scan, browse, and order directly from their tables—no app download required.',
-    items: ['Instant table access', 'Digital menu', 'Order tracking', 'Split bills'],
+    title: 'Guest Ordering',
+    description: 'Guests browse, order, pay, and follow their service journey from their phones.',
+    items: ['Digital menu', 'Mobile cart', 'Integrated payment', 'Order updates'],
+  },
+  {
+    icon: Layers,
+    title: 'Order Management System',
+    description: 'Live queues, table activity, and service statuses stay visible while the venue is moving.',
+    items: ['Live order queues', 'Table activity', 'Station routing', 'Prep and ready states'],
+  },
+  {
+    icon: TabletSmartphone,
+    title: 'TPOS & Service Stations',
+    description: 'Staff place orders and keep kitchen, bar, and kiosk teams aligned from a tablet.',
+    items: ['Staff order entry', 'Station routing', 'Live item status', 'Connected payments'],
   },
   {
     icon: CreditCard,
-    title: 'Payment Processing',
-    description: 'Seamless payment integration with support for multiple payment methods.',
-    items: ['Card payments', 'Mobile wallets', 'Tip management', 'Invoice history'],
+    title: 'Payments & Cash-up',
+    description: 'Keep payment status and reconciliation connected to the same service flow.',
+    items: ['Payment status', 'Cash-up visibility', 'Bill history', 'Reconciliation support'],
   },
   {
     icon: Package,
-    title: 'Inventory Control',
-    description: 'Track stock levels, manage suppliers, and reduce waste with smart inventory tools.',
-    items: ['Stock tracking', 'Waste logging', 'Low stock alerts', 'Supplier management'],
-  },
-  {
-    icon: Users,
-    title: 'Staff Management',
-    description: 'Schedule shifts, track attendance, and manage permissions all in one place.',
-    items: ['Shift scheduling', 'Time tracking', 'Role-based access', 'Performance insights'],
-  },
-  {
-    icon: BarChart3,
-    title: 'Analytics & Reports',
-    description: 'Data-driven insights to help you make informed business decisions.',
-    items: ['Sales analytics', 'Customer insights', 'Trend forecasting', 'Export reports'],
+    title: 'Inventory & Venue Control',
+    description: 'Track the operational signals that help protect stock and margins.',
+    items: ['Stock tracking', 'Receiving records', 'Waste logging', 'Multi-venue visibility'],
   },
 ];
 
 const highlights = [
-  { icon: Zap, title: 'Real-time Sync', description: 'All data syncs instantly across all devices' },
-  { icon: Shield, title: 'Secure & Reliable', description: 'Enterprise-grade security and 99.9% uptime' },
-  { icon: Clock, title: '24/7 Support', description: 'Round-the-clock support when you need it' },
+  { icon: Zap, title: 'Live Cloud Sync', description: 'Orders and service updates stay connected across supported devices' },
+  { icon: Shield, title: 'Role-aware Access', description: 'Give each team member the product view needed for their work' },
+  { icon: Monitor, title: 'Any-screen Operations', description: 'Run the platform from phones, tablets, and laptops' },
 ];
 
 export function Features() {
@@ -161,7 +160,7 @@ export function Features() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection>
               <img
-                src="/images/generated/oms-tablet-flow.png"
+                src="/images/generated/platform-oms-light-v2.webp"
                 alt="OMS Interface"
                 className="rounded-2xl border border-border shadow-2xl shadow-black/10"
               />

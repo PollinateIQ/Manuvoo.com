@@ -48,14 +48,14 @@ export function CTA() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            Ready to transform your hospitality operations?
+            See Manuvoo in your venue.
           </motion.h2>
         </AnimatedSection>
 
         <AnimatedSection delay={0.1}>
           <p className="text-lg text-white/80 mb-10 max-w-2xl mx-auto">
-            Join venues already running smarter with Manuvoo. Book a demo and see
-            how we can help your business thrive.
+            Walk through the connected guest, service, and management flow with
+            our team.
           </p>
         </AnimatedSection>
 
@@ -70,33 +70,7 @@ export function CTA() {
                 })}
                 eventType="demo"
               >
-                Get started
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </CalButton>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <CalButton
-                className={buttonVariants({
-                  size: 'lg',
-                  className:
-                    'bg-white text-orange-600 hover:bg-white/90 font-semibold px-8 py-6 text-base',
-                })}
-                eventType="training"
-              >
-                Book training
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </CalButton>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <CalButton
-                className={buttonVariants({
-                  size: 'lg',
-                  className:
-                    'bg-orange-600 text-white hover:bg-white hover:text-orange-600 font-semibold px-8 py-6 text-base transition-colors border-2 border-white',
-                })}
-                eventType="quick-chat"
-              >
-                Book a call
+                Book a demo
                 <ArrowRight className="w-5 h-5 ml-2" />
               </CalButton>
             </motion.div>
