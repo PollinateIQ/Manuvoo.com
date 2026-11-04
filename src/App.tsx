@@ -1,4 +1,10 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "@/hooks/useTheme";
@@ -14,7 +20,6 @@ import { Features } from "@/pages/Features";
 import { Pricing } from "@/pages/Pricing";
 import { RoadmapPage } from "@/pages/Roadmap";
 import { Contact } from "@/pages/Contact";
-import { CookiePolicy } from "@/pages/CookiePolicy";
 import { IntellectualProperty } from "@/pages/IntellectualProperty";
 import { Terms } from "@/pages/Terms";
 import { PrivacyPolicy } from "@/pages/PrivacyPolicy";
@@ -22,13 +27,24 @@ import { RefundPolicy } from "@/pages/RefundPolicy";
 import { CancellationPolicy } from "@/pages/CancellationPolicy";
 import { DeliveryPolicy } from "@/pages/DeliveryPolicy";
 
-// Scroll to top on route change
+// Scroll to top on route change, or to the #anchor when the link has one
+// (e.g. /privacy-policy#cookie-policy)
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [pathname]);
+    // Wait a tick so the new page (and any redirect) has settled before
+    // measuring the anchor.
+    const timer = setTimeout(() => {
+      const target = hash ? document.getElementById(hash.slice(1)) : null;
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [pathname, hash]);
 
   return null;
 }
@@ -48,7 +64,11 @@ function AppContent() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/roadmap" element={<RoadmapPage />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/cookie-policy" element={<CookiePolicy />} />
+          {/* The Cookie Policy now lives inside the Privacy Policy page */}
+          <Route
+            path="/cookie-policy"
+            element={<Navigate to="/privacy-policy#cookie-policy" replace />}
+          />
           <Route
             path="/intellectual-property"
             element={<IntellectualProperty />}

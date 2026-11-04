@@ -27,9 +27,8 @@ export const company = {
   contact: {
     email: "info@manuvoo.com",
     supportEmail: "support@manuvoo.com",
-    telephone: "+27 69 684 8796",
-    telephoneHref: "tel:+27696848796",
-    whatsapp: "https://wa.me/27696848796",
+    // No public telephone number: email is the only published contact.
+    whatsapp:"https://wa.me/27696848796",
     hours: "Monday – Sunday, 08:00 – 20:00 (SAST)",
   },
 

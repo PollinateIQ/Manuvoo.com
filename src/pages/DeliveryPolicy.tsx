@@ -88,7 +88,7 @@ const sections: LegalSection[] = [
   {
     heading: "8. Problems with fulfilment",
     paragraphs: [
-      `If your order does not arrive, arrives late, or arrives incomplete, contact the venue or reach us on ${company.contact.telephone} or at ${company.contact.email}, ${company.contact.hours}. Where an order is not fulfilled, is incomplete or is materially incorrect, you are refunded under the Refund and Return Policy.`,
+      `If your order does not arrive, arrives late, or arrives incomplete, contact the venue or reach us at ${company.contact.email}, ${company.contact.hours}. Where an order is not fulfilled, is incomplete or is materially incorrect, you are refunded under the Refund and Return Policy.`,
     ],
   },
 ];

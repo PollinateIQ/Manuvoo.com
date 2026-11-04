@@ -53,7 +53,7 @@ const sections: LegalSection[] = [
       },
       {
         term: "STEP 2.",
-        text: `Email ${company.contact.email} or call ${company.contact.telephone} (${company.contact.hours}) with your order number, the date, and what went wrong.`,
+        text: `Email ${company.contact.email} (${company.contact.hours}) with your order number, the date, and what went wrong.`,
       },
       {
         term: "STEP 3.",
@@ -92,7 +92,7 @@ const sections: LegalSection[] = [
   {
     heading: "7. Chargebacks",
     paragraphs: [
-      `If you do not recognise a transaction, please contact us first on ${company.contact.telephone} or at ${company.contact.email}. We can usually identify and resolve it faster than a bank dispute, and we hold a full record of every order and payment. Your right to raise a dispute with your card issuer is unaffected.`,
+      `If you do not recognise a transaction, please contact us first at ${company.contact.email}. We can usually identify and resolve it faster than a bank dispute, and we hold a full record of every order and payment. Your right to raise a dispute with your card issuer is unaffected.`,
     ],
   },
   {

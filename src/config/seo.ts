@@ -126,21 +126,6 @@ export const seoConfig: Record<string, SEOConfig> = {
     ogImage: defaultOgImage,
     canonical: `${baseUrl}/contact`
   },
-  cookiePolicy: {
-    title: "Cookie Policy - Privacy & Data Protection | Manuvoo",
-    description: "Learn about how Manuvoo uses cookies to enhance your browsing experience. Our commitment to privacy and data protection.",
-    keywords: [
-      "cookie policy",
-      "privacy policy",
-      "data protection",
-      "GDPR compliance",
-      "cookies",
-      "privacy"
-    ],
-    ogImage: defaultOgImage,
-    canonical: `${baseUrl}/cookie-policy`,
-    noindex: true
-  },
   terms: {
     title: "Terms & Conditions | Manuvoo",
     description: "The terms and conditions governing use of the Manuvoo platform and all orders and payments made through it. All transactions are in South African Rand (ZAR). Country of domicile: South Africa.",
@@ -248,7 +233,6 @@ export const organizationSchema = {
     "url": baseUrl,
     "logo": `${baseUrl}/images/logo.svg`,
     "email": "info@manuvoo.com",
-    "telephone": "+27696848796",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "18 Angola Rd, Selcourt",
@@ -261,7 +245,6 @@ export const organizationSchema = {
       "@type": "ContactPoint",
       "contactType": "customer service",
       "email": "info@manuvoo.com",
-      "telephone": "+27696848796",
       "areaServed": "ZA",
       "availableLanguage": "English"
     },

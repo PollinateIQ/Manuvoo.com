@@ -89,7 +89,7 @@ const sections: LegalSection[] = [
   {
     heading: "6. How to cancel",
     paragraphs: [
-      `Use the cancel option on your order screen, speak to the venue, or contact Manuvoo on ${company.contact.telephone} or at ${company.contact.email}, ${company.contact.hours}. Every cancellation is logged against the originating order with the reason, the approving user and a timestamp.`,
+      `Use the cancel option on your order screen, speak to the venue, or contact Manuvoo at ${company.contact.email}, ${company.contact.hours}. Every cancellation is logged against the originating order with the reason, the approving user and a timestamp.`,
     ],
   },
 ];

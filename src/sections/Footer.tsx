@@ -5,7 +5,6 @@ import {
   Instagram,
   Facebook,
   Mail,
-  Phone,
   MapPin,
   ArrowUp,
 } from "lucide-react";
@@ -14,12 +13,17 @@ import { useTheme } from "@/hooks/useTheme";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { PaymentMethods } from "@/components/PaymentMethods";
 import { company, addressOneLine } from "@/config/company";
+import { openCookieSettings } from "@/lib/cookieConsent";
 
 /**
  * Every link appears exactly once across the three columns — no link is
- * repeated elsewhere in the footer.
+ * repeated elsewhere in the footer. An `onClick` entry is a button, not a
+ * page link (Cookie Settings reopens the consent banner).
  */
-const footerLinks = {
+const footerLinks: Record<
+  string,
+  { label: string; href?: string; onClick?: () => void }[]
+> = {
   Company: [
     { label: "About Us", href: "/about" },
     { label: "Services", href: "/services" },
@@ -36,7 +40,8 @@ const footerLinks = {
   Legal: [
     { label: "Terms & Conditions", href: "/terms" },
     { label: "Privacy Policy", href: "/privacy-policy" },
-    { label: "Cookie Policy", href: "/cookie-policy" },
+    { label: "Cookie Policy", href: "/privacy-policy#cookie-policy" },
+    { label: "Cookie Settings", onClick: openCookieSettings },
     { label: "Intellectual Property", href: "/intellectual-property" },
   ],
 };
@@ -110,17 +115,6 @@ export function Footer() {
               <Mail className="w-5 h-5" />
               info@manuvoo.com
             </a>
-            <a
-              href="tel:+27696848796"
-              className={`flex items-center gap-2.5 px-6 py-3 rounded-full border text-base transition-colors ${
-                theme === "dark"
-                  ? "bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:text-white"
-                  : "bg-black/5 border-gray-200 text-gray-600 hover:bg-black/10 hover:text-black"
-              }`}
-            >
-              <Phone className="w-5 h-5" />
-              +27 69 684 8796
-            </a>
           </div>
 
           {/* Social Links */}
@@ -165,7 +159,19 @@ export function Footer() {
               <ul className="space-y-4">
                 {links.map((link) => (
                   <li key={link.label}>
-                    {link.href.startsWith("/") ? (
+                    {link.onClick ? (
+                      <button
+                        type="button"
+                        onClick={link.onClick}
+                        className={`text-base transition-colors ${
+                          theme === "dark"
+                            ? "text-gray-400 hover:text-white"
+                            : "text-gray-500 hover:text-black"
+                        }`}
+                      >
+                        {link.label}
+                      </button>
+                    ) : link.href?.startsWith("/") ? (
                       <NavLink
                         to={link.href}
                         className={`text-base transition-colors ${

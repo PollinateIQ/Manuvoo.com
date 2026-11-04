@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import {
   Mail,
-  Phone,
   MapPin,
   MessageCircle,
   Send,
@@ -41,13 +40,6 @@ import {
 
 const contactInfo = [
   {
-    icon: Phone,
-    label: "Telephone",
-    value: company.contact.telephone,
-    href: company.contact.telephoneHref,
-    note: company.contact.hours,
-  },
-  {
     icon: Mail,
     label: "Email",
     value: company.contact.email,
@@ -57,7 +49,7 @@ const contactInfo = [
   {
     icon: MessageCircle,
     label: "WhatsApp",
-    value: company.contact.telephone,
+    value: "Chat with us on WhatsApp",
     href: company.contact.whatsapp,
     note: "Fastest route for order and payment queries",
   },

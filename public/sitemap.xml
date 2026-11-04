@@ -60,14 +60,6 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Cookie Policy Page -->
-  <url>
-    <loc>https://manuvoo.com/cookie-policy</loc>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
   <!-- Terms & Conditions -->
   <url>
     <loc>https://manuvoo.com/terms</loc>
@@ -79,7 +71,7 @@
   <!-- Privacy Policy -->
   <url>
     <loc>https://manuvoo.com/privacy-policy</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>

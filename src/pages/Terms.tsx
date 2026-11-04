@@ -9,7 +9,7 @@ const sections: LegalSection[] = [
     paragraphs: [
       `This website and the Manuvoo platform are owned and operated by ${company.legalName}, a private company registered in the Republic of South Africa under registration number ${company.registrationNumber}.`,
       `Registered and physical business address: ${addressOneLine}.`,
-      `Customer service can be reached on ${company.contact.telephone} or at ${company.contact.email}, ${company.contact.hours}.`,
+      `Customer service can be reached at ${company.contact.email},${company.contact.hours}.`,
       "By accessing this website, placing an order or making a payment through the Manuvoo platform, you agree to these Terms and Conditions.",
     ],
   },
@@ -137,7 +137,7 @@ const sections: LegalSection[] = [
   {
     heading: "12. Complaints and dispute resolution",
     paragraphs: [
-      `Raise any complaint with us first, on ${company.contact.telephone} or at ${company.contact.email}. We acknowledge complaints within one business day and aim to resolve them within five business days.`,
+      `Raise any complaint with us first, at ${company.contact.email}. We acknowledge complaints within one business day and aim to resolve them within five business days.`,
       "If a complaint is not resolved to your satisfaction, you may refer it to the Consumer Goods and Services Ombud or the National Consumer Commission. Referring a dispute to us or to an ombud does not affect your right to approach a court.",
     ],
   },
