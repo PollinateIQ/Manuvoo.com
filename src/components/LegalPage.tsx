@@ -29,6 +29,8 @@ export interface LegalSection {
   bullets?: LegalBullet[];
   groups?: LegalBulletGroup[];
   table?: LegalTable;
+  /** Show the bullets as a numbered list (1., 2., 3.) instead of dots. */
+  numbered?: boolean;
 }
 
 /** A second policy shown below the first, after a divider (e.g. Cookie Policy). */
@@ -46,6 +48,8 @@ interface LegalPageProps {
   title: string;
   intro: string;
   sections: LegalSection[];
+  /** Paragraphs shown above section 1, e.g. who the parties are and key definitions. */
+  preamble?: string[];
   appendix?: LegalAppendix;
   /** Overrides the site-wide policy date for this page only. */
   lastUpdated?: string;
@@ -53,26 +57,52 @@ interface LegalPageProps {
   showContact?: boolean;
 }
 
-function BulletList({ bullets }: { bullets: LegalBullet[] }) {
+/** Renders **bold** spans inside a sentence; everything else stays plain text. */
+function renderInline(text: string) {
+  return text.split(/\*\*(.+?)\*\*/g).map((part, index) =>
+    index % 2 ? (
+      <strong key={index} className="font-semibold text-foreground">
+        {part}
+      </strong>
+    ) : (
+      part
+    )
+  );
+}
+
+function BulletList({
+  bullets,
+  numbered = false,
+}: {
+  bullets: LegalBullet[];
+  numbered?: boolean;
+}) {
+  const List = numbered ? "ol" : "ul";
   return (
-    <ul className="mt-2 space-y-3">
-      {bullets.map((bullet) => (
+    <List className="mt-2 space-y-3">
+      {bullets.map((bullet, index) => (
         <li
           key={bullet.text.slice(0, 40)}
           className="flex items-start gap-3 leading-relaxed text-muted-foreground"
         >
-          <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-orange-500" />
+          {numbered ? (
+            <span className="w-5 flex-shrink-0 text-right font-semibold text-orange-500">
+              {index + 1}.
+            </span>
+          ) : (
+            <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-orange-500" />
+          )}
           <span>
             {bullet.term && (
               <span className="font-semibold text-foreground">
                 {bullet.term}{" "}
               </span>
             )}
-            {bullet.text}
+            {renderInline(bullet.text)}
           </span>
         </li>
       ))}
-    </ul>
+    </List>
   );
 }
 
@@ -101,11 +131,13 @@ function SectionList({
                 key={paragraph.slice(0, 40)}
                 className="mb-4 leading-relaxed text-muted-foreground"
               >
-                {paragraph}
+                {renderInline(paragraph)}
               </p>
             ))}
 
-            {section.bullets && <BulletList bullets={section.bullets} />}
+            {section.bullets && (
+              <BulletList bullets={section.bullets} numbered={section.numbered} />
+            )}
 
             {section.groups?.map((group) => (
               <div key={group.label} className="mt-6 first:mt-0">
@@ -171,6 +203,7 @@ export function LegalPage({
   title,
   intro,
   sections,
+  preamble,
   appendix,
   lastUpdated = company.policyLastUpdated,
   showContact = true,
@@ -211,6 +244,20 @@ export function LegalPage({
       {/* Policy body */}
       <section className="pb-8">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          {preamble && (
+            <AnimatedSection>
+              <div className="mb-10">
+                {preamble.map((paragraph) => (
+                  <p
+                    key={paragraph.slice(0, 40)}
+                    className="mb-4 leading-relaxed text-muted-foreground"
+                  >
+                    {renderInline(paragraph)}
+                  </p>
+                ))}
+              </div>
+            </AnimatedSection>
+          )}
           <SectionList sections={sections} border={border} />
         </div>
       </section>
